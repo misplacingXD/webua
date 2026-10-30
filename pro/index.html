@@ -1,0 +1,764 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="WebUA : sites de réservation directe pour gîtes, chambres d'hôtes et conciergeries. Calculez votre économie et réservez un audit gratuit.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>WebUA Réservation directe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Mise en page : une seule page en sections larges (1160px), un « relevé de versement » en fil rouge, chiffres en police de relevé */
+:root{
+  --bg:#F4F5F1; --surface:#FFFFFF; --soft:#E9ECE5; --ink:#15201C; --muted:#56615C; --line:#DADFD6;
+  --green:#1F6F5C; --green-ink:#FFFFFF; --green-soft:#DCEBE5; --amber:#B9781C; --amber-soft:#F6E7CC; --minus:#A3412C;
+  --deep:#13221D; --on-deep:#EEF2EC; --on-deep-muted:#A9B8B0;
+  --shadow:0 26px 50px -32px rgba(21,32,28,.45);
+  --f-display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --f-body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r-lg:22px; --r-md:14px; --r-sm:9px;
+  --gl:max(clamp(16px,4vw,32px), env(safe-area-inset-left,0px));
+  --gr:max(clamp(16px,4vw,32px), env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1714; --surface:#16211D; --soft:#1C2924; --ink:#E9EEE8; --muted:#A1AEA7; --line:#283731;
+    --green:#5CC2A2; --green-ink:#0C1613; --green-soft:#183A30; --amber:#E7B25C; --amber-soft:#3A2D16; --minus:#E58A73;
+    --deep:#0A110E; --on-deep:#EEF2EC; --on-deep-muted:#9CABA3;
+    --shadow:0 26px 50px -30px rgba(0,0,0,.75); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1714; --surface:#16211D; --soft:#1C2924; --ink:#E9EEE8; --muted:#A1AEA7; --line:#283731;
+  --green:#5CC2A2; --green-ink:#0C1613; --green-soft:#183A30; --amber:#E7B25C; --amber-soft:#3A2D16; --minus:#E58A73;
+  --deep:#0A110E; --on-deep:#EEF2EC; --on-deep-muted:#9CABA3;
+  --shadow:0 26px 50px -30px rgba(0,0,0,.75); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.4rem,6vw,4.3rem)}
+h2{font-size:clamp(1.9rem,4.2vw,3rem)}
+h3{font-size:1.25rem;letter-spacing:-.01em}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1160px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr)}
+.mono,.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);font-weight:500}
+.lead{color:var(--muted);font-size:1.1rem;max-width:56ch}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 24px;font-weight:600;cursor:pointer;text-decoration:none;background:var(--green);color:var(--green-ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.block{width:100%}
+section{scroll-margin-top:84px}
+.sec{padding-block:clamp(64px,9vw,120px)}
+.head{display:grid;gap:14px;margin-bottom:clamp(32px,5vw,52px);max-width:720px}
+.ic{width:20px;height:20px;flex:none}
+
+/* Bandeau */
+.demo{background:var(--soft);color:var(--muted);font-size:.75rem;text-align:center;padding-block:7px;border-bottom:1px solid var(--line);letter-spacing:.04em}
+.demo b{color:var(--ink);font-weight:600}
+
+/* En-tête */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo .mark{width:34px;height:34px;border-radius:9px;background:var(--green);color:var(--green-ink);display:grid;place-items:center}
+.logo .mark svg{width:20px;height:20px}
+.logo strong{font-family:var(--f-display);font-size:1.35rem;font-weight:800;letter-spacing:-.02em;line-height:1}
+.logo small{display:block;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+nav.main{display:none;gap:4px}
+nav.main a{text-decoration:none;padding:8px 13px;border-radius:999px;font-weight:500;font-size:.94rem;color:var(--muted)}
+nav.main a:hover{color:var(--ink);background:var(--soft)}
+.top .cta{display:none;padding:10px 18px;font-size:.92rem}
+.menu-btn{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.mnav{border-top:1px solid var(--line);background:var(--bg)}
+.mnav .wrap{display:grid;gap:2px;padding-block:10px 18px}
+.mnav a{text-decoration:none;padding:12px 2px;font-size:1.05rem;border-bottom:1px solid var(--line)}
+.mnav .btn{margin-top:12px}
+@media (min-width:940px){nav.main{display:flex}.top .cta{display:inline-flex}.menu-btn{display:none}.mnav{display:none!important}}
+
+/* Héros */
+.hero{display:grid;gap:40px;padding-block:clamp(44px,8vw,96px) clamp(48px,7vw,88px);align-items:center}
+.hero-txt{display:grid;gap:22px;min-width:0}
+.hero h1 em{font-style:normal;color:var(--green)}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px}
+.for{display:flex;flex-wrap:wrap;gap:8px;font-size:.86rem}
+.for span{padding:6px 12px;border-radius:999px;background:var(--soft);color:var(--muted)}
+@media (min-width:960px){.hero{grid-template-columns:1.1fr .9fr;gap:56px}}
+
+/* Relevé */
+.receipt{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:clamp(20px,3vw,30px);display:grid;gap:18px;font-family:var(--f-mono);font-size:.88rem;position:relative}
+.receipt .rh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px dashed var(--line);padding-bottom:12px}
+.receipt .rh b{font-family:var(--f-display);font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.receipt .rh span{color:var(--muted);font-size:.76rem}
+.rblock{display:grid;gap:7px}
+.rblock .t{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.rl{display:flex;gap:8px;align-items:baseline}
+.rl .lab{flex:none;max-width:70%}
+.rl .dots{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px);min-width:12px}
+.rl .v{flex:none;font-variant-numeric:tabular-nums}
+.rl.minus .v{color:var(--minus)}
+.rl.total{font-weight:600;font-size:.95rem}
+.rl.total.good .v{color:var(--green)}
+.rdiff{background:var(--green-soft);border-radius:var(--r-sm);padding:12px 14px;display:flex;justify-content:space-between;gap:12px;align-items:center;font-weight:600;color:var(--ink)}
+.rdiff b{font-size:1.15rem;color:var(--green)}
+.receipt .src{font-size:.7rem;color:var(--muted);font-family:var(--f-body)}
+
+/* Changements */
+.changes{background:var(--deep);color:var(--on-deep)}
+.changes .wrap{padding-block:clamp(48px,7vw,80px);display:grid;gap:28px}
+.changes h2{color:var(--on-deep);font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.changes .eyebrow{color:#7FD0B4}
+.chg{display:grid;gap:1px;background:rgba(238,242,236,.12);border-radius:var(--r-md);overflow:hidden}
+.chg > div{background:var(--deep);padding:20px;display:grid;gap:6px;align-content:start}
+.chg .pct{font-family:var(--f-mono);font-size:2rem;font-weight:500;line-height:1;color:#F0C47A}
+.chg .who{font-weight:600}
+.chg p{color:var(--on-deep-muted);font-size:.9rem}
+.chg .date{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;color:var(--on-deep-muted);text-transform:uppercase}
+@media (min-width:640px){.chg{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.chg{grid-template-columns:repeat(4,1fr)}}
+.changes .note{font-size:.8rem;color:var(--on-deep-muted)}
+
+/* Calculateur */
+.calc{display:grid;gap:24px}
+@media (min-width:980px){.calc{grid-template-columns:1.15fr 1fr;gap:32px;align-items:start}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,3.4vw,32px);display:grid;gap:20px;min-width:0}
+.presets{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:8px 14px;cursor:pointer;font-size:.88rem;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:transparent}
+.fgrid{display:grid;gap:18px}
+@media (min-width:560px){.fgrid{grid-template-columns:1fr 1fr}}
+.f{display:grid;gap:6px;min-width:0}
+.f label{font-size:.86rem;font-weight:600}
+.f .hint{font-size:.78rem;color:var(--muted)}
+.in{display:flex;align-items:center;border:1px solid var(--line);background:var(--bg);border-radius:var(--r-sm);overflow:hidden}
+.in input,.in select{border:0;background:transparent;padding:12px 14px;width:100%;min-width:0;font-family:var(--f-mono);font-size:1rem}
+.in span{padding:0 14px;color:var(--muted);font-family:var(--f-mono)}
+.in:focus-within{outline:2px solid var(--green);outline-offset:0}
+.range{display:grid;gap:8px}
+.range .row{display:flex;justify-content:space-between;align-items:baseline}
+.range output{font-family:var(--f-mono);font-weight:600;font-size:1.1rem;color:var(--green)}
+input[type=range]{width:100%;accent-color:var(--green)}
+.ticks{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.result{background:var(--deep);color:var(--on-deep);border-color:transparent}
+.result .big{font-family:var(--f-mono);font-size:clamp(2.4rem,6vw,3.6rem);font-weight:500;line-height:1;color:#7FD0B4;font-variant-numeric:tabular-nums}
+.result .sub{color:var(--on-deep-muted);font-size:.92rem}
+.result .rows{display:grid;gap:8px;font-family:var(--f-mono);font-size:.85rem;border-top:1px solid rgba(238,242,236,.14);padding-top:16px}
+.result .rows div{display:flex;justify-content:space-between;gap:12px}
+.result .rows span:first-child{color:var(--on-deep-muted);font-family:var(--f-body)}
+.bars{display:grid;gap:10px}
+.bar{display:grid;gap:4px;font-size:.8rem;color:var(--on-deep-muted)}
+.bar i{display:block;height:10px;border-radius:99px;background:rgba(238,242,236,.14);overflow:hidden}
+.bar i b{display:block;height:100%;border-radius:99px;transition:width .4s ease}
+.verdict{border-radius:var(--r-sm);padding:12px 14px;font-size:.9rem;background:rgba(238,242,236,.08);color:var(--on-deep)}
+.verdict strong{display:block;margin-bottom:2px}
+.price-tool{display:grid;gap:14px}
+.price-out{display:grid;gap:6px;background:var(--amber-soft);border-radius:var(--r-sm);padding:14px 16px;font-size:.92rem}
+.price-out b{font-family:var(--f-mono);font-size:1.4rem;color:var(--ink)}
+.price-out s{color:var(--minus)}
+
+/* Schéma */
+.flow{display:grid;gap:14px;max-width:920px;margin-inline:auto}
+.flow .row{display:grid;gap:12px}
+@media (min-width:700px){.flow .r3{grid-template-columns:repeat(3,1fr)}.flow .r2{grid-template-columns:1fr 1fr}}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;display:grid;gap:2px;text-align:center}
+.node b{font-weight:600}
+.node span{font-size:.82rem;color:var(--muted)}
+.node .mono{font-size:.8rem}
+.node.core{background:var(--green-soft);border-color:var(--green);padding:22px}
+.node.core b{font-family:var(--f-display);font-size:1.2rem}
+.node.money{border-style:dashed}
+.link{display:flex;justify-content:center;gap:28px;font-family:var(--f-mono);font-size:.74rem;color:var(--muted);flex-wrap:wrap}
+.link span{display:inline-flex;align-items:center;gap:6px}
+.link span::before{content:"";width:1.5px;height:18px;background:var(--line)}
+.flow-note{display:grid;gap:14px;margin-top:28px}
+@media (min-width:800px){.flow-note{grid-template-columns:repeat(3,1fr)}}
+.fn{display:flex;gap:12px;align-items:flex-start}
+.fn .ico{width:40px;height:40px;border-radius:11px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;flex:none}
+.fn b{display:block}
+.fn span{color:var(--muted);font-size:.92rem}
+
+/* Étapes */
+.steps{display:grid;gap:14px;counter-reset:s}
+@media (min-width:760px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{border-top:2px solid var(--ink);padding-top:18px;display:grid;gap:8px;align-content:start}
+.step::before{counter-increment:s;content:"Étape " counter(s);font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.step .dur{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.step p{color:var(--muted);font-size:.95rem}
+
+/* Offres */
+.offers{display:grid;gap:18px}
+@media (min-width:700px){.offers{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.offers{grid-template-columns:repeat(4,1fr)}}
+.offer{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;display:grid;gap:16px;grid-template-rows:auto auto auto 1fr auto;min-width:0;position:relative}
+.offer.star{border:2px solid var(--green);box-shadow:var(--shadow)}
+.offer .tag{position:absolute;top:-12px;left:22px;background:var(--green);color:var(--green-ink);font-size:.72rem;font-weight:600;padding:4px 10px;border-radius:999px}
+.offer .k{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.offer .pr{display:grid;gap:2px}
+.offer .pr b{font-family:var(--f-mono);font-size:1.6rem;font-weight:500;line-height:1.1}
+.offer .pr span{font-size:.85rem;color:var(--muted)}
+.offer .who{font-size:.92rem;color:var(--muted)}
+.offer ul{list-style:none;margin:0;padding:0;display:grid;gap:9px;font-size:.92rem;align-content:start}
+.offer li{display:flex;gap:9px;align-items:flex-start}
+.offer li svg{width:17px;height:17px;color:var(--green);margin-top:3px;flex:none}
+.offer .rec{font-family:var(--f-mono);font-size:.82rem;background:var(--soft);border-radius:var(--r-sm);padding:10px 12px}
+.terms{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.85rem;color:var(--muted)}
+.terms span{display:inline-flex;gap:8px;align-items:center}
+.terms svg{width:16px;height:16px;color:var(--green)}
+
+/* Pour qui */
+.fits{display:grid;gap:14px}
+@media (min-width:860px){.fits{grid-template-columns:repeat(3,1fr)}}
+.fit{border-radius:var(--r-md);padding:24px;display:grid;gap:10px;align-content:start;background:var(--soft)}
+.fit .lvl{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.fit.yes .lvl{color:var(--green)}
+.fit.maybe .lvl{color:var(--amber)}
+.fit p{color:var(--muted);font-size:.95rem}
+.fit .eco{font-family:var(--f-mono);font-size:.9rem;color:var(--ink)}
+
+/* Preuves */
+.proof{display:grid;gap:18px}
+@media (min-width:860px){.proof{grid-template-columns:1fr 1fr}}
+.case{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-lg);padding:26px;display:grid;gap:12px;align-content:start}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.status.live{color:var(--green)}
+.case p{color:var(--muted)}
+.case a.lnk{font-weight:600;color:var(--green);text-decoration:none}
+.case a.lnk:hover{text-decoration:underline}
+
+/* FAQ */
+.faq{display:grid;gap:32px}
+@media (min-width:900px){.faq{grid-template-columns:1fr 1.7fr;gap:64px}}
+.qa{border-top:1px solid var(--line)}
+.qa details{border-bottom:1px solid var(--line)}
+.qa summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:600;font-size:1.05rem;position:relative}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";position:absolute;right:6px;top:15px;font-family:var(--f-mono);font-size:1.4rem;color:var(--green);transition:transform .2s}
+.qa details[open] summary::after{transform:rotate(45deg)}
+.qa details p{padding:0 0 22px;color:var(--muted);max-width:64ch}
+
+/* Audit */
+.audit{background:var(--deep);color:var(--on-deep)}
+.audit .wrap{padding-block:clamp(64px,9vw,112px);display:grid;gap:40px}
+@media (min-width:960px){.audit .wrap{grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}}
+.audit h2{color:var(--on-deep)}
+.audit .eyebrow{color:#7FD0B4}
+.audit .lead{color:var(--on-deep-muted)}
+.audit ul{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.audit li{display:flex;gap:10px;align-items:flex-start;color:var(--on-deep)}
+.audit li svg{width:18px;height:18px;color:#7FD0B4;margin-top:3px;flex:none}
+form.af{background:var(--surface);color:var(--ink);border-radius:var(--r-lg);padding:clamp(20px,4vw,34px);display:grid;gap:16px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.fr{display:grid;gap:16px}
+@media (min-width:600px){.fr.two{grid-template-columns:1fr 1fr}}
+.fld{display:grid;gap:6px;min-width:0}
+.fld > label,.fld > .l{font-size:.86rem;font-weight:600}
+.fld input,.fld select,.fld textarea{border:1px solid var(--line);background:var(--bg);border-radius:var(--r-sm);padding:12px 14px;width:100%}
+.fld textarea{min-height:96px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--green);outline-offset:0;border-color:transparent}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.9rem;cursor:pointer;background:var(--bg)}
+.checks input{accent-color:var(--green)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted)}
+.consent input{margin-top:4px;accent-color:var(--green)}
+.err{color:var(--minus);font-size:.86rem}
+.small{font-size:.8rem;color:var(--muted);text-align:center}
+.ok{background:var(--surface);color:var(--ink);border-radius:var(--r-lg);padding:32px;display:grid;gap:12px}
+
+/* Pied */
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:44px 28px;display:grid;gap:28px}
+.fcols{display:grid;gap:26px}
+@media (min-width:820px){.fcols{grid-template-columns:1.5fr 1fr 1fr}}
+footer h4{margin:0 0 10px;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:500}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:.94rem}
+footer a{text-decoration:none;color:var(--muted)}
+footer a:hover{color:var(--ink)}
+footer p{color:var(--muted);font-size:.94rem;max-width:40ch}
+.legal{border-top:1px solid var(--line);padding-top:18px;font-size:.84rem;color:var(--muted)}
+.legal summary{cursor:pointer;font-weight:600;color:var(--ink);padding-block:4px}
+.legal .lg{display:grid;gap:8px;padding-top:12px;max-width:760px}
+.ph{background:var(--soft);padding:0 5px;border-radius:4px;color:var(--ink);font-family:var(--f-mono);font-size:.9em}
+.fb{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.8rem;color:var(--muted)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}html{scroll-behavior:auto}}
+</style>
+
+</head>
+<body>
+<div class="demo"><b>Maquette de démonstration</b> · prix et contenus à valider avant mise en ligne</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="WebUA, haut de page">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 15l2 2 4-4"/></svg></span>
+      <span><strong>WebUA</strong><small>Réservation directe</small></span>
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#calcul">Calculateur</a>
+      <a href="#methode">Méthode</a>
+      <a href="#offres">Offres</a>
+      <a href="#pour-qui">Pour qui</a>
+      <a href="#faq">Questions</a>
+    </nav>
+    <a class="btn cta" href="#audit">Audit gratuit</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Ouvrir le menu">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <div class="wrap">
+      <a href="#calcul">Calculateur d'économie</a>
+      <a href="#methode">La méthode</a>
+      <a href="#offres">Offres et tarifs</a>
+      <a href="#pour-qui">Pour qui</a>
+      <a href="#faq">Questions fréquentes</a>
+      <a class="btn block" href="#audit">Réserver mon audit gratuit</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- Héros -->
+  <div class="wrap hero">
+    <div class="hero-txt">
+      <span class="eyebrow">Gîtes · chambres d'hôtes · conciergeries</span>
+      <h1>Gardez Airbnb pour trouver des voyageurs. <em>Faites revenir les anciens chez vous.</em></h1>
+      <p class="lead">J'installe votre canal de réservation directe : un site à votre nom, relié à votre calendrier et à votre logiciel de gestion, avec paiement en ligne sur votre propre compte. Vous ne payez plus 15,5 % sur les voyageurs qui reviennent.</p>
+      <div class="ctas">
+        <a class="btn" href="#audit">Réserver mon audit gratuit
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="#calcul">Calculer mon économie</a>
+      </div>
+      <div class="for"><span>Synchronisé avec Airbnb et Booking</span><span>Paiement Stripe à votre nom</span><span>Aucune ligne de code à gérer</span></div>
+    </div>
+
+    <div class="receipt" aria-label="Exemple de versement pour une nuit à 100 €">
+      <div class="rh"><b>Relevé d'une nuit à 100 €</b><span>tarifs au 30 oct. 2026</span></div>
+      <div class="rblock">
+        <span class="t">Réservée sur Airbnb</span>
+        <div class="rl"><span class="lab">Nuitée</span><span class="dots"></span><span class="v">100,00 €</span></div>
+        <div class="rl minus"><span class="lab">Commission hôte 15,5 %</span><span class="dots"></span><span class="v">−15,50 €</span></div>
+        <div class="rl total"><span class="lab">Versé</span><span class="dots"></span><span class="v">84,50 €</span></div>
+      </div>
+      <div class="rblock">
+        <span class="t">Réservée en direct</span>
+        <div class="rl"><span class="lab">Nuitée</span><span class="dots"></span><span class="v">100,00 €</span></div>
+        <div class="rl minus"><span class="lab">Carte bancaire 1,5 % + 0,25 €</span><span class="dots"></span><span class="v">−1,75 €</span></div>
+        <div class="rl total good"><span class="lab">Versé</span><span class="dots"></span><span class="v">98,25 €</span></div>
+      </div>
+      <div class="rdiff"><span>Gardé en plus, par nuit</span><b class="mono">+13,75 €</b></div>
+      <p class="src">Commission Airbnb côté hôte depuis le 13 octobre 2026. Frais Stripe pour une carte européenne standard.</p>
+    </div>
+  </div>
+
+  <!-- Ce qui a changé -->
+  <div class="changes">
+    <div class="wrap">
+      <div style="display:grid;gap:12px;max-width:720px">
+        <span class="eyebrow">Octobre 2026</span>
+        <h2>Les plateformes ont augmenté leur part, en même temps.</h2>
+      </div>
+      <div class="chg">
+        <div><span class="date">Depuis le 13 oct.</span><span class="pct">15,5 %</span><span class="who">Airbnb</span><p>Prélevés sur chaque réservation côté hôte, ménage compris. Avant : environ 3 % visibles.</p></div>
+        <div><span class="date">Depuis le 29 oct.</span><span class="pct">12 %</span><span class="who">Abritel</span><p>Hors TVA, au lieu d'environ 8 %. La clause de parité interdit d'être moins cher ailleurs.</p></div>
+        <div><span class="date">En moyenne</span><span class="pct">~15 %</span><span class="who">Booking.com</span><p>De 10 à 25 % selon les cas. Ne peut plus imposer vos prix ailleurs en Europe.</p></div>
+        <div><span class="date">Dès le 20 nov.</span><span class="pct">Ménage</span><span class="who">Nouvelle règle Airbnb</span><p>Plus de tâches imposées aux voyageurs, et les frais de ménage entrent dans les 15,5 %.</p></div>
+      </div>
+      <p class="note">Une nuit qui vous rapportait 97 € sur Airbnb doit maintenant être affichée 115 € pour vous rapporter autant.</p>
+    </div>
+  </div>
+
+  <!-- Calculateur -->
+  <section class="sec" id="calcul">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Calculateur</span>
+        <h2>Combien vous coûtent les voyageurs qui reviennent ?</h2>
+        <p class="lead">Entrez vos chiffres. Le calcul suppose qu'une partie de vos réservations passe en direct, avec un paiement par carte à environ 2 %.</p>
+      </div>
+      <div class="calc">
+        <div class="panel">
+          <div class="presets" role="group" aria-label="Exemples">
+            <button class="chip" type="button" data-p="gite" aria-pressed="true">Un gîte</button>
+            <button class="chip" type="button" data-p="multi">5 logements</button>
+            <button class="chip" type="button" data-p="conc">Conciergerie de 30 logements</button>
+          </div>
+          <div class="fgrid">
+            <div class="f"><label for="c-rev">Recettes par logement et par an</label><div class="in"><input id="c-rev" type="number" inputmode="numeric" min="0" step="500" value="20000"><span>€</span></div><span class="hint">Montant payé par les voyageurs</span></div>
+            <div class="f"><label for="c-n">Nombre de logements</label><div class="in"><input id="c-n" type="number" inputmode="numeric" min="1" step="1" value="1"></div><span class="hint">Tous canaux confondus</span></div>
+            <div class="f"><label for="c-com">Plateforme principale</label><div class="in"><select id="c-com"><option value="15.5" selected>Airbnb · 15,5 %</option><option value="15">Booking.com · ~15 %</option><option value="12">Abritel · 12 %</option></select></div></div>
+            <div class="f"><label for="c-pay">Coût du paiement direct</label><div class="in"><input id="c-pay" type="number" inputmode="decimal" min="0" max="10" step="0.1" value="2"><span>%</span></div><span class="hint">Stripe : 1,5 % + 0,25 € par carte</span></div>
+          </div>
+          <div class="range">
+            <div class="row"><label for="c-share" style="font-weight:600;font-size:.86rem">Part des réservations passées en direct</label><output id="c-share-o" for="c-share">10 %</output></div>
+            <input id="c-share" type="range" min="5" max="40" step="5" value="10">
+            <div class="ticks"><span>5 %</span><span>10</span><span>15</span><span>20</span><span>25</span><span>30</span><span>35</span><span>40 %</span></div>
+            <span class="hint muted" style="font-size:.78rem">10 à 25 % est réaliste la première année, surtout grâce aux anciens voyageurs.</span>
+          </div>
+        </div>
+        <div style="display:grid;gap:18px">
+          <div class="panel result" aria-live="polite">
+            <div style="display:grid;gap:8px">
+              <span class="eyebrow">Économie estimée par an</span>
+              <span class="big" id="r-year">270 €</span>
+              <span class="sub" id="r-month">soit environ 23 € par mois</span>
+            </div>
+            <div class="bars">
+              <div class="bar"><span id="b1-l">Commission sur ces réservations via la plateforme</span><i><b id="b1" style="background:#E58A73;width:100%"></b></i></div>
+              <div class="bar"><span id="b2-l">Coût des mêmes réservations en direct</span><i><b id="b2" style="background:#7FD0B4;width:13%"></b></i></div>
+            </div>
+            <div class="rows">
+              <div><span>Recettes totales</span><span id="r-tot">20 000 €</span></div>
+              <div><span>Passées en direct</span><span id="r-dir">2 000 €</span></div>
+              <div><span>Commission évitée</span><span id="r-com">310 €</span></div>
+              <div><span>Frais de paiement</span><span id="r-fee">−40 €</span></div>
+            </div>
+            <div class="verdict" id="r-verdict"></div>
+          </div>
+          <div class="panel price-tool">
+            <div style="display:grid;gap:6px"><span class="eyebrow">Vérifier vos prix</span><h3>Quel prix afficher sur Airbnb pour toucher autant qu'avant ?</h3></div>
+            <div class="f"><label for="p-old">Ce que vous touchiez par nuit avant le 13 octobre</label><div class="in"><input id="p-old" type="number" inputmode="decimal" min="0" step="1" value="97"><span>€</span></div></div>
+            <div class="price-out" aria-live="polite"><span>Prix à afficher maintenant</span><b id="p-new">115 €</b><span class="muted" id="p-wrong">Ajouter 15,5 % ne suffit pas : 112 € vous ferait perdre de l'argent sur chaque nuit.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Méthode -->
+  <section class="sec" id="methode" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">La méthode</span>
+        <h2>Votre logiciel de gestion au centre. Tout passe par lui.</h2>
+        <p class="lead">Je n'écris pas de système de réservation maison. J'assemble des outils éprouvés, ouverts à votre nom, et je les règle pour qu'ils travaillent ensemble.</p>
+      </div>
+      <div class="flow" aria-label="Schéma du canal de réservation directe">
+        <div class="row r3">
+          <div class="node"><b>Airbnb</b><span class="mono">15,5 %</span></div>
+          <div class="node"><b>Booking.com</b><span class="mono">~15 %</span></div>
+          <div class="node"><b>Abritel</b><span class="mono">12 %</span></div>
+        </div>
+        <div class="link"><span>API, temps réel</span><span>API, temps réel</span><span>iCal, disponibilités</span></div>
+        <div class="node core"><b>Logiciel de gestion · Smoobu ou Lodgify</b><span>Un seul calendrier, les prix et saisons, les messages, le moteur de réservation</span></div>
+        <div class="link"><span>le module de réservation</span><span>les paiements</span></div>
+        <div class="row r2">
+          <div class="node"><b>Votre site</b><span>Votre nom de domaine et le module de réservation</span></div>
+          <div class="node money"><b>Stripe, à votre nom</b><span>Virement direct sur votre compte bancaire</span></div>
+        </div>
+        <div class="link"><span>trouvent le site</span></div>
+        <div class="row r2">
+          <div class="node"><b>Anciens voyageurs</b><span>QR code dans le logement, livret d'accueil, e-mails</span></div>
+          <div class="node"><b>Nouveaux voyageurs</b><span>Google, office de tourisme</span></div>
+        </div>
+      </div>
+      <div class="flow-note">
+        <div class="fn"><span class="ico" data-ic="cal"></span><div><b>Pas de double réservation</b><span>Une date réservée sur le site se ferme sur Airbnb et Booking en quelques minutes.</span></div></div>
+        <div class="fn"><span class="ico" data-ic="lock"></span><div><b>Votre argent ne passe pas par moi</b><span>Les voyageurs paient sur votre compte Stripe. Vous gardez vos identifiants.</span></div></div>
+        <div class="fn"><span class="ico" data-ic="doc"></span><div><b>Vos propres conditions</b><span>Acompte, caution, annulation : c'est vous qui décidez, pas la plateforme.</span></div></div>
+      </div>
+
+      <div style="height:clamp(56px,8vw,88px)"></div>
+      <div class="head" style="margin-bottom:28px">
+        <span class="eyebrow">Déroulé</span>
+        <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem)">De l'audit au suivi mensuel</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>Audit</h3><span class="dur">20 minutes en visio</span><p>Vos prix depuis le passage à 15,5 %, votre conformité, et l'économie possible en euros.</p></div>
+        <div class="step"><h3>Mise en place</h3><span class="dur">2 à 4 jours</span><p>Logiciel relié à vos plateformes, site, paiement, nom de domaine. Vous validez textes et photos en 30 minutes.</p></div>
+        <div class="step"><h3>Fidélisation</h3><span class="dur">dès la livraison</span><p>Livret d'accueil, carte QR code dans le logement, e-mail après chaque séjour direct.</p></div>
+        <div class="step"><h3>Suivi</h3><span class="dur">chaque mois</span><p>Mises à jour, contrôle des calendriers, et un rapport : réservations directes contre plateformes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offres -->
+  <section class="sec" id="offres" style="background:var(--surface);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Offres et tarifs</span>
+        <h2>Vous n'achetez pas un site. Vous achetez des voyageurs qui reviennent.</h2>
+      </div>
+      <div class="offers">
+        <article class="offer">
+          <span class="k">Porte d'entrée</span>
+          <h3>Audit canal direct</h3>
+          <div class="pr"><b>49 à 90 €</b><span>offert aux 3 premiers clients</span></div>
+          <ul>
+            <li data-c>Vérification de vos prix depuis le 13 octobre</li>
+            <li data-c>Conformité : numéro d'enregistrement, DPE, taxe de séjour, copropriété</li>
+            <li data-c>Économie chiffrée et plan d'action d'une page</li>
+          </ul>
+          <span class="rec">Livré en 1 h 30</span>
+        </article>
+        <article class="offer">
+          <span class="k">1 à 3 logements</span>
+          <h3>Vitrine et réservation directe</h3>
+          <div class="pr"><b>690 à 990 €</b><span>création, puis 29 à 49 € par mois</span></div>
+          <ul>
+            <li data-c>Site de 5 pages en français et en anglais</li>
+            <li data-c>Logiciel de gestion relié à Airbnb et Booking</li>
+            <li data-c>Réservation en ligne et paiement Stripe</li>
+            <li data-c>Référencement Google et livret avec QR code</li>
+          </ul>
+          <span class="rec">Pour gîtes et chambres d'hôtes</span>
+        </article>
+        <article class="offer star">
+          <span class="tag">Conciergeries</span>
+          <span class="k">Multi-logements</span>
+          <h3>Site conciergerie</h3>
+          <div class="pr"><b>1 500 à 3 000 €</b><span>création, puis 99 à 199 € par mois</span></div>
+          <ul>
+            <li data-c>Une page par logement, filtres et recherche</li>
+            <li data-c>Page « Confiez-nous votre logement » pour gagner des mandats</li>
+            <li data-c>Référencement local ville par ville</li>
+            <li data-c>Intégration de votre logiciel actuel et e-mails de fidélisation</li>
+          </ul>
+          <span class="rec">+50 € par nouvelle page logement</span>
+        </article>
+        <article class="offer">
+          <span class="k">Abonnement</span>
+          <h3>Réservations directes</h3>
+          <div class="pr"><b>49 à 149 €</b><span>par mois, pour les clients des offres 1 et 2</span></div>
+          <ul>
+            <li data-c>E-mail trimestriel à vos anciens voyageurs</li>
+            <li data-c>Photos et tarifs tenus à jour</li>
+            <li data-c>Rapport mensuel : direct contre plateformes</li>
+          </ul>
+          <span class="rec">Sans engagement de durée</span>
+        </article>
+      </div>
+      <div class="terms">
+        <span data-ct>Paiement 50 % à la commande, 50 % à la mise en ligne</span>
+        <span data-ct>Logiciel de gestion payé directement par vous (dès 28 € par mois)</span>
+        <span data-ct>TVA non applicable, article 293 B du CGI</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pour qui -->
+  <section class="sec" id="pour-qui">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Pour qui</span>
+        <h2>Utile quand l'économie se compte en milliers d'euros</h2>
+        <p class="lead">Un canal direct demande un peu d'investissement. Je vous dis franchement s'il est rentable pour vous.</p>
+      </div>
+      <div class="fits">
+        <div class="fit yes"><span class="lvl">Très adapté</span><h3>Conciergeries</h3><p>Le site vous sert aussi à convaincre de nouveaux propriétaires de vous confier leur bien.</p><span class="eco">8 000 à 30 000 € par an</span></div>
+        <div class="fit yes"><span class="lvl">Adapté</span><h3>Gîtes et chambres d'hôtes</h3><p>Séjours plus longs, clientèle fidèle qui revient d'une année sur l'autre.</p><span class="eco">1 000 à 5 000 € par an</span></div>
+        <div class="fit maybe"><span class="lvl">À étudier</span><h3>Un seul appartement</h3><p>L'économie tourne autour de 300 à 700 € par an. Commencez par l'audit : un site complet n'est pas toujours justifié.</p><span class="eco">300 à 700 € par an</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réalisations -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="head" style="margin-bottom:28px">
+        <span class="eyebrow">Réalisations</span>
+        <h2 style="font-size:clamp(1.6rem,3.4vw,2.3rem)">Ce que je peux vous montrer aujourd'hui</h2>
+      </div>
+      <div class="proof">
+        <div class="case">
+          <span class="status">En cours</span>
+          <h3>Logement pilote à Carcassonne</h3>
+          <p>Premier site de réservation directe, relié à Airbnb et Booking. Les chiffres réels seront publiés ici après la première saison.</p>
+        </div>
+        <div class="case">
+          <span class="status live">En ligne</span>
+          <h3>Maquette pour une conciergerie</h3>
+          <p>Exemple de site multi-logements à Courbevoie : catalogue filtrable, fiche logement avec calendrier, page propriétaires. Données fictives.</p>
+          <a class="lnk" href="https://misplacingxd.github.io/webua/" target="_blank" rel="noopener">Voir la maquette →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq" style="padding-top:0">
+    <div class="wrap faq">
+      <div style="display:grid;gap:14px;align-content:start">
+        <span class="eyebrow">Questions fréquentes</span>
+        <h2>Ce qu'on me demande avant de se lancer</h2>
+      </div>
+      <div class="qa" id="qa"></div>
+    </div>
+  </section>
+
+  <!-- Audit -->
+  <section class="audit" id="audit">
+    <div class="wrap">
+      <div style="display:grid;gap:20px;align-content:start">
+        <span class="eyebrow">Audit gratuit</span>
+        <h2>20 minutes pour savoir ce qu'un canal direct vous rapporterait</h2>
+        <p class="lead">Réservé aux trois premiers clients, en échange d'un témoignage si l'audit vous a été utile.</p>
+        <ul>
+          <li data-c>Vos prix vérifiés depuis le passage à 15,5 %</li>
+          <li data-c>L'économie possible, en euros, sur vos propres chiffres</li>
+          <li data-c>Les points de conformité à régler (numéro d'enregistrement, taxe de séjour)</li>
+          <li data-c>Un plan d'action d'une page, que vous travailliez avec moi ou non</li>
+        </ul>
+      </div>
+      <div>
+        <form class="af" id="af" novalidate>
+          <div class="fr two">
+            <div class="fld"><label for="a-name">Prénom et nom</label><input id="a-name" autocomplete="name" placeholder="Claire Martin"></div>
+            <div class="fld"><label for="a-mail">E-mail</label><input id="a-mail" type="email" autocomplete="email" placeholder="claire@exemple.fr"></div>
+          </div>
+          <div class="fr two">
+            <div class="fld"><label for="a-tel">Téléphone</label><input id="a-tel" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></div>
+            <div class="fld"><label for="a-type">Vous êtes</label><select id="a-type"><option>Gîte ou maison de vacances</option><option>Chambres d'hôtes</option><option>Conciergerie ou gestionnaire</option><option>Propriétaire de 2 à 10 logements</option><option>Propriétaire d'un logement</option></select></div>
+          </div>
+          <div class="fr two">
+            <div class="fld"><label for="a-n">Nombre de logements</label><input id="a-n" type="number" inputmode="numeric" min="1" value="1"></div>
+            <div class="fld"><label for="a-soft">Logiciel de gestion actuel</label><select id="a-soft"><option>Aucun</option><option>Smoobu</option><option>Lodgify</option><option>Beds24</option><option>Hostaway</option><option>Autre</option></select></div>
+          </div>
+          <div class="fld"><span class="l">Plateformes utilisées</span>
+            <div class="checks">
+              <label><input type="checkbox" id="a-p1" checked> Airbnb</label>
+              <label><input type="checkbox" id="a-p2"> Booking.com</label>
+              <label><input type="checkbox" id="a-p3"> Abritel</label>
+              <label><input type="checkbox" id="a-p4"> Gîtes de France</label>
+              <label><input type="checkbox" id="a-p5"> Autre</label>
+            </div>
+          </div>
+          <div class="fld"><label for="a-msg">Votre situation en quelques mots</label><textarea id="a-msg" placeholder="Commune, type de logement, ce qui vous fait hésiter…"></textarea></div>
+          <label class="consent"><input type="checkbox" id="a-ok"> J'accepte d'être recontacté pour planifier l'audit. Mes données ne servent qu'à cela et ne sont jamais transmises.</label>
+          <p class="err" id="a-err" hidden></p>
+          <button class="btn block" type="submit">Demander mon audit</button>
+          <p class="small">Maquette : ce formulaire n'envoie aucune donnée.</p>
+        </form>
+        <div class="ok" id="a-done" hidden>
+          <span class="eyebrow">Démonstration</span>
+          <h3 style="font-size:1.5rem">Demande prête à être envoyée</h3>
+          <p class="muted">Sur le vrai site, vous recevriez un e-mail pour choisir un créneau. Ici, rien n'a été envoyé.</p>
+          <button class="btn ghost" type="button" id="a-back" style="justify-self:start">Revenir au formulaire</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div style="display:grid;gap:14px;align-content:start">
+        <a class="logo" href="#top"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 15l2 2 4-4"/></svg></span><span><strong>WebUA</strong><small>Réservation directe</small></span></a>
+        <p>Sites de réservation directe pour gîtes, chambres d'hôtes et conciergeries. Basé dans l'Aude, disponible partout en France.</p>
+      </div>
+      <div><h4>Le service</h4><ul><li><a href="#calcul">Calculateur</a></li><li><a href="#methode">Méthode</a></li><li><a href="#offres">Offres et tarifs</a></li><li><a href="#faq">Questions</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><span class="muted">Nathan</span></li><li><span class="ph">[e-mail pro]</span></li><li><span class="ph">[téléphone]</span></li><li><a href="#audit">Réserver un audit</a></li></ul></div>
+    </div>
+    <details class="legal">
+      <summary>Mentions légales et confidentialité</summary>
+      <div class="lg">
+        <p><b>Éditeur</b> : Nathan <span class="ph">[nom]</span>, entrepreneur individuel (micro-entreprise), SIRET <span class="ph">[à compléter]</span>, <span class="ph">[adresse]</span>. TVA non applicable, article 293 B du CGI.</p>
+        <p><b>Hébergement</b> : <span class="ph">[hébergeur et adresse]</span>.</p>
+        <p><b>Données personnelles</b> : les informations du formulaire servent uniquement à organiser l'audit. Elles sont conservées 12 mois au plus et supprimées sur simple demande à <span class="ph">[e-mail]</span>.</p>
+        <p><b>Cookies</b> : ce site n'utilise ni mesure d'audience ni publicité, il ne dépose donc pas de cookies.</p>
+        <p><b>Encaissement</b> : WebUA ne perçoit jamais l'argent des voyageurs. Les paiements vont directement sur le compte Stripe de chaque loueur.</p>
+      </div>
+    </details>
+    <div class="fb"><span>© 2026 WebUA</span><span>Maquette de démonstration</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const I={
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M8.5 14.5l2 2 4-4"/>',
+  lock:'<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5M12 14.5v2.5"/>',
+  doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/>'
+};
+const ic=(n,s=20)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+document.querySelectorAll('[data-ic]').forEach(e=>e.innerHTML=ic(e.dataset.ic));
+document.querySelectorAll('[data-c],[data-ct]').forEach(e=>e.insertAdjacentHTML('afterbegin',ic('check',17)));
+
+/* FAQ */
+const FAQ=[
+ ['« Airbnb me remplit déjà. »','Parfait, on garde Airbnb. Le site sert aux voyageurs qui reviennent, ceux sur lesquels vous payez aujourd\'hui 15,5 % sans que la plateforme ait rien apporté.'],
+ ['« Mon logiciel de gestion fait déjà un site. »','Oui, et je m\'en sers. Je le configure, je le rends beau, visible sur Google, et je le fais vivre. Vous n\'avez rien à faire.'],
+ ['« Personne ne réservera en direct. »','Les inconnus, pas tout de suite, c\'est vrai. Les anciens voyageurs, si : carte QR code dans le logement, e-mail après le séjour, petit avantage réservé au direct.'],
+ ['« Et si j\'ai une double réservation ? »','Le calendrier est synchronisé directement avec Airbnb et Booking par votre logiciel de gestion, pas par un simple fichier. Seul Abritel passe par une synchronisation plus lente, que je vous explique à l\'audit.'],
+ ['« Puis-je être moins cher en direct ? »','Face à Airbnb et Booking, oui. Abritel impose en revanche de ne jamais être moins cher ailleurs. On récompense donc plutôt la fidélité autrement : arrivée anticipée, départ tardif, produit local offert.'],
+ ['« Qui encaisse l\'argent des voyageurs ? »','Vous, sur votre propre compte Stripe. Je ne touche jamais l\'argent des voyageurs et tous les comptes sont à votre nom.'],
+ ['« Et la taxe de séjour ? »','En direct, c\'est vous qui la collectez et la reversez à la commune. Je l\'ajoute comme ligne séparée dans la réservation et je vous montre où la déclarer.'],
+ ['« C\'est trop cher. »','L\'audit vous dit en combien de séjours c\'est remboursé. Si ce n\'est pas rentable pour vous, je vous le dirai.'],
+ ['« Je n\'ai pas le temps. »','Je fais tout. Vous validez les textes et les photos en 30 minutes, et vous créez vous-même vos comptes pendant un rendez-vous d\'une heure où je vous guide.']
+];
+$('#qa').innerHTML=FAQ.map(([q,a],i)=>`<details${i===0?' open':''}><summary>${q}</summary><p>${a}</p></details>`).join('');
+
+/* Calculateur */
+const eur=n=>Math.round(n).toLocaleString('fr-FR')+' €';
+const P={gite:[20000,1],multi:[18000,5],conc:[20000,30]};
+const rev=$('#c-rev'),n=$('#c-n'),com=$('#c-com'),pay=$('#c-pay'),share=$('#c-share');
+function calc(){
+  const R=Math.max(0,+rev.value||0),N=Math.max(1,Math.round(+n.value||1)),C=+com.value/100,F=Math.max(0,+pay.value||0)/100,S=+share.value/100;
+  const tot=R*N,dir=tot*S,avoided=dir*C,fee=dir*F,save=avoided-fee;
+  $('#c-share-o').textContent=Math.round(S*100)+' %';
+  $('#r-year').textContent=eur(Math.max(0,save));
+  $('#r-month').textContent='soit environ '+eur(Math.max(0,save)/12)+' par mois';
+  $('#r-tot').textContent=eur(tot);$('#r-dir').textContent=eur(dir);$('#r-com').textContent=eur(avoided);$('#r-fee').textContent='−'+eur(fee);
+  $('#b1-l').textContent='Commission plateforme sur ces réservations : '+eur(avoided);
+  $('#b2-l').textContent='Frais de paiement en direct : '+eur(fee);
+  $('#b2').style.width=(avoided?Math.max(2,fee/avoided*100):0)+'%';
+  let v;
+  if(save>=5000) v=['Un canal direct est clairement rentable.','L\'offre conciergerie est remboursée en moins d\'un an, maintenance comprise.'];
+  else if(save>=1000) v=['Un canal direct est rentable.','L\'offre vitrine est remboursée en un à deux ans, puis l\'économie s\'ajoute chaque année.'];
+  else v=['Un site complet sera long à rentabiliser.','Commencez par l\'audit et la fidélisation des anciens voyageurs : c\'est plus adapté à votre volume.'];
+  $('#r-verdict').innerHTML=`<strong>${v[0]}</strong>${v[1]}`;
+}
+[rev,n,com,pay,share].forEach(e=>e.addEventListener('input',()=>{calc();document.querySelectorAll('.presets .chip').forEach(c=>c.setAttribute('aria-pressed','false'))}));
+document.querySelector('.presets').addEventListener('click',e=>{
+  const c=e.target.closest('.chip');if(!c)return;
+  const [r,k]=P[c.dataset.p];rev.value=r;n.value=k;
+  document.querySelectorAll('.presets .chip').forEach(x=>x.setAttribute('aria-pressed',String(x===c)));
+  calc();
+});
+calc();
+
+/* Prix à afficher */
+const old=$('#p-old');
+function price(){
+  const v=Math.max(0,+old.value||0),need=Math.ceil(v/0.845),wrong=Math.round(v*1.155);
+  $('#p-new').textContent=need.toLocaleString('fr-FR')+' €';
+  $('#p-wrong').innerHTML=v?`Ajouter 15,5 % ne suffit pas : <s>${wrong.toLocaleString('fr-FR')} €</s> vous ferait perdre ${Math.max(0,Math.round(v-wrong*0.845))} € sur chaque nuit.`:'Entrez votre ancien versement par nuit.';
+}
+old.addEventListener('input',price);price();
+
+/* Formulaire */
+$('#af').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=$('#a-name').value.trim(),mail=$('#a-mail').value.trim(),err=$('#a-err');let m='';
+  if(!name)m='Indiquez votre nom pour que je puisse vous recontacter.';
+  else if(!/^\S+@\S+\.\S+$/.test(mail))m='Indiquez une adresse e-mail valide, par exemple claire@exemple.fr.';
+  else if(!$('#a-ok').checked)m='Cochez la case d\'accord pour envoyer la demande.';
+  err.textContent=m;err.hidden=!m;if(m)return;
+  $('#af').hidden=true;$('#a-done').hidden=false;
+});
+$('#a-back').onclick=()=>{$('#a-done').hidden=true;$('#af').hidden=false};
+
+/* Menu mobile */
+const mb=$('#menu-btn'),mn=$('#mnav');
+mb.onclick=()=>{const o=mn.hidden;mn.hidden=!o;mb.setAttribute('aria-expanded',String(o))};
+mn.addEventListener('click',e=>{if(e.target.closest('a')){mn.hidden=true;mb.setAttribute('aria-expanded','false')}});
+})();
+</script>
+
+</body>
+</html>
