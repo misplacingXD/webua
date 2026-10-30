@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="WebUA, conciergerie de locations saisonnières à Courbevoie. Maquette du site de réservation directe.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>WebUA Courbevoie</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Mise en page : colonne centrale de 1180px, sections très aérées, rubans pleine largeur (sable, bleu nuit) ; mobile d'abord */
+:root{
+  --bg:#F7F5F0; --surface:#FFFFFF; --sand:#EADFCB; --sand-soft:#F2EBDF; --sand-deep:#A9834C;
+  --ink:#14223F; --muted:#5A6378; --line:#E2DBCD; --chip:#EFE7D8;
+  --night:#14223F; --on-night:#F4EAD7; --on-night-muted:#B9C0CF;
+  --btn-bg:#14223F; --btn-fg:#F4EAD7; --ok:#2F6B4F; --booked:#E4DED3; --sel:#14223F; --sel-fg:#F4EAD7; --range:#E9DCC4;
+  --shadow:0 24px 48px -30px rgba(20,34,63,.45);
+  --f-display:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --f-body:"Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --r-lg:24px; --r-md:16px; --r-sm:10px;
+  --gut:max(clamp(16px,4vw,32px), env(safe-area-inset-left,0px));
+  --gut-r:max(clamp(16px,4vw,32px), env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E172B; --surface:#16223C; --sand:#24314F; --sand-soft:#18243F; --sand-deep:#D9BC86;
+    --ink:#EFE7D8; --muted:#A6AEBF; --line:#28365A; --chip:#202D4B;
+    --night:#091124; --on-night:#F4EAD7; --on-night-muted:#A6AEBF;
+    --btn-bg:#E2C793; --btn-fg:#0E172B; --ok:#7CC4A0; --booked:#1E2A46; --sel:#E2C793; --sel-fg:#0E172B; --range:#2C3A5C;
+    --shadow:0 24px 48px -28px rgba(0,0,0,.7); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E172B; --surface:#16223C; --sand:#24314F; --sand-soft:#18243F; --sand-deep:#D9BC86;
+  --ink:#EFE7D8; --muted:#A6AEBF; --line:#28365A; --chip:#202D4B;
+  --night:#091124; --on-night:#F4EAD7; --on-night-muted:#A6AEBF;
+  --btn-bg:#E2C793; --btn-fg:#0E172B; --ok:#7CC4A0; --booked:#1E2A46; --sel:#E2C793; --sel-fg:#0E172B; --range:#2C3A5C;
+  --shadow:0 24px 48px -28px rgba(0,0,0,.7); color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);font-weight:500;line-height:1.1;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(2.3rem,6.2vw,4.4rem)}
+h2{font-size:clamp(1.8rem,4vw,2.8rem)}
+h3{font-size:1.3rem}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sand-deep);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:var(--gut);padding-right:var(--gut)}
+.eyebrow{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--sand-deep)}
+.lead{color:var(--muted);font-size:1.075rem;max-width:58ch}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.ic{width:20px;height:20px;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 24px;font-weight:600;cursor:pointer;text-decoration:none;background:var(--btn-bg);color:var(--btn-fg);transition:transform .15s ease, box-shadow .15s ease}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.sand{background:var(--on-night);color:#14223F}
+.btn.block{width:100%}
+section.sec{padding-block:clamp(56px,9vw,112px)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 32px;margin-bottom:clamp(28px,4vw,44px)}
+.sec-head > div{display:grid;gap:12px;min-width:0}
+
+/* Bandeau maquette */
+.demo{background:var(--sand-soft);color:var(--muted);font-size:.75rem;letter-spacing:.06em;text-align:center;padding-block:7px;border-bottom:1px solid var(--line)}
+.demo b{font-weight:600;color:var(--ink)}
+
+/* En-tête */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo .mark{width:34px;height:34px;border-radius:10px;background:var(--btn-bg);color:var(--btn-fg);display:grid;place-items:center}
+.logo .mark svg{width:20px;height:20px}
+.logo strong{font-family:var(--f-display);font-size:1.45rem;font-weight:600;letter-spacing:.01em;line-height:1}
+.logo small{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+nav.main{display:none;align-items:center;gap:6px}
+nav.main a{text-decoration:none;padding:8px 14px;border-radius:999px;font-weight:500;font-size:.95rem;color:var(--muted)}
+nav.main a:hover,nav.main a[aria-current="page"]{color:var(--ink);background:var(--chip)}
+.top .cta{display:none;padding:11px 20px;font-size:.92rem}
+.menu-btn{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.mnav{border-top:1px solid var(--line);background:var(--bg)}
+.mnav .wrap{display:grid;gap:4px;padding-block:12px 20px}
+.mnav a{text-decoration:none;padding:12px 4px;font-size:1.05rem;border-bottom:1px solid var(--line)}
+.mnav .btn{margin-top:12px}
+@media (min-width:920px){nav.main{display:flex}.top .cta{display:inline-flex}.menu-btn{display:none}.mnav{display:none!important}}
+
+/* Visuels illustrés */
+.ph{position:relative;overflow:hidden;background:var(--sand);max-width:100%}
+.ph svg{display:block;width:100%;height:100%}
+
+/* Accueil */
+.hero-wrap{padding-top:clamp(12px,2.5vw,28px)}
+.hero{position:relative;border-radius:var(--r-lg);overflow:hidden;color:#FBF6EC;isolation:isolate}
+.hero .ph{position:absolute;inset:0;z-index:-2;border-radius:0}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(11,18,38,.78) 0%,rgba(11,18,38,.45) 48%,rgba(11,18,38,.05) 85%),linear-gradient(0deg,rgba(11,18,38,.5),transparent 45%)}
+.hero-in{display:grid;gap:22px;padding:clamp(56px,10vw,128px) clamp(22px,5vw,64px) clamp(96px,11vw,150px);max-width:760px}
+.hero h1{color:#FBF6EC}
+.hero h1 em{font-style:italic;color:#EBD3A5}
+.hero p{color:#E4E2DC;font-size:1.1rem;max-width:46ch}
+.hero .eyebrow{color:#EBD3A5}
+.hero .btn{background:#F4EAD7;color:#14223F;justify-self:start}
+.search{position:relative;margin:-64px clamp(10px,3vw,40px) 0;background:var(--surface);border-radius:var(--r-md);box-shadow:var(--shadow);border:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:1px;overflow:hidden}
+.search .f{display:grid;gap:2px;padding:12px 16px;background:var(--surface);min-width:0}
+.search label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--muted)}
+.search input,.search select{border:0;background:transparent;padding:2px 0;font-weight:600;width:100%;min-width:0}
+.search .f.dest{grid-column:1/-1}
+.search .go{grid-column:1/-1;padding:12px;background:var(--surface)}
+.search .go .btn{width:100%}
+.search{background:var(--line)}
+@media (min-width:860px){
+  .search{grid-template-columns:1.3fr 1fr 1fr 1fr auto}
+  .search .f.dest,.search .go{grid-column:auto}
+  .search .f{padding:16px 22px}
+  .search .go{display:flex;align-items:center;padding:10px 12px}
+  .search .go .btn{width:auto;height:100%;padding-inline:28px}
+}
+.values{display:grid;gap:14px;margin-top:clamp(40px,6vw,64px)}
+.value{display:flex;gap:14px;align-items:flex-start}
+.value .ico{width:44px;height:44px;border-radius:12px;background:var(--chip);display:grid;place-items:center;color:var(--sand-deep);flex:none}
+.value strong{display:block;font-weight:600}
+.value span{color:var(--muted);font-size:.95rem}
+@media (min-width:760px){.values{grid-template-columns:repeat(3,1fr);gap:28px}}
+
+.facts{background:var(--sand-soft);border-block:1px solid var(--line)}
+.facts .wrap{display:grid;gap:28px;padding-block:clamp(44px,7vw,80px)}
+.facts-grid{display:grid;gap:14px}
+.fact{background:var(--surface);border-radius:var(--r-md);padding:22px;border:1px solid var(--line);display:grid;gap:6px;align-content:start}
+.fact .big{font-family:var(--f-display);font-size:2.2rem;line-height:1;font-variant-numeric:tabular-nums}
+.fact .line{font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--sand-deep)}
+.fact p{color:var(--muted);font-size:.95rem}
+@media (min-width:860px){.facts .wrap{grid-template-columns:1fr 2fr;align-items:center;gap:48px}.facts-grid{grid-template-columns:repeat(3,1fr)}}
+
+/* Cartes logements */
+.grid{display:grid;gap:clamp(20px,3vw,32px);grid-template-columns:1fr}
+@media (min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{display:grid;gap:14px;text-decoration:none;min-width:0}
+.card .ph{aspect-ratio:4/3;border-radius:var(--r-md)}
+.card .ph svg{transition:transform .5s ease}
+.card:hover .ph svg{transform:scale(1.04)}
+.badge{position:absolute;top:12px;left:12px;background:var(--surface);color:var(--ink);font-size:.72rem;font-weight:600;padding:6px 10px;border-radius:999px;letter-spacing:.02em}
+.card .row{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.card h3{font-size:1.25rem}
+.card .rate{display:inline-flex;align-items:center;gap:4px;font-size:.9rem;font-weight:600;white-space:nowrap}
+.card .rate svg{width:14px;height:14px;color:var(--sand-deep)}
+.card .meta{display:flex;flex-wrap:wrap;gap:4px 14px;color:var(--muted);font-size:.92rem}
+.card .meta span{display:inline-flex;align-items:center;gap:6px}
+.card .meta svg{width:16px;height:16px}
+.card .price{font-size:.95rem}
+.card .price b{font-size:1.1rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters .lab{font-size:.85rem;color:var(--muted);margin-right:4px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 16px;cursor:pointer;font-size:.92rem;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:transparent}
+.count{color:var(--muted);font-size:.92rem;margin-bottom:20px}
+.empty{padding:48px;border:1px dashed var(--line);border-radius:var(--r-md);text-align:center;color:var(--muted)}
+.page-head{padding-top:clamp(36px,6vw,72px);padding-bottom:28px;display:grid;gap:14px}
+
+/* Avis */
+.reviews{display:grid;gap:18px}
+@media (min-width:700px){.reviews{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.reviews{grid-template-columns:repeat(3,1fr)}}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:24px;display:grid;gap:14px;align-content:start}
+.stars{display:flex;gap:2px;color:var(--sand-deep)}
+.stars svg{width:16px;height:16px}
+.review blockquote{margin:0;font-family:var(--f-display);font-size:1.12rem;line-height:1.45}
+.who{display:flex;gap:12px;align-items:center;font-size:.9rem}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--chip);display:grid;place-items:center;font-weight:600;color:var(--sand-deep);flex:none}
+.who small{display:block;color:var(--muted);font-size:.82rem}
+.score{display:flex;align-items:center;gap:14px}
+.score .n{font-family:var(--f-display);font-size:2.6rem;line-height:1}
+.note{font-size:.8rem;color:var(--muted);font-style:italic}
+
+/* FAQ */
+.faq-grid{display:grid;gap:32px}
+@media (min-width:900px){.faq-grid{grid-template-columns:1fr 1.6fr;gap:64px}}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:20px 40px 20px 0;font-weight:600;font-size:1.05rem;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:14px;font-family:var(--f-display);font-size:1.6rem;font-weight:400;color:var(--sand-deep);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 22px;color:var(--muted);max-width:62ch}
+
+/* Ruban bleu nuit */
+.band{background:var(--night);color:var(--on-night)}
+.band .wrap{padding-block:clamp(52px,8vw,96px);display:grid;gap:24px}
+.band h2{color:var(--on-night)}
+.band p{color:var(--on-night-muted);max-width:52ch}
+@media (min-width:860px){.band .wrap{grid-template-columns:1.5fr 1fr;align-items:center}.band .wrap > :last-child{justify-self:end}}
+
+/* Page logement */
+.back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--muted);font-size:.92rem;margin-top:24px}
+.lg-head{display:grid;gap:10px;padding-block:18px 24px}
+.lg-sub{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:.95rem}
+.lg-sub span{display:inline-flex;align-items:center;gap:6px}
+.lg-sub svg{width:16px;height:16px}
+.gallery{display:grid;grid-auto-flow:column;grid-auto-columns:86%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;border-radius:var(--r-lg);scrollbar-width:none}
+.gallery::-webkit-scrollbar{display:none}
+.gallery button{all:unset;cursor:pointer;scroll-snap-align:start;position:relative;border-radius:var(--r-md);overflow:hidden}
+.gallery button:focus-visible{outline:2px solid var(--sand-deep);outline-offset:-4px}
+.gallery .ph{aspect-ratio:4/3;height:100%}
+.gallery .cap{position:absolute;left:10px;bottom:10px;background:rgba(11,18,38,.62);color:#FBF6EC;font-size:.75rem;padding:4px 10px;border-radius:999px}
+@media (min-width:760px){
+  .gallery{grid-auto-flow:row;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;aspect-ratio:2.2/1}
+  .gallery button:first-child{grid-row:1/3}
+  .gallery .ph{aspect-ratio:auto}
+  .gallery button{border-radius:var(--r-sm)}
+  .gallery button:first-child{border-radius:var(--r-lg) var(--r-sm) var(--r-sm) var(--r-lg)}
+  .gallery button:nth-child(3){border-top-right-radius:var(--r-lg)}
+  .gallery button:nth-child(5){border-bottom-right-radius:var(--r-lg)}
+}
+.lg-body{display:grid;gap:40px;padding-block:36px 72px}
+@media (min-width:980px){.lg-body{grid-template-columns:minmax(0,1fr) 380px;gap:64px;align-items:start}}
+.lg-main{display:grid;gap:40px;min-width:0}
+.lg-main > section{display:grid;gap:18px;padding-bottom:40px;border-bottom:1px solid var(--line)}
+.lg-main > section:last-child{border-bottom:0;padding-bottom:0}
+.lg-main h2{font-size:1.65rem}
+.keyfacts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:640px){.keyfacts{grid-template-columns:repeat(4,1fr)}}
+.kf{background:var(--sand-soft);border-radius:var(--r-sm);padding:14px 16px;display:grid;gap:2px}
+.kf b{font-size:1.05rem}
+.kf span{font-size:.82rem;color:var(--muted)}
+.desc{display:grid;gap:14px;max-width:64ch}
+.equip{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px 24px}
+.equip li{display:flex;gap:12px;align-items:center}
+.equip svg{color:var(--sand-deep)}
+ul.clean{list-style:none;margin:0;padding:0}
+.rules{display:grid;gap:10px}
+.rules li{display:flex;gap:10px;align-items:center;color:var(--muted)}
+.rules svg{width:18px;height:18px;color:var(--ink)}
+
+/* Calendrier */
+.cal-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cal-nav{display:flex;gap:8px}
+.cal-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center}
+.cal-nav button:disabled{opacity:.35;cursor:default}
+.cals{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.month h4{margin:0 0 10px;font-weight:600;text-transform:capitalize;font-size:1rem}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px 0;text-align:center;font-variant-numeric:tabular-nums}
+.days .dow{font-size:.72rem;color:var(--muted);padding-bottom:6px;font-weight:600}
+.day{all:unset;box-sizing:border-box;height:40px;display:grid;place-items:center;font-size:.92rem;cursor:pointer;position:relative}
+.day span{width:36px;height:36px;display:grid;place-items:center;border-radius:50%}
+.day:hover span{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.day:focus-visible span{outline:2px solid var(--sand-deep)}
+.day.past,.day.booked{cursor:default;color:var(--muted)}
+.day.past{opacity:.45}
+.day.booked span{text-decoration:line-through;opacity:.6}
+.day.past:hover span,.day.booked:hover span{box-shadow:none}
+.day.inr{background:var(--range)}
+.day.start{background:linear-gradient(90deg,transparent 50%,var(--range) 50%)}
+.day.end{background:linear-gradient(90deg,var(--range) 50%,transparent 50%)}
+.day.start.end{background:none}
+.day.start span,.day.end span{background:var(--sel);color:var(--sel-fg);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+/* Encadré réservation */
+.book{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow);display:grid;gap:18px}
+@media (min-width:980px){.book{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px)}}
+.book .p{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.book .p b{font-family:var(--f-display);font-size:1.9rem;font-weight:500}
+.direct{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:var(--ok)}
+.direct svg{width:15px;height:15px}
+.bk-fields{border:1px solid var(--line);border-radius:var(--r-sm);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.bk-fields > div{padding:10px 14px;display:grid;gap:2px;min-width:0}
+.bk-fields > div + div{border-left:1px solid var(--line)}
+.bk-fields .full{grid-column:1/-1;border-left:0!important;border-top:1px solid var(--line)}
+.bk-fields label,.bk-fields .l{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.bk-fields select{border:0;background:transparent;padding:0;font-weight:600;width:100%}
+.bk-fields .v{font-weight:600}
+.lines{display:grid;gap:10px;font-size:.95rem}
+.lines div{display:flex;justify-content:space-between;gap:12px}
+.lines .tot{border-top:1px solid var(--line);padding-top:14px;font-weight:700;font-size:1.05rem}
+.lines .zero{color:var(--ok);font-weight:600}
+.save{background:var(--sand-soft);border-radius:var(--r-sm);padding:12px 14px;font-size:.88rem;color:var(--muted)}
+.save b{color:var(--ink)}
+.notice{border-radius:var(--r-sm);padding:14px;font-size:.9rem;background:var(--chip);border:1px solid var(--line)}
+.notice b{display:block;margin-bottom:2px}
+.small{font-size:.82rem;color:var(--muted);text-align:center}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:12px var(--gut-r) calc(12px + env(safe-area-inset-bottom,0px)) var(--gut);display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 -10px 30px -20px rgba(0,0,0,.4)}
+.mbar b{font-size:1.05rem}
+.mbar small{display:block;color:var(--muted);font-size:.8rem}
+.mbar .btn{padding:12px 22px}
+@media (min-width:980px){.mbar{display:none!important}}
+@media (max-width:979px){body.has-bar{padding-bottom:84px}}
+
+/* Propriétaires */
+.own-hero{display:grid;gap:32px;padding-block:clamp(36px,6vw,72px) clamp(40px,6vw,72px);align-items:center}
+.own-hero .ph{aspect-ratio:5/4;border-radius:var(--r-lg)}
+.own-hero > div{display:grid;gap:20px;min-width:0}
+@media (min-width:900px){.own-hero{grid-template-columns:1.05fr 1fr;gap:64px}}
+.args{display:grid;gap:18px}
+@media (min-width:860px){.args{grid-template-columns:repeat(3,1fr);gap:24px}}
+.arg{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:28px;display:grid;gap:12px;align-content:start}
+.arg .ico{width:48px;height:48px;border-radius:14px;background:var(--chip);color:var(--sand-deep);display:grid;place-items:center}
+.arg .ico svg{width:24px;height:24px}
+.arg p{color:var(--muted)}
+.arg .k{font-family:var(--f-display);font-size:1.6rem;line-height:1}
+.steps{display:grid;gap:0;counter-reset:s;margin-top:8px}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:18px 0;border-top:1px solid var(--line)}
+.steps li::before{counter-increment:s;content:counter(s);width:36px;height:36px;border-radius:50%;border:1.5px solid var(--sand-deep);color:var(--sand-deep);display:grid;place-items:center;font-family:var(--f-display);font-size:1.05rem}
+.steps b{display:block}
+.steps span{color:var(--muted);font-size:.95rem}
+.own-form{display:grid;gap:40px}
+@media (min-width:960px){.own-form{grid-template-columns:1fr 1.25fr;gap:64px;align-items:start}}
+form.contact{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,4vw,36px);display:grid;gap:16px;box-shadow:var(--shadow)}
+.fr{display:grid;gap:16px}
+@media (min-width:600px){.fr.two{grid-template-columns:1fr 1fr}}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label{font-size:.85rem;font-weight:600}
+.fld input,.fld select,.fld textarea{border:1px solid var(--line);background:var(--bg);border-radius:var(--r-sm);padding:12px 14px;width:100%}
+.fld textarea{min-height:110px;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--sand-deep);outline-offset:0;border-color:transparent}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted)}
+.consent input{margin-top:4px;accent-color:var(--sand-deep)}
+.err{color:#B4462E;font-size:.85rem}
+.ok-box{display:grid;gap:10px;padding:28px;border-radius:var(--r-md);background:var(--sand-soft);border:1px solid var(--line)}
+.ok-box h3{font-size:1.5rem}
+
+/* Mentions */
+.legal{display:grid;gap:28px;max-width:760px;padding-bottom:80px}
+.legal section{display:grid;gap:8px}
+.legal h2{font-size:1.4rem}
+.legal p{color:var(--muted)}
+.ph-txt{background:var(--chip);padding:1px 6px;border-radius:4px;font-size:.92em;color:var(--ink)}
+
+/* Pied de page */
+footer.foot{background:var(--night);color:var(--on-night)}
+footer.foot .wrap{padding-block:56px 28px;display:grid;gap:36px}
+.foot-cols{display:grid;gap:28px;grid-template-columns:1fr 1fr}
+.foot-cols > div:first-child{grid-column:1/-1}
+@media (min-width:860px){.foot-cols{grid-template-columns:1.6fr 1fr 1fr 1.2fr}.foot-cols > div:first-child{grid-column:auto}}
+.foot h4{margin:0 0 12px;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:#D9BC86}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none;color:var(--on-night-muted)}
+.foot a:hover{color:var(--on-night)}
+.foot p{color:var(--on-night-muted);font-size:.95rem;max-width:36ch}
+.foot .logo strong{color:var(--on-night)}
+.foot .logo small{color:var(--on-night-muted)}
+.foot .logo .mark{background:#F4EAD7;color:#14223F}
+.foot-bottom{border-top:1px solid rgba(244,234,215,.15);padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.82rem;color:var(--on-night-muted)}
+.foot-bottom nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+
+.view{animation:fade .35s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="demo"><b>Maquette de démonstration</b> · aucune réservation ni aucun paiement n'est enregistré</div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="WebUA, accueil">
+      <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V5h16v15M8.5 20V9.5h7V20"/></svg></span>
+      <span><strong>WebUA</strong><small>Conciergerie · Courbevoie</small></span>
+    </a>
+    <nav class="main" aria-label="Navigation principale">
+      <a href="#logements" data-nav="logements">Nos logements</a>
+      <a href="#proprietaires" data-nav="proprietaires">Propriétaires</a>
+      <a href="#avis" data-nav="avis">Avis</a>
+      <a href="#faq" data-nav="faq">FAQ</a>
+    </nav>
+    <a class="btn cta" href="#logements">Réserver en direct</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Ouvrir le menu">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <div class="wrap">
+      <a href="#logements">Nos logements</a>
+      <a href="#proprietaires">Propriétaires</a>
+      <a href="#avis">Avis clients</a>
+      <a href="#faq">Questions fréquentes</a>
+      <a class="btn block" href="#logements">Réserver en direct</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ACCUEIL -->
+  <div class="view" id="v-accueil" data-view="accueil">
+    <div class="wrap hero-wrap">
+      <div class="hero">
+        <div class="ph" id="hero-art"></div>
+        <div class="hero-in">
+          <span class="eyebrow">Locations saisonnières à Courbevoie</span>
+          <h1>Vos vacances à Courbevoie, <em>sans frais de plateforme</em></h1>
+          <p>Des appartements tenus par notre équipe locale, à dix minutes de Paris Saint-Lazare. Réservez en direct et payez le juste prix.</p>
+          <a class="btn" href="#logements">Réserver en direct
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <form class="search" id="search" aria-label="Rechercher un logement">
+        <div class="f dest"><label for="s-dest">Destination</label><input id="s-dest" value="Courbevoie (92400)" readonly></div>
+        <div class="f"><label for="s-arr">Arrivée</label><input id="s-arr" type="date"></div>
+        <div class="f"><label for="s-dep">Départ</label><input id="s-dep" type="date"></div>
+        <div class="f"><label for="s-gst">Voyageurs</label>
+          <select id="s-gst"><option value="1">1 voyageur</option><option value="2" selected>2 voyageurs</option><option value="3">3 voyageurs</option><option value="4">4 voyageurs</option><option value="6">5 à 6 voyageurs</option><option value="8">7 à 8 voyageurs</option></select></div>
+        <div class="go"><button class="btn" type="submit">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg>Rechercher</button></div>
+      </form>
+      <div class="values">
+        <div class="value"><span class="ico" data-ic="tag"></span><div><strong>0 € de frais de service</strong><span>Le prix affiché est le prix payé, ménage compris.</span></div></div>
+        <div class="value"><span class="ico" data-ic="pin"></span><div><strong>Une équipe sur place, 7 j/7</strong><span>Basée à Courbevoie, joignable avant et pendant le séjour.</span></div></div>
+        <div class="value"><span class="ico" data-ic="linen"></span><div><strong>Ménage de niveau hôtelier</strong><span>Draps, serviettes et produits d'accueil fournis.</span></div></div>
+      </div>
+    </div>
+
+    <section class="sec">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Sélection</span><h2>Nos logements du moment</h2></div>
+          <a class="btn ghost" href="#logements">Voir les 6 logements</a>
+        </div>
+        <div class="grid" id="featured"></div>
+      </div>
+    </section>
+
+    <div class="facts">
+      <div class="wrap">
+        <div style="display:grid;gap:14px">
+          <span class="eyebrow">Courbevoie, côté pratique</span>
+          <h2>Paris à quelques stations</h2>
+          <p class="lead">Entre la Seine et La Défense, Courbevoie offre le calme d'une ville résidentielle avec des transports directs vers le centre de Paris.</p>
+        </div>
+        <div class="facts-grid">
+          <div class="fact"><span class="line">Transilien L</span><span class="big">≈ 10 min</span><p>De Bécon-les-Bruyères à Paris Saint-Lazare.</p></div>
+          <div class="fact"><span class="line">RER A</span><span class="big">≈ 5 min</span><p>De La Défense à Charles-de-Gaulle–Étoile, au pied des Champs-Élysées.</p></div>
+          <div class="fact"><span class="line">Tramway T2</span><span class="big">2 arrêts</span><p>Faubourg de l'Arche et Les Fauvelles, pour rejoindre Paris La Défense Arena.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="sec" id="avis">
+      <div class="wrap">
+        <div class="sec-head">
+          <div><span class="eyebrow">Avis clients</span><h2>Ils ont séjourné chez nous</h2></div>
+          <div class="score"><span class="n num">4,9</span><div><div class="stars" data-stars="5"></div><span class="note">Note et avis d'exemple pour la maquette</span></div></div>
+        </div>
+        <div class="reviews" id="reviews"></div>
+      </div>
+    </section>
+
+    <section class="sec" id="faq" style="padding-top:0">
+      <div class="wrap faq-grid">
+        <div style="display:grid;gap:14px;align-content:start">
+          <span class="eyebrow">Questions fréquentes</span>
+          <h2>Avant de réserver</h2>
+          <p class="lead">Une autre question ? Notre équipe répond en moins d'une heure, de 8 h à 22 h.</p>
+        </div>
+        <div class="faq" id="faq-list"></div>
+      </div>
+    </section>
+
+    <div class="band">
+      <div class="wrap">
+        <div style="display:grid;gap:14px">
+          <span class="eyebrow" style="color:#D9BC86">Propriétaires</span>
+          <h2>Vous avez un logement à Courbevoie ?</h2>
+          <p>Nous gérons tout, de l'annonce au ménage, et vous versons vos revenus chaque mois.</p>
+        </div>
+        <a class="btn sand" href="#proprietaires">Confier mon logement</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGEMENTS -->
+  <div class="view" id="v-logements" data-view="logements" hidden>
+    <div class="wrap">
+      <div class="page-head">
+        <span class="eyebrow">Réservation directe</span>
+        <h1 style="font-size:clamp(2.2rem,5vw,3.6rem)">Nos logements</h1>
+        <p class="lead">Six adresses à Courbevoie, préparées et entretenues par notre équipe. Même logement, même confort, sans frais de service.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtrer par nombre de voyageurs" id="filters">
+        <span class="lab">Voyageurs</span>
+        <button class="chip" data-min="0" aria-pressed="true">Tous</button>
+        <button class="chip" data-min="2">2 et +</button>
+        <button class="chip" data-min="4">4 et +</button>
+        <button class="chip" data-min="6">6 et +</button>
+        <button class="chip" data-min="8">8</button>
+      </div>
+      <div style="height:28px"></div>
+      <p class="count" id="count"></p>
+      <div class="grid" id="list"></div>
+      <div style="height:clamp(56px,8vw,96px)"></div>
+    </div>
+  </div>
+
+  <!-- LOGEMENT -->
+  <div class="view" id="v-logement" data-view="logement" hidden></div>
+
+  <!-- PROPRIÉTAIRES -->
+  <div class="view" id="v-proprietaires" data-view="proprietaires" hidden>
+    <div class="wrap">
+      <div class="own-hero">
+        <div>
+          <span class="eyebrow">Propriétaires à Courbevoie</span>
+          <h1 style="font-size:clamp(2.3rem,5.5vw,4rem)">Confiez-nous votre logement</h1>
+          <p class="lead">Nous louons votre appartement ou votre maison en courte durée, en réservation directe et sur les plateformes. Vous gardez la main, nous gérons le reste.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px"><a class="btn" href="#contact-form" id="to-form">Demander une estimation</a></div>
+        </div>
+        <div class="ph" id="own-art"></div>
+      </div>
+
+      <div class="args">
+        <div class="arg"><span class="ico" data-ic="chart"></span><h3>Des revenus optimisés</h3><p>Prix ajustés chaque jour selon la saison, les salons à La Défense et les concerts à l'Arena. La réservation directe vous évite une partie des commissions.</p></div>
+        <div class="arg"><span class="ico" data-ic="key"></span><h3>Zéro charge mentale</h3><p>Annonces, échanges avec les voyageurs, arrivées, ménage, linge et petites réparations : notre équipe locale s'occupe de tout, 7 jours sur 7.</p></div>
+        <div class="arg"><span class="ico" data-ic="shield"></span><h3>Une location en règle</h3><p>Déclaration en mairie, numéro d'enregistrement, suivi de la limite de 120 nuits par an pour une résidence principale, collecte de la taxe de séjour.</p></div>
+      </div>
+
+      <section class="sec" style="padding-bottom:clamp(72px,10vw,120px)">
+        <div class="own-form">
+          <div style="display:grid;gap:14px">
+            <span class="eyebrow">Comment ça se passe</span>
+            <h2>De la visite à la première réservation</h2>
+            <ol class="steps clean">
+              <li><div><b>Visite et estimation</b><span>Nous venons voir le logement et vous remettons une estimation de revenus sous 48 h.</span></div></li>
+              <li><div><b>Mise en valeur</b><span>Photos professionnelles, conseils d'aménagement, rédaction des annonces.</span></div></li>
+              <li><div><b>Mise en ligne</b><span>Sur notre site de réservation directe et sur les grandes plateformes.</span></div></li>
+              <li><div><b>Suivi mensuel</b><span>Un relevé clair chaque mois et un virement de vos revenus.</span></div></li>
+            </ol>
+          </div>
+          <div id="contact-form">
+            <form class="contact" id="own-form" novalidate>
+              <h3>Parlons de votre logement</h3>
+              <div class="fr two">
+                <div class="fld"><label for="o-name">Prénom et nom</label><input id="o-name" autocomplete="name" placeholder="Camille Durand"></div>
+                <div class="fld"><label for="o-mail">E-mail</label><input id="o-mail" type="email" autocomplete="email" placeholder="camille@exemple.fr"></div>
+              </div>
+              <div class="fr two">
+                <div class="fld"><label for="o-tel">Téléphone</label><input id="o-tel" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></div>
+                <div class="fld"><label for="o-quart">Quartier</label>
+                  <select id="o-quart"><option>Bécon-les-Bruyères</option><option>Bords de Seine</option><option>Centre-ville · Charras</option><option>Faubourg de l'Arche</option><option>Les Fauvelles</option><option>Parc de Bécon</option><option>Marceau · Gare de Courbevoie</option><option>Autre</option></select></div>
+              </div>
+              <div class="fr two">
+                <div class="fld"><label for="o-type">Type de logement</label>
+                  <select id="o-type"><option>Studio</option><option selected>2 pièces</option><option>3 pièces</option><option>4 pièces et +</option><option>Maison</option></select></div>
+                <div class="fld"><label for="o-usage">Usage actuel</label>
+                  <select id="o-usage"><option>Résidence principale</option><option>Résidence secondaire</option><option>Investissement locatif</option></select></div>
+              </div>
+              <div class="fld"><label for="o-msg">Votre message</label><textarea id="o-msg" placeholder="Surface, étage, disponibilités, questions…"></textarea></div>
+              <label class="consent"><input type="checkbox" id="o-ok"> J'accepte d'être recontacté au sujet de mon logement. Mes données ne sont pas transmises à des tiers.</label>
+              <p class="err" id="o-err" hidden></p>
+              <button class="btn block" type="submit">Envoyer ma demande</button>
+              <p class="small">Maquette : le formulaire n'envoie aucune donnée.</p>
+            </form>
+            <div class="ok-box" id="own-ok" hidden>
+              <span class="eyebrow">Démonstration</span>
+              <h3>Merci, votre demande serait bien reçue.</h3>
+              <p class="muted">Sur le vrai site, l'équipe WebUA vous rappellerait sous 24 h. Dans cette maquette, rien n'a été envoyé.</p>
+              <button class="btn ghost" id="own-reset" type="button" style="justify-self:start">Revenir au formulaire</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- MENTIONS -->
+  <div class="view" id="v-mentions" data-view="mentions" hidden>
+    <div class="wrap">
+      <div class="page-head"><span class="eyebrow">Informations légales</span><h1 style="font-size:clamp(2.2rem,5vw,3.4rem)">Mentions légales</h1>
+        <p class="lead">Les champs entre crochets sont à compléter avec les informations réelles de la société.</p></div>
+      <div class="legal">
+        <section><h2>Éditeur du site</h2><p>WebUA, <span class="ph-txt">[forme juridique]</span> au capital de <span class="ph-txt">[montant]</span> €, immatriculée au RCS de Nanterre sous le numéro <span class="ph-txt">[SIREN]</span>. Siège social : <span class="ph-txt">[adresse]</span>, 92400 Courbevoie. Directeur de la publication : <span class="ph-txt">[nom]</span>.</p></section>
+        <section><h2>Activité réglementée</h2><p>Carte professionnelle « Gestion immobilière » n° <span class="ph-txt">[numéro]</span>, délivrée par la CCI Paris Île-de-France, si l'activité inclut l'encaissement de loyers pour le compte des propriétaires. Garantie financière : <span class="ph-txt">[organisme]</span>.</p></section>
+        <section><h2>Hébergement</h2><p><span class="ph-txt">[nom de l'hébergeur]</span>, <span class="ph-txt">[adresse]</span>.</p></section>
+        <section><h2>Données personnelles</h2><p>Les données saisies dans les formulaires servent uniquement à répondre aux demandes et à gérer les séjours. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression en écrivant à <span class="ph-txt">[adresse e-mail]</span>.</p></section>
+        <section><h2>Meublés de tourisme</h2><p>Chaque logement proposé dispose d'un numéro d'enregistrement délivré par la mairie de Courbevoie, affiché sur sa fiche. Les numéros présentés dans cette maquette sont fictifs.</p></section>
+        <section><h2>Conditions de réservation</h2><p>Annulation gratuite jusqu'à 7 jours avant l'arrivée, puis remboursement de 50 %. Conditions données à titre d'exemple.</p></section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-cols">
+      <div style="display:grid;gap:16px;align-content:start">
+        <a class="logo" href="#accueil"><span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V5h16v15M8.5 20V9.5h7V20"/></svg></span><span><strong>WebUA</strong><small>Conciergerie · Courbevoie</small></span></a>
+        <p>Conciergerie de locations saisonnières à Courbevoie. Réservation directe, sans frais de plateforme.</p>
+      </div>
+      <div><h4>Voyageurs</h4><ul><li><a href="#logements">Nos logements</a></li><li><a href="#avis">Avis clients</a></li><li><a href="#faq">Questions fréquentes</a></li></ul></div>
+      <div><h4>Propriétaires</h4><ul><li><a href="#proprietaires">Confier mon logement</a></li><li><a href="#proprietaires">Estimer mes revenus</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><span class="muted" style="color:var(--on-night-muted)">92400 Courbevoie</span></li><li><span style="color:var(--on-night-muted)">01 XX XX XX XX</span></li><li><span style="color:var(--on-night-muted)">bonjour@webua.fr</span></li></ul></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 WebUA · Maquette de démonstration</span>
+      <nav aria-label="Liens légaux"><a href="#mentions">Mentions légales</a><a href="#mentions">CGV</a><a href="#mentions">Confidentialité</a><a href="#mentions">Cookies</a></nav>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" hidden>
+  <div><b id="mb-price" class="num"></b><small id="mb-dates"></small></div>
+  <a class="btn" href="#booking" id="mb-go">Réserver</a>
+</div>
+
+<script>
+(function(){
+/* ---------- Icônes ---------- */
+const I={
+  wifi:'<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M9 16a4.5 4.5 0 0 1 6 0"/><circle cx="12" cy="19.3" r=".9" fill="currentColor"/>',
+  kitchen:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M8 6h.01M11 6h.01M8 13h8v5H8z"/>',
+  washer:'<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13.5" r="4.5"/><path d="M7.5 6.5h.01M10.5 6.5h3"/>',
+  tv:'<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  desk:'<path d="M3 10h18M5 10v10M19 10v10M8 10V5h8v5"/>',
+  coffee:'<path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5v2.5M12 3.5v2.5"/>',
+  key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M16.5 6.5l2 2M14 9l2 2"/>',
+  linen:'<path d="M4 7.5L8 4h8l4 3.5-3 3V20H7v-9.5z"/>',
+  balcony:'<path d="M3 12h18M5 12v8M9 12v8M15 12v8M19 12v8M3 20h18M7 12V4h10v8"/>',
+  parking:'<rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9.5 17V7h3.5a3 3 0 0 1 0 6H9.5"/>',
+  elevator:'<rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M9 9.5l3-3 3 3M9 14.5l3 3 3-3"/>',
+  crib:'<path d="M4 5v15M20 5v15M4 16h16M4 9h16M8 9v7M12 9v7M16 9v7"/>',
+  ac:'<path d="M12 2.5v19M4 7l16 10M20 7L4 17"/>',
+  garden:'<path d="M12 21v-9M12 12c0-4 3-7 7-7 0 4-3 7-7 7zM12 14c0-3-2.5-5.5-6-5.5 0 3 2.5 5.5 6 5.5zM5 21h14"/>',
+  bbq:'<path d="M4 10h16a8 8 0 0 1-16 0zM8 17l-2 4M16 17l2 4M9 3c-1 1.5 1 2.5 0 4M13 3c-1 1.5 1 2.5 0 4"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  bed:'<path d="M3 19v-8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8M3 15h18M6 9V6h5v3M13 9V6h5v3"/>',
+  area:'<path d="M4 4h16v16H4zM4 9h5M15 20v-5"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  no:'<circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/>',
+  tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8" r="1.5"/>',
+  chart:'<path d="M4 20V4M4 20h16M8 16l4-5 3 3 5-7"/>',
+  shield:'<path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+  arrowL:'<path d="M19 12H5M11 6l-6 6 6 6"/>',
+  prev:'<path d="M15 6l-6 6 6 6"/>', next:'<path d="M9 6l6 6-6 6"/>'
+};
+const ic=(n,c='ic')=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+const star='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg>';
+const EQ={wifi:'Wi-Fi fibre',kitchen:'Cuisine équipée',washer:'Lave-linge',tv:'Télévision connectée',desk:'Espace de travail',coffee:'Machine à café',key:'Arrivée autonome',linen:'Linge de maison fourni',balcony:'Balcon',terrace:'Terrasse',parking:'Parking en sous-sol',elevator:'Ascenseur',crib:'Lit bébé sur demande',ac:'Climatisation',garden:'Jardin clos',bbq:'Barbecue'};
+const EQI={terrace:'balcony'};
+
+/* ---------- Illustrations ---------- */
+function rand(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let uid=0;
+const svg=(w,h,inner,label)=>`<svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${label}">${inner}</svg>`;
+function towers(r,x0,x1,base,hMin,hMax,fill,win,wmin=18,wmax=50){
+  let s='',x=x0;
+  while(x<x1){
+    const w=wmin+r()*(wmax-wmin),h=hMin+r()*(hMax-hMin);
+    s+= r()<.3 ? `<polygon points="${x},${base} ${x},${base-h} ${x+w},${base-h+w*.4} ${x+w},${base}" fill="${fill}"/>` : `<rect x="${x}" y="${base-h}" width="${w}" height="${h}" fill="${fill}"/>`;
+    if(win) for(let yy=base-h+w*.45+6;yy<base-6;yy+=9) for(let xx=x+4;xx<x+w-5;xx+=7) if(r()<win) s+=`<rect x="${xx.toFixed(1)}" y="${yy.toFixed(1)}" width="3" height="4" fill="#F5DDA8" opacity="${(.45+r()*.55).toFixed(2)}"/>`;
+    x+=w+2+r()*7;
+  }
+  return s;
+}
+const skyG=(id,a,b)=>`<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient>`;
+
+function hero(){
+  const r=rand(7),id='h'+(uid++);
+  let s=`<defs><linearGradient id="${id}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15234A"/><stop offset=".42" stop-color="#4A5B88"/><stop offset=".76" stop-color="#D4B087"/><stop offset="1" stop-color="#F2D9A9"/></linearGradient>${skyG(id+'w','#5B6B93','#121E3C')}<radialGradient id="${id}g" cx=".68" cy=".64" r=".38"><stop offset="0" stop-color="#FBE7C0" stop-opacity=".85"/><stop offset="1" stop-color="#FBE7C0" stop-opacity="0"/></radialGradient></defs>`;
+  s+=`<rect width="1200" height="700" fill="url(#${id}s)"/><rect width="1200" height="700" fill="url(#${id}g)"/><circle cx="820" cy="440" r="44" fill="#FBE9C6"/>`;
+  s+=towers(r,640,1200,482,140,340,'#2B3A62',.16,24,58);
+  s+=`<path fill-rule="evenodd" d="M490 482V352h130v130zM510 482V372h90v110z" fill="#33446E"/>`;
+  s+=towers(r,0,470,502,50,130,'#1C2949',.32,30,70);
+  for(let x=-10;x<1210;x+=22+r()*22) s+=`<circle cx="${x.toFixed(0)}" cy="${(494-r()*8).toFixed(0)}" r="${(13+r()*12).toFixed(0)}" fill="#162240"/>`;
+  s+=`<rect y="498" width="1200" height="14" fill="#121C36"/><rect y="512" width="1200" height="188" fill="url(#${id}w)"/>`;
+  for(let i=0;i<80;i++){const y=516+r()*180,x=820+(r()-.5)*(140+(y-510)*2.2),w=16+r()*70;s+=`<rect x="${(x-w/2).toFixed(0)}" y="${y.toFixed(0)}" width="${w.toFixed(0)}" height="2" rx="1" fill="#F6DDAE" opacity="${(.12+r()*.45).toFixed(2)}"/>`}
+  return svg(1200,700,s,'Courbevoie au crépuscule : bords de Seine et tours de La Défense');
+}
+function floor(p,y){let s=`<rect y="${y}" width="400" height="${300-y}" fill="${p.floor}"/>`;for(let x=-40;x<460;x+=34)s+=`<path d="M${x} ${y}L${x-36} 300" stroke="#000" stroke-opacity=".07"/>`;return s+`<rect y="${y-4}" width="400" height="5" fill="#fff" opacity=".5"/>`}
+function winView(r,id,x,y,w,h){return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#${id})"/>`+towers(r,x+4,x+w-4,y+h,h*.2,h*.6,'#A3B1C8',0,10,22)+`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#FBFAF7" stroke-width="7"/><path d="M${x+w/2} ${y}v${h}M${x} ${y+h*.48}h${w}" stroke="#FBFAF7" stroke-width="4"/>`}
+const SC={
+living(p){const id='l'+(uid++),r=rand(p.seed);let s=`<defs>${skyG(id,'#C3D5E8','#F3E2C4')}</defs><rect width="400" height="300" fill="${p.wall}"/>`;
+  s+=winView(r,id,250,34,118,160)+`<rect x="236" y="26" width="15" height="192" rx="3" fill="${p.textile}"/><rect x="369" y="26" width="15" height="192" rx="3" fill="${p.textile}"/><rect x="228" y="22" width="164" height="4" rx="2" fill="#2B2B2B" opacity=".45"/>`;
+  s+=`<rect x="74" y="56" width="96" height="68" fill="#FBFAF7"/><rect x="82" y="64" width="80" height="52" fill="${p.accent2}"/><circle cx="136" cy="82" r="11" fill="${p.textile}"/><path d="M82 116l26-26 22 20 12-10 20 16z" fill="${p.accent}" opacity=".75"/>`;
+  s+=floor(p,216)+`<ellipse cx="140" cy="264" rx="140" ry="22" fill="${p.rug}"/>`;
+  s+=`<rect x="36" y="136" width="176" height="48" rx="14" fill="${p.accent}"/><rect x="36" y="136" width="176" height="48" rx="14" fill="#000" opacity=".14"/><rect x="28" y="168" width="192" height="44" rx="10" fill="${p.accent}"/><rect x="20" y="156" width="24" height="58" rx="10" fill="${p.accent}"/><rect x="204" y="156" width="24" height="58" rx="10" fill="${p.accent}"/><rect x="20" y="156" width="24" height="58" rx="10" fill="#000" opacity=".08"/><rect x="204" y="156" width="24" height="58" rx="10" fill="#000" opacity=".08"/>`;
+  s+=`<rect x="54" y="146" width="42" height="30" rx="8" fill="${p.textile}"/><rect x="102" y="148" width="38" height="28" rx="8" fill="#FBFAF7" opacity=".9"/><rect x="40" y="212" width="5" height="8" fill="#3A2E24"/><rect x="202" y="212" width="5" height="8" fill="#3A2E24"/>`;
+  s+=`<ellipse cx="146" cy="242" rx="44" ry="9" fill="${p.wood}"/><rect x="142" y="242" width="8" height="20" fill="${p.wood}"/><rect x="134" y="222" width="12" height="18" rx="4" fill="#FBFAF7"/><path d="M140 222c-6-12-14-16-18-14M140 222c2-14 10-20 16-18M140 222c-1-10-2-18 0-24" stroke="#5E8452" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  s+=`<path d="M14 218V88" stroke="#2B2B2B" stroke-width="2.5"/><ellipse cx="14" cy="220" rx="12" ry="3" fill="#2B2B2B"/><path d="M0 88h28l-6-26H6z" fill="${p.textile}"/><ellipse cx="14" cy="96" rx="22" ry="10" fill="#F7DFAA" opacity=".35"/>`;
+  return svg(400,300,s,'Séjour')},
+bedroom(p){const id='b'+(uid++);let s=`<defs><radialGradient id="${id}"><stop offset="0" stop-color="#F7DFAA" stop-opacity=".55"/><stop offset="1" stop-color="#F7DFAA" stop-opacity="0"/></radialGradient></defs><rect width="400" height="300" fill="${p.wall}"/><rect x="92" y="30" width="216" height="190" fill="${p.accent2}" opacity=".35"/>`;
+  for(const x of [72,328]) s+=`<path d="M${x} 0v104" stroke="#2B2B2B" stroke-width="1.5"/><circle cx="${x}" cy="114" r="30" fill="url(#${id})"/><path d="M${x-10} 104h20l-4 12h-12z" fill="#2B2B2B"/><circle cx="${x}" cy="117" r="4" fill="#FBE7C0"/>`;
+  s+=`<rect x="170" y="48" width="60" height="36" fill="#FBFAF7"/><path d="M176 76c10-14 18-6 24-16s14-2 24 6" stroke="${p.accent}" stroke-width="2" fill="none"/>`;
+  s+=floor(p,222)+`<rect x="114" y="98" width="172" height="90" rx="16" fill="${p.accent}"/>`;
+  for(let x=136;x<286;x+=22) s+=`<path d="M${x} 104v80" stroke="#000" stroke-opacity=".1" stroke-width="2"/>`;
+  s+=`<rect x="100" y="166" width="200" height="56" rx="8" fill="#F8F6F1"/><rect x="126" y="148" width="66" height="28" rx="10" fill="#FFFFFF" stroke="#E2DED6"/><rect x="208" y="148" width="66" height="28" rx="10" fill="#FFFFFF" stroke="#E2DED6"/><rect x="100" y="188" width="200" height="34" rx="6" fill="${p.textile}"/><rect x="100" y="198" width="200" height="8" fill="${p.accent}" opacity=".45"/><rect x="104" y="222" width="6" height="10" fill="#3A2E24"/><rect x="290" y="222" width="6" height="10" fill="#3A2E24"/>`;
+  s+=`<rect x="50" y="182" width="42" height="42" rx="4" fill="${p.wood}"/><path d="M54 203h34" stroke="#000" stroke-opacity=".15"/><rect x="308" y="182" width="42" height="42" rx="4" fill="${p.wood}"/><path d="M312 203h34" stroke="#000" stroke-opacity=".15"/><rect x="60" y="172" width="20" height="10" rx="2" fill="${p.accent2}"/><rect x="322" y="168" width="10" height="14" rx="4" fill="#FBFAF7"/>`;
+  return svg(400,300,s,'Chambre')},
+kitchen(p){const id='k'+(uid++),r=rand(p.seed+3);let s=`<defs>${skyG(id,'#C3D5E8','#F3E2C4')}</defs><rect width="400" height="300" fill="${p.wall}"/>`;
+  s+=winView(r,id,262,26,104,84);
+  s+=`<rect x="34" y="80" width="170" height="5" fill="${p.wood}"/><circle cx="58" cy="66" r="13" fill="#FBFAF7" stroke="#DDD8CF"/><circle cx="82" cy="66" r="13" fill="#FBFAF7" stroke="#DDD8CF"/><rect x="110" y="58" width="16" height="22" rx="3" fill="${p.accent2}"/><rect x="132" y="62" width="16" height="18" rx="3" fill="${p.textile}"/><rect x="156" y="52" width="12" height="28" rx="3" fill="${p.accent}" opacity=".7"/><path d="M182 80c0-10 4-18 10-22M186 80c2-8 8-12 14-12" stroke="#5E8452" stroke-width="3" fill="none"/>`;
+  s+=`<rect x="18" y="118" width="364" height="56" fill="${p.tile}"/>`;
+  for(let x=18;x<382;x+=20) s+=`<path d="M${x} 118v56" stroke="#000" stroke-opacity=".06"/>`;
+  for(let y=132;y<174;y+=14) s+=`<path d="M18 ${y}h364" stroke="#000" stroke-opacity=".06"/>`;
+  for(const x of [110,190]) s+=`<path d="M${x} 0v44" stroke="#2B2B2B" stroke-width="1.5"/><path d="M${x-16} 58a16 14 0 0 1 32 0z" fill="${p.accent}"/><ellipse cx="${x}" cy="62" rx="22" ry="7" fill="#F7DFAA" opacity=".4"/>`;
+  s+=floor(p,256)+`<rect x="16" y="170" width="368" height="10" rx="2" fill="${p.counter}"/><rect x="20" y="180" width="360" height="76" fill="${p.accent}"/>`;
+  for(let x=80;x<380;x+=60) s+=`<path d="M${x} 184v68" stroke="#000" stroke-opacity=".18"/>`;
+  for(let x=50;x<380;x+=60) s+=`<rect x="${x}" y="196" width="20" height="3" rx="1.5" fill="#D6B98A"/>`;
+  s+=`<rect x="258" y="168" width="60" height="4" fill="#9AA3AE"/><path d="M296 170v-22q0-8-9-8h-6" stroke="#8C8C8C" stroke-width="3" fill="none"/><ellipse cx="92" cy="166" rx="22" ry="6" fill="#FBFAF7"/><circle cx="84" cy="160" r="6" fill="#E0A458"/><circle cx="96" cy="159" r="6" fill="#B9C36A"/><rect x="150" y="148" width="40" height="22" rx="3" fill="${p.wood}"/>`;
+  return svg(400,300,s,'Cuisine')},
+bath(p){const id='m'+(uid++);let s=`<defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4F2EE"/><stop offset="1" stop-color="#C9D3DE"/></linearGradient></defs><rect width="400" height="300" fill="${p.tile}"/>`;
+  for(let x=0;x<400;x+=22) s+=`<path d="M${x} 0v250" stroke="#fff" stroke-opacity=".55"/>`;
+  for(let y=0;y<250;y+=22) s+=`<path d="M0 ${y}h400" stroke="#fff" stroke-opacity=".55"/>`;
+  s+=`<circle cx="200" cy="96" r="54" fill="url(#${id})" stroke="${p.wood}" stroke-width="5"/><path d="M176 70l20-20M190 80l26-26" stroke="#fff" stroke-width="3" opacity=".7"/>`;
+  for(const x of [124,276]) s+=`<rect x="${x-5}" y="78" width="10" height="26" rx="5" fill="#FBE7C0"/><circle cx="${x}" cy="90" r="20" fill="#FBE7C0" opacity=".25"/>`;
+  s+=`<rect y="250" width="400" height="50" fill="${p.floor}"/><rect x="118" y="178" width="164" height="72" rx="4" fill="${p.wood}"/><path d="M200 182v64M122 214h156" stroke="#000" stroke-opacity=".15"/><rect x="110" y="170" width="180" height="10" rx="2" fill="#EFECE6"/><ellipse cx="200" cy="168" rx="38" ry="9" fill="#FFFFFF" stroke="#DCD8D0"/><path d="M200 160v-18h12" stroke="#8C8C8C" stroke-width="3" fill="none"/>`;
+  s+=`<circle cx="330" cy="104" r="10" fill="none" stroke="#B9A27E" stroke-width="3"/><rect x="314" y="112" width="32" height="74" rx="4" fill="${p.textile}"/><rect x="314" y="170" width="32" height="5" fill="${p.accent}" opacity=".5"/>`;
+  s+=`<rect x="48" y="216" width="30" height="34" rx="4" fill="#FBFAF7"/><path d="M63 216c-10-18-22-24-28-22M63 216c4-20 16-28 24-26M63 216c0-14 2-26 6-32M63 216c-4-14-12-24-18-26" stroke="#5E8452" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+  return svg(400,300,s,'Salle de bain')},
+view(p){const id='v'+(uid++),r=rand(p.seed+9);let s=`<defs>${skyG(id,'#9DB6D3','#F2DEBC')}${skyG(id+'w','#7F93B4','#4C5E84')}</defs><rect width="400" height="300" fill="url(#${id})"/><circle cx="300" cy="140" r="18" fill="#FBEFD6"/>`;
+  s+= p.trees ? '' : towers(r,180,400,170,40,120,'#7C8BAA',.12,12,26)+`<path fill-rule="evenodd" d="M140 170v-42h44v42zM147 170v-35h30v35z" fill="#8392B0"/>`;
+  s+=towers(r,0,180,176,10,30,'#8D98AE',0,20,34);
+  for(let x=-8;x<410;x+=12+r()*14) s+=`<circle cx="${x.toFixed(0)}" cy="${(p.trees?168:176)-r()*6}" r="${(p.trees?14:8)+r()*(p.trees?12:7)}" fill="${p.trees?'#5E8452':'#6F8566'}"/>`;
+  s+=`<rect y="180" width="400" height="34" fill="url(#${id}w)"/>`;
+  for(let i=0;i<14;i++) s+=`<rect x="${(r()*380).toFixed(0)}" y="${(184+r()*26).toFixed(0)}" width="${(12+r()*30).toFixed(0)}" height="1.6" fill="#F6E4C2" opacity=".55"/>`;
+  s+=`<rect y="250" width="400" height="50" fill="${p.floor}"/><rect y="204" width="400" height="5" fill="#2B3346"/>`;
+  for(let x=6;x<400;x+=14) s+=`<rect x="${x}" y="209" width="2.4" height="41" fill="#2B3346"/>`;
+  s+=`<ellipse cx="290" cy="236" rx="30" ry="7" fill="${p.wood}"/><rect x="287" y="236" width="6" height="40" fill="#2B3346"/><rect x="226" y="236" width="22" height="6" rx="2" fill="${p.accent}"/><path d="M228 242v30M246 242v30M228 236v-24" stroke="#2B3346" stroke-width="3"/><rect x="40" y="244" width="40" height="34" rx="4" fill="#C98E62"/><circle cx="52" cy="236" r="9" fill="#5E8452"/><circle cx="68" cy="232" r="10" fill="#6F9460"/><circle cx="50" cy="228" r="4" fill="#F0C3B4"/><circle cx="70" cy="224" r="4" fill="#F7E3A3"/><rect x="284" y="222" width="12" height="12" rx="3" fill="#FBFAF7"/>`;
+  return svg(400,300,s,p.trees?'Vue sur le parc':'Vue depuis le balcon')},
+garden(p){const id='g'+(uid++),r=rand(p.seed+5);let s=`<defs>${skyG(id,'#B8CDE3','#EEE6D6')}</defs><rect width="400" height="300" fill="url(#${id})"/>`;
+  s+=`<path d="M20 70L200 18 380 70z" fill="#9C5B43"/><rect x="34" y="68" width="332" height="160" fill="${p.stone}"/>`;
+  for(let i=0;i<120;i++) s+=`<ellipse cx="${(40+r()*320).toFixed(0)}" cy="${(74+r()*150).toFixed(0)}" rx="${(4+r()*7).toFixed(1)}" ry="${(2+r()*3).toFixed(1)}" fill="#7A5B3A" opacity="${(.08+r()*.18).toFixed(2)}"/>`;
+  for(const x of [70,170,270]) s+=`<rect x="${x-14}" y="98" width="88" height="110" fill="#FBFAF7"/><rect x="${x-8}" y="104" width="76" height="104" fill="#5E7392"/><path d="M${x+30} 104v104M${x-8} 140h76M${x-8} 174h76" stroke="#FBFAF7" stroke-width="3"/><rect x="${x-30}" y="98" width="16" height="110" fill="${p.accent}"/><rect x="${x+74}" y="98" width="16" height="110" fill="${p.accent}"/>`;
+  s+=`<rect y="224" width="400" height="76" fill="#86A86E"/>`;
+  for(let x=-10;x<410;x+=16+r()*10) s+=`<circle cx="${x.toFixed(0)}" cy="${(226-r()*6).toFixed(0)}" r="${(10+r()*8).toFixed(0)}" fill="#5E8452"/>`;
+  s+=`<path d="M300 190l-56 26h112z" fill="${p.textile}"/><path d="M300 214v52" stroke="#3A2E24" stroke-width="3"/><ellipse cx="300" cy="262" rx="34" ry="8" fill="${p.wood}"/><rect x="246" y="250" width="22" height="6" rx="2" fill="${p.accent}"/><rect x="332" y="250" width="22" height="6" rx="2" fill="${p.accent}"/><path d="M250 256v20M264 256v20M336 256v20M350 256v20" stroke="#3A2E24" stroke-width="2.5"/><ellipse cx="80" cy="276" rx="36" ry="6" fill="#6E9258"/>`;
+  return svg(400,300,s,'Jardin')}
+};
+const SCL={living:'Séjour',bedroom:'Chambre',kitchen:'Cuisine',bath:'Salle de bain',view:'Vue',garden:'Jardin'};
+
+/* ---------- Données ---------- */
+const L=[
+ {id:'becon',name:'Studio Bécon',q:'Bécon-les-Bruyères',g:2,sleep:'1 lit double',rooms:'Studio · salle d\'eau',m2:24,price:79,clean:30,rate:'4,88',nrev:63,reg:'92026 000 118 B',
+  pal:{seed:11,wall:'#ECE5D8',floor:'#CDAE84',accent:'#31476F',accent2:'#9DB0C8',textile:'#D8C29C',rug:'#E3D4BA',wood:'#A57E56',tile:'#E7E1D6',counter:'#F2EFE9'},
+  sc:['living','kitchen','bedroom','bath','view'],
+  desc:['Un studio lumineux au 3e étage avec ascenseur, à quatre minutes à pied de la gare de Bécon-les-Bruyères. Paris Saint-Lazare est à une dizaine de minutes en train, pratique pour visiter Paris.','Le coin nuit est séparé par une verrière, la cuisine permet de vrais repas et le linge de maison est fourni.'],
+  eq:['wifi','kitchen','coffee','tv','desk','elevator','key','linen']},
+ {id:'seine',name:'Appartement Quai de Seine',q:'Bords de Seine',g:4,sleep:'2 lits doubles',rooms:'2 chambres · 1 salle de bain',m2:58,price:129,clean:45,rate:'4,93',nrev:48,reg:'92026 000 204 A',
+  pal:{seed:23,wall:'#E3E7EB',floor:'#C8A97F',accent:'#5C7A99',accent2:'#C9B48F',textile:'#E7D6B8',rug:'#D8CDBE',wood:'#8E6B4A',tile:'#DCE3EA',counter:'#F2F1EE'},
+  sc:['view','living','bedroom','kitchen','bath'],
+  desc:['Deux chambres calmes et un séjour ouvert sur la Seine. Le quai piéton passe au pied de l\'immeuble, face à l\'île de la Jatte : idéal pour courir le matin ou flâner le soir.','La seconde chambre dispose d\'un vrai bureau, avec la fibre et une machine à café à grains. Le balcon accueille deux personnes pour le petit-déjeuner.'],
+  eq:['wifi','desk','kitchen','washer','coffee','tv','balcony','elevator','key','linen']},
+ {id:'arche',name:'Duplex Faubourg de l\'Arche',q:'Faubourg de l\'Arche',g:6,sleep:'2 lits doubles · 2 lits simples',rooms:'3 chambres · 2 salles de bain',m2:92,price:189,clean:70,rate:'4,90',nrev:37,reg:'92026 000 087 C',
+  pal:{seed:37,wall:'#EFE9DF',floor:'#B99770',accent:'#20345A',accent2:'#C9A97A',textile:'#D9C7A6',rug:'#E6DACB',wood:'#7F5E40',tile:'#ECE6DC',counter:'#F4F1EC'},
+  sc:['living','bedroom','kitchen','view','bath'],
+  desc:['Un duplex contemporain à deux pas de La Défense et de l\'arrêt Faubourg de l\'Arche du tram T2. Trois chambres, deux salles de bain et une grande table pour dîner à six.','Les familles apprécient le lit bébé, la terrasse orientée ouest et la place de parking en sous-sol.'],
+  eq:['wifi','kitchen','washer','terrace','parking','crib','ac','tv','desk','key','linen']},
+ {id:'charras',name:'Loft Charras',q:'Centre-ville · Charras',g:4,sleep:'1 lit double · 2 lits simples',rooms:'1 chambre + mezzanine',m2:65,price:145,clean:50,rate:'4,95',nrev:29,reg:'92026 000 156 A',
+  pal:{seed:41,wall:'#DCD6CC',floor:'#7A6250',accent:'#A8643F',accent2:'#8A9AA8',textile:'#E9DFCF',rug:'#CFC3B2',wood:'#5C4636',tile:'#D2CBC0',counter:'#E9E6E0'},
+  sc:['living','kitchen','bedroom','bath','view'],
+  desc:['Un ancien atelier réhabilité près du centre Charras : grande hauteur sous plafond, briques apparentes et verrière plein sud.','La mezzanine accueille deux personnes supplémentaires. Boulangeries, marché et restaurants de la rue de Bezons sont à moins de cinq minutes à pied.'],
+  eq:['wifi','kitchen','washer','coffee','tv','desk','key','linen']},
+ {id:'parc',name:'Deux-pièces du Parc',q:'Parc de Bécon',g:3,sleep:'1 lit double · 1 canapé-lit',rooms:'1 chambre · 1 salle de bain',m2:41,price:99,clean:35,rate:'4,91',nrev:52,reg:'92026 000 132 D',
+  pal:{seed:53,wall:'#E2E8DF',floor:'#D2B790',accent:'#6F8A6E',accent2:'#C7B48E',textile:'#F0E4CC',rug:'#DCD5C2',wood:'#9A7650',tile:'#E1E7DE',counter:'#F3F2EC',trees:true},
+  sc:['bedroom','living','kitchen','bath','view'],
+  desc:['Face aux arbres du parc de Bécon et du musée Roybet Fould, un deux-pièces au calme pour trois voyageurs.','Lit double dans la chambre, canapé-lit confortable dans le séjour, cuisine équipée. La gare de Bécon-les-Bruyères est à huit minutes à pied.'],
+  eq:['wifi','kitchen','washer','coffee','tv','elevator','key','linen']},
+ {id:'fauvelles',name:'Maison des Fauvelles',q:'Les Fauvelles',g:8,sleep:'3 lits doubles · 2 lits simples',rooms:'4 chambres · 2 salles de bain',m2:120,price:249,clean:90,rate:'4,89',nrev:21,reg:'92026 000 061 B',
+  pal:{seed:67,wall:'#F1E8D8',floor:'#BE9A6E',accent:'#46607F',accent2:'#C9B48F',textile:'#E8D9BC',rug:'#E3D6C1',wood:'#86643F',tile:'#E9E2D4',counter:'#F4F1EB',stone:'#D7B78C'},
+  sc:['garden','living','kitchen','bedroom','bath'],
+  desc:['Une maison en meulière avec jardin clos, une rareté à Courbevoie. Quatre chambres, deux salles de bain et une cuisine ouverte sur le jardin.','L\'arrêt Les Fauvelles du tram T2 est à six minutes à pied, et Paris La Défense Arena à une quinzaine de minutes.'],
+  eq:['wifi','kitchen','washer','garden','bbq','crib','tv','desk','parking','key','linen']}
+];
+const byId=Object.fromEntries(L.map(l=>[l.id,l]));
+const scene=(l,i)=>SC[l.sc[i]](l.pal);
+
+const REV=[
+ ['Claire','Lyon','Deux-pièces du Parc','septembre 2026','Arrivée autonome sans souci et appartement impeccable. Avec les enfants, on était au parc en deux minutes.'],
+ ['Thomas','Bordeaux','Appartement Quai de Seine','octobre 2026','Idéal pour une semaine de mission à La Défense : un vrai bureau, une bonne connexion, et le quai pour courir le matin.'],
+ ['Inès et Marc','Lille','Duplex Faubourg de l\'Arche','août 2026','En réservant en direct, nous avons payé près de 90 € de moins que sur la plateforme, pour le même duplex.'],
+ ['Sofia','Milan','Loft Charras','juillet 2026','Notre vol avait trois heures de retard. L\'équipe nous a attendus et nous a tout expliqué à 23 h.'],
+ ['Famille Martin','Nantes','Maison des Fauvelles','juin 2026','Une grande maison calme avec jardin, et le concert à l\'Arena accessible à pied. Les enfants ont adoré.'],
+ ['Paul','Rennes','Studio Bécon','octobre 2026','Petit mais très bien pensé. La gare est juste à côté, j\'étais à Saint-Lazare en dix minutes.']
+];
+const FAQ=[
+ ['Pourquoi réserver en direct plutôt que sur une plateforme ?','Ce sont les mêmes logements, tenus par la même équipe. En réservant ici, vous ne payez pas de frais de service, qui atteignent souvent 14 à 15 % du séjour sur les plateformes, et vous échangez directement avec nous.'],
+ ['Comment se passe l\'arrivée ?','L\'arrivée est possible dès 16 h. La veille, vous recevez le code de la boîte à clés sécurisée et un guide du logement. Si vous préférez un accueil en personne, un membre de l\'équipe vous attend sur place.'],
+ ['Quelles sont les conditions d\'annulation ?','Annulation gratuite jusqu\'à 7 jours avant l\'arrivée. Ensuite, 50 % du montant est remboursé. Conditions présentées à titre d\'exemple dans cette maquette.'],
+ ['Le paiement est-il sécurisé ?','Sur le site final, le paiement passerait par un prestataire certifié avec authentification 3-D Secure. Cette maquette ne demande et n\'enregistre aucun paiement.'],
+ ['La taxe de séjour est-elle comprise ?','Elle est calculée selon le barème de la ville de Courbevoie et affichée avant la confirmation, puis reversée à la commune par nos soins.'],
+ ['Comment rejoindre Paris depuis Courbevoie ?','Le Transilien L relie Bécon-les-Bruyères et Courbevoie à Saint-Lazare. Depuis La Défense, le RER A et la ligne 1 du métro desservent l\'Étoile et le centre. Le tram T2 longe la ville côté ouest.']
+];
+
+/* ---------- Utilitaires ---------- */
+const $=s=>document.querySelector(s);
+const day0=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate());
+const addD=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const parse=v=>{if(!v)return null;const [y,m,d]=v.split('-').map(Number);return new Date(y,m-1,d)};
+const fmt=d=>d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+const eur=n=>n.toLocaleString('fr-FR')+' €';
+const nights=(a,d)=>Math.round((d-a)/864e5);
+const TODAY=day0(new Date());
+function nextFriday(){let d=addD(TODAY,14);while(d.getDay()!==5)d=addD(d,1);return d}
+
+const state={guests:2,min:0,arr:nextFriday(),dep:addD(nextFriday(),3)};
+
+/* ---------- Rendu des cartes ---------- */
+function card(l){
+  return `<a class="card" href="#logement-${l.id}">
+    <div class="ph">${scene(l,0)}<span class="badge">Réservation directe</span></div>
+    <div class="row"><h3>${l.name}</h3><span class="rate num">${star}${l.rate}</span></div>
+    <div class="meta"><span>${ic('pin')}${l.q}</span><span>${ic('user')}${l.g} voyageurs</span></div>
+    <div class="price">à partir de <b class="num">${eur(l.price)}</b> / nuit</div>
+  </a>`;
+}
+$('#featured').innerHTML=['seine','arche','parc'].map(i=>card(byId[i])).join('');
+function renderList(){
+  const items=L.filter(l=>l.g>=state.min);
+  $('#list').innerHTML=items.length?items.map(card).join(''):'<div class="empty">Aucun logement pour ce nombre de voyageurs.</div>';
+  $('#count').textContent=`${items.length} logement${items.length>1?'s':''} ${state.min?`pour ${state.min} voyageurs ou plus`:'à Courbevoie'}`;
+  document.querySelectorAll('#filters .chip').forEach(c=>c.setAttribute('aria-pressed',String(+c.dataset.min===state.min)));
+}
+$('#filters').addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;state.min=+c.dataset.min;renderList()});
+
+$('#reviews').innerHTML=REV.map(([n,c,lg,d,t])=>`<article class="review"><div class="stars">${star.repeat(5)}</div><blockquote>« ${t} »</blockquote><div class="who"><span class="avatar">${n[0]}</span><div><b>${n}</b>, ${c}<small>${lg} · ${d}</small></div></div></article>`).join('');
+document.querySelectorAll('[data-stars]').forEach(e=>e.innerHTML=star.repeat(+e.dataset.stars));
+$('#faq-list').innerHTML=FAQ.map(([q,a],i)=>`<details${i===0?' open':''}><summary>${q}</summary><p>${a}</p></details>`).join('');
+document.querySelectorAll('[data-ic]').forEach(e=>e.innerHTML=ic(e.dataset.ic));
+$('#hero-art').innerHTML=hero();
+$('#own-art').innerHTML=SC.living(byId.arche.pal);
+
+/* ---------- Recherche ---------- */
+const sArr=$('#s-arr'),sDep=$('#s-dep');
+sArr.min=iso(TODAY);sArr.value=iso(state.arr);sDep.value=iso(state.dep);sDep.min=iso(addD(state.arr,1));
+sArr.addEventListener('change',()=>{const a=parse(sArr.value);if(!a)return;sDep.min=iso(addD(a,1));if(parse(sDep.value)<=a)sDep.value=iso(addD(a,2))});
+$('#search').addEventListener('submit',e=>{
+  e.preventDefault();
+  const a=parse(sArr.value),d=parse(sDep.value);
+  if(a&&d&&d>a&&a>=TODAY){state.arr=a;state.dep=d}
+  state.guests=+$('#s-gst').value;state.min=state.guests<=1?0:state.guests;
+  location.hash='logements';
+});
+
+/* ---------- Page logement ---------- */
+let cur=null,sel={a:null,d:null},calM=null,msg='';
+function isBooked(l,d){if(d<TODAY)return false;const r=rand(l.pal.seed*7919+d.getFullYear()*400+d.getMonth()*32+d.getDate());r();return r()<.17}
+function rangeFree(l,a,d){for(let x=a;x<d;x=addD(x,1))if(isBooked(l,x))return false;return true}
+function firstFree(l,a,n){let x=a;for(let i=0;i<120;i++){if(rangeFree(l,x,addD(x,n)))return x;x=addD(x,1)}return a}
+
+function renderLogement(l){
+  cur=l;msg='';
+  const n=Math.max(1,nights(state.arr,state.dep));
+  const a=rangeFree(l,state.arr,state.dep)?state.arr:firstFree(l,state.arr,n);
+  sel={a,d:addD(a,n)};calM=new Date(a.getFullYear(),a.getMonth(),1);
+  const g=Math.min(Math.max(state.guests,1),l.g);
+  $('#v-logement').innerHTML=`<div class="wrap">
+    <a class="back" href="#logements">${ic('arrowL')}Tous les logements</a>
+    <div class="lg-head">
+      <h1 style="font-size:clamp(2rem,4.6vw,3.2rem)">${l.name}</h1>
+      <div class="lg-sub"><span class="num" style="color:var(--ink);font-weight:600">${star.replace('<svg','<svg style="color:var(--sand-deep)"')}${l.rate} · ${l.nrev} avis</span><span>${ic('pin')}${l.q}, Courbevoie</span><span>N° d'enregistrement ${l.reg} (exemple)</span></div>
+    </div>
+    <div class="gallery" id="gallery">${l.sc.map((s,i)=>`<button type="button" data-i="${i}" aria-label="Agrandir : ${SCL[s]}"><div class="ph">${scene(l,i)}</div><span class="cap">${SCL[s]}</span></button>`).join('')}</div>
+    <div class="lg-body">
+      <div class="lg-main">
+        <section>
+          <div class="keyfacts">
+            <div class="kf"><span>Voyageurs</span><b class="num">${l.g} max.</b></div>
+            <div class="kf"><span>Surface</span><b class="num">${l.m2} m²</b></div>
+            <div class="kf"><span>Couchage</span><b>${l.sleep}</b></div>
+            <div class="kf"><span>Pièces</span><b>${l.rooms}</b></div>
+          </div>
+          <div class="desc">${l.desc.map(p=>`<p>${p}</p>`).join('')}</div>
+        </section>
+        <section>
+          <h2>Équipements</h2>
+          <ul class="clean equip">${l.eq.map(k=>`<li>${ic(EQI[k]||k)}${EQ[k]}</li>`).join('')}</ul>
+        </section>
+        <section>
+          <div class="cal-top"><h2>Disponibilités</h2><div class="cal-nav"><button type="button" id="cal-prev" aria-label="Mois précédent">${ic('prev')}</button><button type="button" id="cal-next" aria-label="Mois suivant">${ic('next')}</button></div></div>
+          <p class="muted" style="font-size:.95rem">Sélectionnez une date d'arrivée puis une date de départ.</p>
+          <div class="cals" id="cals"></div>
+          <div class="legend"><span><i style="background:var(--sel)"></i>Votre séjour</span><span><i style="background:var(--booked)"></i>Déjà réservé</span></div>
+        </section>
+        <section>
+          <h2>Bon à savoir</h2>
+          <ul class="clean rules">
+            <li>${ic('clock')}Arrivée à partir de 16 h, départ avant 11 h</li>
+            <li>${ic('key')}Boîte à clés sécurisée ou accueil en personne</li>
+            <li>${ic('no')}Logement non-fumeur, fêtes non autorisées</li>
+            <li>${ic('check')}Annulation gratuite jusqu'à 7 jours avant l'arrivée</li>
+          </ul>
+        </section>
+      </div>
+      <aside class="book" id="booking" aria-label="Réservation">
+        <div class="p"><div><b class="num">${eur(l.price)}</b> <span class="muted">/ nuit</span></div><span class="direct">${ic('check')}Sans frais de service</span></div>
+        <div class="bk-fields">
+          <div><span class="l">Arrivée</span><span class="v" id="bk-a"></span></div>
+          <div><span class="l">Départ</span><span class="v" id="bk-d"></span></div>
+          <div class="full"><label for="bk-g">Voyageurs</label><select id="bk-g">${Array.from({length:l.g},(_,i)=>`<option value="${i+1}"${i+1===g?' selected':''}>${i+1} voyageur${i?'s':''}</option>`).join('')}</select></div>
+        </div>
+        <div id="bk-lines"></div>
+        <button class="btn block" id="bk-go" type="button">Réserver en direct</button>
+        <div id="bk-msg"></div>
+        <p class="small">Aucun montant n'est débité à cette étape.</p>
+      </aside>
+    </div>
+  </div>`;
+  $('#gallery').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b||b.dataset.i==='0'||innerWidth<760)return;
+    const i=+b.dataset.i;[l.sc[0],l.sc[i]]=[l.sc[i],l.sc[0]];
+    const first=$('#gallery').children[0];
+    first.querySelector('.ph').innerHTML=scene(l,0);first.querySelector('.cap').textContent=SCL[l.sc[0]];
+    b.querySelector('.ph').innerHTML=scene(l,i);b.querySelector('.cap').textContent=SCL[l.sc[i]];
+    first.setAttribute('aria-label','Agrandir : '+SCL[l.sc[0]]);b.setAttribute('aria-label','Agrandir : '+SCL[l.sc[i]]);
+  });
+  $('#cal-prev').onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()-1,1);renderCal()};
+  $('#cal-next').onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()+1,1);renderCal()};
+  $('#cals').addEventListener('click',e=>{const b=e.target.closest('.day');if(!b||b.disabled)return;pick(parse(b.dataset.d))});
+  $('#bk-g').onchange=()=>{state.guests=+$('#bk-g').value};
+  $('#bk-go').onclick=()=>{
+    msg=sel.a&&sel.d?'sent':'dates';renderBook();
+  };
+  renderCal();renderBook();
+}
+function pick(d){
+  if(!sel.a||sel.d||d<=sel.a){sel={a:d,d:null}}
+  else if(rangeFree(cur,sel.a,d)){sel.d=d}
+  else sel={a:d,d:null};
+  if(sel.a&&sel.d){state.arr=sel.a;state.dep=sel.d}
+  msg='';renderCal();renderBook();
+}
+function month(y,m){
+  const first=new Date(y,m,1),off=(first.getDay()+6)%7,len=new Date(y,m+1,0).getDate();
+  let h=`<div class="month"><h4>${first.toLocaleDateString('fr-FR',{month:'long',year:'numeric'})}</h4><div class="days">${['L','M','M','J','V','S','D'].map(x=>`<span class="dow">${x}</span>`).join('')}`;
+  for(let i=0;i<off;i++)h+='<span></span>';
+  for(let k=1;k<=len;k++){
+    const d=new Date(y,m,k),t=+d,past=d<TODAY,bk=!past&&isBooked(cur,d);
+    const a=sel.a&&+sel.a===t,e=sel.d&&+sel.d===t,inr=sel.a&&sel.d&&d>sel.a&&d<sel.d;
+    const startOnly=a&&!sel.d;
+    const cls=['day',past&&'past',bk&&!a&&!e&&'booked',a&&!startOnly&&'start',(e||startOnly)&&'end',startOnly&&'start',inr&&'inr'].filter(Boolean).join(' ');
+    h+=`<button type="button" class="${cls}" data-d="${iso(d)}" ${past||(bk&&!(sel.a&&!sel.d&&d>sel.a&&rangeFree(cur,sel.a,d)))?'disabled':''} aria-label="${d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}${bk?', déjà réservé':''}"><span>${k}</span></button>`;
+  }
+  return h+'</div></div>';
+}
+function renderCal(){
+  const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1);
+  $('#cals').innerHTML=month(calM.getFullYear(),calM.getMonth())+month(m2.getFullYear(),m2.getMonth());
+  $('#cal-prev').disabled=calM<=new Date(TODAY.getFullYear(),TODAY.getMonth(),1);
+}
+function renderBook(){
+  const l=cur,{a,d}=sel;
+  $('#bk-a').textContent=a?fmt(a):'Choisir';
+  $('#bk-d').textContent=d?fmt(d):'Choisir';
+  let h='';
+  if(a&&d){
+    const n=nights(a,d),sub=n*l.price,plat=Math.round(sub*.14),tot=sub+l.clean;
+    h=`<div class="lines num">
+      <div><span>${eur(l.price)} × ${n} nuit${n>1?'s':''}</span><span>${eur(sub)}</span></div>
+      <div><span>Frais de ménage</span><span>${eur(l.clean)}</span></div>
+      <div><span>Frais de service</span><span class="zero">0 €</span></div>
+      <div class="tot"><span>Total</span><span>${eur(tot)}</span></div>
+    </div>
+    <div class="save">Sur une plateforme, environ <b class="num">${eur(plat)}</b> de frais de service s'ajouteraient à ce séjour.</div>`;
+  } else h='<p class="muted" style="font-size:.92rem">Choisissez vos dates dans le calendrier pour voir le prix total.</p>';
+  $('#bk-lines').innerHTML=h;
+  $('#bk-msg').innerHTML=msg==='sent'?`<div class="notice" role="status"><b>Ceci est une maquette.</b>Sur le vrai site, vous passeriez au paiement sécurisé. Ici, aucune réservation n'est créée et aucun paiement n'est demandé.</div>`:msg==='dates'?`<div class="notice" role="status"><b>Dates manquantes</b>Sélectionnez une date d'arrivée et une date de départ.</div>`:'';
+  $('#mb-price').textContent=eur(l.price)+' / nuit';
+  $('#mb-dates').textContent=a&&d?`${fmt(a)} – ${fmt(d)} · sans frais de service`:'Choisissez vos dates';
+}
+$('#mb-go').addEventListener('click',e=>{e.preventDefault();$('#booking').scrollIntoView({behavior:'smooth',block:'start'})});
+
+/* ---------- Formulaire propriétaires ---------- */
+$('#own-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const err=$('#o-err'),name=$('#o-name').value.trim(),mail=$('#o-mail').value.trim();
+  let m='';
+  if(!name)m='Indiquez votre nom pour que nous puissions vous recontacter.';
+  else if(!/^\S+@\S+\.\S+$/.test(mail))m='Indiquez une adresse e-mail valide, par exemple camille@exemple.fr.';
+  else if(!$('#o-ok').checked)m='Cochez la case d\'accord pour envoyer la demande.';
+  err.textContent=m;err.hidden=!m;
+  if(m)return;
+  $('#own-form').hidden=true;$('#own-ok').hidden=false;
+});
+$('#own-reset').onclick=()=>{$('#own-ok').hidden=true;$('#own-form').hidden=false};
+$('#to-form').addEventListener('click',e=>{e.preventDefault();$('#contact-form').scrollIntoView({behavior:'smooth'})});
+
+/* ---------- Menu et navigation ---------- */
+const mb=$('#menu-btn'),mn=$('#mnav');
+mb.onclick=()=>{const o=mn.hidden;mn.hidden=!o;mb.setAttribute('aria-expanded',String(o))};
+mn.addEventListener('click',e=>{if(e.target.closest('a')){mn.hidden=true;mb.setAttribute('aria-expanded','false')}});
+
+function route(){
+  const h=(location.hash||'#accueil').slice(1);
+  let v='accueil',anchor=null;
+  if(h==='logements'){v='logements';renderList()}
+  else if(h.startsWith('logement-')&&byId[h.slice(9)]){v='logement';renderLogement(byId[h.slice(9)])}
+  else if(h==='proprietaires'||h==='mentions')v=h;
+  else if(h==='avis'||h==='faq')anchor=h;
+  document.querySelectorAll('[data-view]').forEach(el=>el.hidden=el.dataset.view!==v);
+  document.querySelectorAll('nav.main a').forEach(a=>{const on=a.dataset.nav===(anchor||(v==='logement'?'logements':v));on?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current')});
+  const bar=v==='logement';$('#mbar').hidden=!bar;document.body.classList.toggle('has-bar',bar);
+  if(anchor){requestAnimationFrame(()=>document.getElementById(anchor).scrollIntoView({block:'start'}))}
+  else if(h!=='booking'&&h!=='contact-form')window.scrollTo(0,0);
+}
+document.querySelectorAll('section[id]').forEach(s=>s.style.scrollMarginTop='96px');
+addEventListener('hashchange',route);
+route();
+})();
+</script>
+
+</body>
+</html>
