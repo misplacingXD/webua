@@ -66,8 +66,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 section,[id]{scroll-margin-top:84px}
 
 /* Bandeau */
-.demo{background:var(--soft);color:var(--muted);font-size:.76rem;text-align:center;padding-block:7px;border-bottom:1px solid var(--line);letter-spacing:.03em}
+.demo{background:var(--soft);color:var(--muted);font-size:.76rem;text-align:center;padding-block:7px;padding-inline:16px;border-bottom:1px solid var(--line);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .demo b{color:var(--ink)}
+@media (max-width:640px){.demo .more{display:none}}
 
 /* En-tête */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -353,7 +354,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
 
 </head>
 <body>
-<div class="demo"><b data-en="Demo mock-up">Maquette de démonstration</b> · <span data-en="no booking or payment is recorded">aucune réservation ni aucun paiement n'est enregistré</span></div>
+<div class="demo"><b data-en="Demo mock-up">Maquette de démonstration</b><span class="more"> · <span data-en="no booking or payment is recorded">aucune réservation ni aucun paiement n'est enregistré</span></span></div>
 
 <header class="top">
   <div class="wrap">
@@ -396,7 +397,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
     <div class="wrap">
       <span class="eyebrow" data-en="Two B&amp;B suites · 15 min from Carcassonne">Deux chambres d'hôtes · à 15 min de Carcassonne</span>
       <h1 data-en="Your private spa, under the pergola, just for two">Votre spa privé, sous la pergola, rien que pour deux</h1>
-      <p class="lead" data-en="Two wooden suites in the Minervois vineyards, each with its own terrace and hot tub, a 15-metre saltwater swimming lane and breakfast delivered to your door.">Deux suites en bois au milieu des vignes du Minervois, chacune avec sa terrasse et son jacuzzi, un couloir de nage de 15 mètres à l'eau salée et le petit-déjeuner déposé devant votre porte.</p>
+      <p class="lead" data-en="Two wooden suites in Malves-en-Minervois, each with its own terrace and hot tub, a 15-metre saltwater swimming lane and breakfast included.">Deux suites en bois à Malves-en-Minervois, chacune avec sa terrasse et son jacuzzi, un couloir de nage de 15 mètres à l'eau salée et le petit-déjeuner inclus.</p>
       <div class="badges">
         <span class="badge"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><b>9,5/10</b> Booking.com</span>
         <span class="badge"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><b>5,0/5</b> Airbnb · <span data-en="Guest favourite">Coup de cœur voyageurs</span></span>
@@ -410,7 +411,6 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
       <div class="f wide"><label for="s-s" data-en="Suite">Suite</label><select id="s-s"><option value="" data-en="Either suite">Peu importe</option><option value="eve" data-en="Ève · soft tones, sunset">Ève · tons doux, couchant</option><option value="adam" data-en="Adam · terracotta, morning sun">Adam · terracotta, soleil du matin</option></select></div>
       <div class="go"><button class="btn" type="submit" data-en="Check availability">Voir les disponibilités</button></div>
     </form>
-    <p class="direct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg><span data-en="&lt;b&gt;Booking direct:&lt;/b&gt; one hour early check-in on us, and you talk straight to Laure &amp;amp; Paulo.">&lt;b&gt;En réservant ici :&lt;/b&gt; une heure d'arrivée anticipée offerte, et vous échangez directement avec Laure et Paulo.</span></p>
   </div>
 
   <section class="sec" id="suites">
@@ -418,7 +418,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
       <div class="head">
         <span class="eyebrow" data-en="The suites">Les suites</span>
         <h2 data-en="Two suites, two moods">Deux suites, deux ambiances</h2>
-        <p class="lead" data-en="Same comfort, same private spa, same 22 m² and queen-size bed. Choose your light: the sunset or the morning sun.">Même confort, même spa privé, mêmes 22 m² et lit queen size. Choisissez votre lumière : le coucher de soleil ou le soleil du matin.</p>
+        <p class="lead" data-en="Each suite has 22 m², a queen-size bed and its own spa on a private terrace. Ève faces south-west towards the pool, Adam faces south-east towards the garden.">Chaque suite fait 22 m², avec un lit queen size et son propre spa sur une terrasse privée. Ève est exposée sud-ouest, côté piscine ; Adam sud-est, côté jardin.</p>
       </div>
       <div class="suites" id="suite-cards"></div>
     </div>
@@ -445,7 +445,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
           <div class="txt">
             <span class="eyebrow" data-en="Private spa">Spa privé</span>
             <h3 data-en="Your hot tub, on your own terrace">Votre jacuzzi, sur votre propre terrasse</h3>
-            <p data-en="Under the pergola, candles and fairy lights, bathrobes and slippers ready. Nobody else uses it, all year round, even on a frosty winter night.">Sous la pergola, bougies et guirlandes, peignoirs et chaussons prêts. Personne d'autre ne l'utilise, toute l'année, même par une nuit d'hiver.</p>
+            <p data-en="Under the pergola, with candles and fairy lights. Bathrobes and slippers are provided.">Sous la pergola, avec bougies et guirlandes lumineuses. Peignoirs et chaussons sont fournis.</p>
             <span class="fact" data-en="One spa per suite, never shared">Un spa par suite, jamais partagé</span>
           </div>
         </div>
@@ -453,9 +453,9 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
           <div class="ph"><img src="img/59.webp" alt="Petit-déjeuner servi sur la terrasse : viennoiseries, jus d'orange, café" loading="lazy"></div>
           <div class="txt">
             <span class="eyebrow" data-en="Breakfast">Petit-déjeuner</span>
-            <h3 data-en="Breakfast, delivered to your terrace">Le petit-déjeuner, déposé sur votre terrasse</h3>
-            <p data-en="Every morning, an insulated basket with golden pastries and treats made by Paulo, left discreetly in your own box. Eat whenever you like.">Chaque matin, un panier isotherme garni de viennoiseries dorées et de douceurs préparées par Paulo, déposé discrètement dans votre coffre. Vous le dégustez à votre rythme.</p>
-            <span class="fact" data-en="Included · alternatives for special diets on request">Inclus · alternatives pour régimes particuliers sur demande</span>
+            <h3 data-en="Breakfast, at your own pace">Le petit-déjeuner, à votre rythme</h3>
+            <p data-en="Every morning, an insulated basket of pastries and treats made by Paulo is left discreetly in your own box.">Chaque matin, un panier isotherme garni de viennoiseries et de douceurs préparées par Paulo est déposé discrètement dans votre coffre dédié.</p>
+            <span class="fact" data-en="Sweet continental breakfast, included · alternatives on request">Continental sucré, inclus · alternatives sur demande</span>
           </div>
         </div>
         <div class="xp rev">
@@ -463,8 +463,8 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
           <div class="txt">
             <span class="eyebrow" data-en="Wood &amp; quiet">Bois &amp; calme</span>
             <h3 data-en="Built in wood by a local craftsman">Une ossature en bois, faite par un artisan du coin</h3>
-            <p data-en="The suites are framed in wood made to measure, warm, quiet, smelling of the forest. Each has its private entrance and its own parking space.">Les suites ont une ossature bois façonnée sur mesure : une chaleur naturelle, une acoustique feutrée, l'odeur de la forêt. Chacune a son entrée privée et sa place de parking.</p>
-            <span class="fact" data-en="Laure &amp; Paulo live on site, close by but discreet">Laure et Paulo vivent sur place, présents mais discrets</span>
+            <p data-en="The suites are framed in wood made to measure: natural warmth and soft acoustics. Each has its private entrance and its own parking space.">Les suites ont une ossature bois façonnée sur mesure : une chaleur naturelle et une acoustique feutrée. Chacune a son entrée privée et sa place de parking.</p>
+            <span class="fact" data-en="Laure &amp; Paulo live on site">Laure et Paulo habitent sur place</span>
           </div>
         </div>
       </div>
@@ -506,7 +506,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
         <span class="eyebrow" data-en="The area">La région</span>
         <h2 data-en="Between the Cité and the Minervois vineyards">Entre la Cité et les vignes du Minervois</h2>
         <p class="lead" data-en="Malves-en-Minervois is a quiet wine village, 15 minutes from Carcassonne. Laure is happy to share her favourite spots.">Malves-en-Minervois est un village viticole au calme, à 15 minutes de Carcassonne. Laure partage volontiers ses adresses préférées.</p>
-        <p class="muted" style="font-size:.85rem" data-en="Approximate driving times.">Temps de trajet indicatifs, en voiture.</p>
+        <p class="muted" style="font-size:.85rem" data-en="Distances from the B&amp;B. A car is recommended.">Distances depuis les chambres d'hôtes. Voiture recommandée.</p>
       </div>
       <ul class="places" id="places"></ul>
     </div>
@@ -528,7 +528,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
       <div style="display:grid;gap:18px;align-content:start">
         <span class="eyebrow" data-en="Your hosts">Vos hôtes</span>
         <h2 data-en="Laure &amp; Paulo">Laure et Paulo</h2>
-        <p data-en="We live on site and look after every detail, from the decoration for your anniversary to the evening meal delivered to your terrace. A question before booking? Write to us.">Nous habitons sur place et soignons chaque détail, de la décoration pour votre anniversaire au dîner livré sur votre terrasse. Une question avant de réserver ? Écrivez-nous.</p>
+        <p data-en="We live on site and will be happy to welcome you. We respect your privacy while staying available. A question before booking? Write to us.">Nous habitons sur place et serons ravis de vous accueillir. Nous respectons votre intimité tout en restant disponibles. Une question avant de réserver ? Écrivez-nous.</p>
         <div class="ph"><img src="img/01.webp" alt="Le jardin avec le couloir de nage, les pergolas et les transats" loading="lazy"></div>
         <p style="font-size:.92rem">12 rue des Parfaits, 11600 Malves-en-Minervois</p>
       </div>
@@ -650,26 +650,26 @@ const ALT={
 };
 const S={
  eve:{name:'Ève',cls:'eve',seed:7,cover:'48',photos:['48','46','47','32','49','53','51','52','50','45','59'],
-  tag:['Douce et lumineuse, face au couchant','Soft and bright, facing the sunset'],
-  expo:['Sud-ouest · vue piscine et coucher de soleil','South-west · pool and sunset view'],
-  desc:[[ 'C\'est la suite souvent choisie pour ses teintes douces, beige et blanc, qui créent une atmosphère très apaisante.','Exposée sud-ouest, elle regarde la piscine et le coucher de soleil. Sur la terrasse, sous la pergola, vous attendent votre jacuzzi privé et un fauteuil œuf suspendu, le meilleur endroit pour voir le ciel changer de couleur.'],
-         ['Guests often choose this suite for its soft beige and white tones, which make it very calming.','Facing south-west, it looks over the pool and the sunset. On the terrace, under the pergola, your private hot tub and a hanging egg chair are waiting: the best seat to watch the sky change colour.']],
+  tag:['Tons beige et blanc, vue sur la piscine','Beige and white tones, pool view'],
+  expo:['Exposée sud-ouest, côté coucher de soleil','Facing south-west, towards the sunset'],
+  desc:[[ 'C\'est la suite souvent choisie pour ses teintes douces, beige et blanc, qui créent une atmosphère très apaisante.','Exposée sud-ouest, elle offre la vue sur la piscine et le coucher de soleil. Elle dispose d\'un fauteuil œuf suspendu et, sur sa terrasse privée, d\'un jacuzzi sous la pergola.'],
+         ['Guests often choose this suite for its soft beige and white tones, which make it very calming.','Facing south-west, it overlooks the pool and the sunset. It has a hanging egg chair and, on its private terrace, a hot tub under the pergola.']],
   extra:[['egg','Fauteuil œuf suspendu','Hanging egg chair'],['sun','Soleil couchant','Sunset view']],
   feats:[['Spa privé','Private spa'],['Vue piscine','Pool view'],['Fauteuil œuf','Egg chair']]},
  adam:{name:'Adam',cls:'adam',seed:13,cover:'61',photos:['61','56','57','62','55','58','54','60','63','64','65'],
-  tag:['Chaleureuse, au soleil du matin','Warm, in the morning sun'],
-  expo:['Sud-est · soleil le matin et l\'après-midi, vue jardin','South-east · morning and afternoon sun, garden view'],
-  desc:[['Une décoration chaleureuse aux tons terracotta et noir, pour une ambiance plus intense.','Exposée sud-est, la suite Adam profite du soleil dès le matin et l\'après-midi, avec vue sur le jardin. Sa terrasse abrite le jacuzzi sous la pergola, des transats et un hamac suspendu. Elle dispose aussi d\'un micro-ondes.'],
-         ['A warm terracotta and black decor, for a more intense mood.','Facing south-east, the Adam suite gets the sun from the morning into the afternoon, with a garden view. Its terrace has the hot tub under the pergola, sun loungers and a hanging hammock. It also has a microwave.']],
+  tag:['Tons terracotta et noir, vue sur le jardin','Terracotta and black tones, garden view'],
+  expo:['Exposée sud-est, soleil le matin et l\'après-midi','Facing south-east, sun in the morning and afternoon'],
+  desc:[['Une décoration chaleureuse aux tons terracotta et noir.','Exposée sud-est, la suite Adam profite du soleil dès le matin et l\'après-midi, avec vue sur le jardin. Elle dispose d\'un hamac suspendu, d\'un micro-ondes et, sur sa terrasse privée, d\'un jacuzzi sous la pergola.'],
+         ['A warm terracotta and black decor.','Facing south-east, the Adam suite gets the sun from the morning into the afternoon, with a garden view. It has a hanging hammock, a microwave and, on its private terrace, a hot tub under the pergola.']],
   extra:[['hammock','Hamac suspendu','Hanging hammock'],['micro','Micro-ondes','Microwave']],
-  feats:[['Spa privé','Private spa'],['Soleil du matin','Morning sun'],['Hamac','Hammock']]}
+  feats:[['Spa privé','Private spa'],['Vue jardin','Garden view'],['Hamac','Hammock']]}
 };
-const EQ=[['spa','Jacuzzi privé sur la terrasse','Private hot tub on the terrace'],['bed','Lit queen size','Queen-size bed'],['ac','Climatisation','Air conditioning'],['wifi','Wi-Fi fibre (342 Mbit/s)','Fibre Wi-Fi (342 Mbps)'],['tv','Télévision','TV'],['coffee','Machine à café et bouilloire','Coffee machine and kettle'],['fridge','Minibar','Minibar'],['robe','Peignoirs et chaussons','Bathrobes and slippers'],['shower','Douche à l\'italienne','Walk-in shower'],['door','Entrée privée','Private entrance'],['car','Une place de parking','One parking space'],['pool','Couloir de nage partagé','Shared swimming lane'],['breakfast','Petit-déjeuner inclus','Breakfast included']];
+const EQ=[['spa','Jacuzzi privé sur la terrasse','Private hot tub on the terrace'],['bed','Lit queen size','Queen-size bed'],['ac','Climatisation','Air conditioning'],['wifi','Wi-Fi (342 Mbit/s)','Wi-Fi (342 Mbps)'],['tv','Télévision','TV'],['coffee','Machine à café et bouilloire','Coffee machine and kettle'],['fridge','Minibar','Minibar'],['robe','Peignoirs et chaussons','Bathrobes and slippers'],['shower','Salle d\'eau privative avec douche','Private shower room'],['door','Entrée privée','Private entrance'],['car','Une place de parking','One parking space'],['pool','Couloir de nage partagé','Shared swimming lane'],['breakfast','Petit-déjeuner inclus','Breakfast included']];
 const OPTS=[
- {id:'deco',ic:'heart',fr:'Décoration romantique ou anniversaire',en:'Romantic or birthday decoration',p:50,u:['forfait','flat'],d:['Pétales, ballons, lettres : la suite décorée à votre arrivée.','Petals, balloons, letters: the suite decorated for your arrival.']},
- {id:'choc',ic:'gift',fr:'Boîte de chocolats en forme de cœur',en:'Heart-shaped box of chocolates',p:50,u:['la boîte','per box'],d:['Déposée dans la suite avant votre arrivée.','Left in the suite before you arrive.']},
- {id:'board',ic:'board',fr:'Planche apéritive',en:'Aperitif board',p:11,u:['par personne','per person'],d:['Fromages et charcuterie de la région, pour l\'apéritif en terrasse.','Local cheese and charcuterie for drinks on the terrace.'],pp:true},
- {id:'menu',ic:'dish',fr:'Menu traiteur livré sur place',en:'Catered dinner delivered',p:35,u:['par personne','per person'],d:['Un dîner aux saveurs locales, servi sur votre terrasse. Le cassoulet a ses fidèles.','A local-flavour dinner served on your terrace. The cassoulet has its fans.'],pp:true},
+ {id:'deco',ic:'heart',fr:'Décoration romantique ou anniversaire',en:'Romantic or birthday decoration',p:50,u:['forfait','flat'],d:['La suite décorée pour votre occasion.','The suite decorated for your occasion.']},
+ {id:'choc',ic:'gift',fr:'Boîte de chocolats en forme de cœur',en:'Heart-shaped box of chocolates',p:50,u:['la boîte','per box'],d:['Sur réservation, selon disponibilité.','On request, subject to availability.']},
+ {id:'board',ic:'board',fr:'Planche apéritive',en:'Aperitif board',p:11,u:['par personne','per person'],d:['Aux saveurs locales, pour l\'apéritif.','Local flavours, for pre-dinner drinks.'],pp:true},
+ {id:'menu',ic:'dish',fr:'Menu traiteur livré sur place',en:'Catered dinner delivered',p:35,u:['par personne','per person'],d:['Un dîner aux saveurs locales, servi en toute intimité.','A local-flavour dinner, served in private.'],pp:true},
  {id:'early',ic:'clock',fr:'Arrivée anticipée',en:'Early check-in',p:10,u:['par heure, 2 h max.','per hour, 2 h max.'],d:['Dès 15 h au lieu de 17 h, selon disponibilité.','From 3 pm instead of 5 pm, subject to availability.'],hours:true},
  {id:'late',ic:'clock',fr:'Départ tardif',en:'Late check-out',p:10,u:['par heure, 2 h max.','per hour, 2 h max.'],d:['Jusqu\'à 13 h au lieu de 11 h, selon disponibilité.','Until 1 pm instead of 11 am, subject to availability.'],hours:true}
 ];
@@ -683,20 +683,17 @@ const REV=[
  ['Lopes','Booking.com',['L\'accueil de Laure et Paulo, les installations au top, la déco avec goût, la literie confortable.','Laure and Paulo\'s welcome, top facilities, tasteful decor, a comfortable bed.']]
 ];
 const PLACES=[
- ['Cité de Carcassonne','Carcassonne\'s medieval Cité','Remparts et château comtal, classés à l\'UNESCO.','Ramparts and castle, a UNESCO World Heritage site.','15 min'],
- ['Canal du Midi à Trèbes','Canal du Midi at Trèbes','Balade à vélo ou à pied le long des platanes.','Cycle or walk under the plane trees.','15 min'],
- ['Caunes-Minervois','Caunes-Minervois','Abbaye, marbre rouge et caves du Minervois.','Abbey, red marble and Minervois wine cellars.','15 min'],
- ['Lac de la Cavayère','Lac de la Cavayère','Baignade et pique-nique en été.','Swimming and picnics in summer.','20 min'],
- ['Châteaux de Lastours','Lastours castles','Quatre châteaux cathares sur une crête.','Four Cathar castles on a ridge.','25 min'],
- ['Gouffre géant de Cabrespine','Cabrespine giant chasm','Une des plus grandes salles souterraines visitables.','One of the largest show caves you can visit.','30 min'],
- ['Minerve','Minerve','Village perché entre deux gorges.','Village perched between two gorges.','45 min'],
- ['Abbaye de Fontfroide','Fontfroide Abbey','Abbaye cistercienne et roseraie, conseil de Laure.','Cistercian abbey and rose garden, one of Laure\'s tips.','50 min']
+ ['Carcassonne','Carcassonne','La Cité médiévale et la ville basse.','The medieval Cité and the lower town.','15 min'],
+ ['Cathédrale Saint-Michel','Saint-Michel Cathedral','Dans la ville basse de Carcassonne.','In Carcassonne\'s lower town.','12 km'],
+ ['Aéroport de Carcassonne','Carcassonne airport','L\'aéroport le plus proche.','The nearest airport.','13 km'],
+ ['Randonnée et vélo','Hiking and cycling','Les vignes et les collines autour du village.','Vineyards and hills around the village.','sur place'],
+ ['Abbaye de Fontfroide','Fontfroide Abbey','Un conseil de Laure, salué par nos voyageurs.','One of Laure\'s tips, praised by our guests.','—']
 ];
 const INFOS=[['Arrivée','Check-in','À partir de 17 h, en autonomie avec boîte à clés. Dès 15 h en option.','From 5 pm, self check-in with a key box. From 3 pm as an extra.'],['Départ','Check-out','Avant 11 h. Jusqu\'à 13 h en option.','Before 11 am. Until 1 pm as an extra.'],['Pour qui','Who for','Séjours en couple, réservés aux adultes. Animaux non acceptés.','Couples, adults only. No pets.'],['Sur place','On site','Non-fumeur, espace fumeur extérieur. Calme de 22 h à 7 h.','Non-smoking, outdoor smoking area. Quiet hours 10 pm to 7 am.']];
 const FAQ=[
- ['La piscine est-elle chauffée ?','Is the pool heated?','Oui, le couloir de nage est à l\'eau salée et chauffé en saison. Il est ouvert de mai à septembre, selon la météo. Le jacuzzi de chaque suite fonctionne toute l\'année.','Yes, the swimming lane is saltwater and heated in season. It is open May to September, weather permitting. Each suite\'s hot tub works all year round.'],
- ['Le petit-déjeuner est-il compris ?','Is breakfast included?','Oui. Un petit-déjeuner continental sucré est déposé chaque matin sur votre terrasse. Pour un régime particulier, prévenez-nous avant votre arrivée.','Yes. A sweet continental breakfast is left on your terrace every morning. For special diets, let us know before you arrive.'],
- ['Peut-on dîner sur place ?','Can we have dinner on site?','Oui, sur réservation 48 h avant : planche apéritive à 11 € par personne ou menu traiteur à 35 € par personne, servis sur votre terrasse.','Yes, booked 48 hours ahead: aperitif board at €11 per person or catered dinner at €35 per person, served on your terrace.'],
+ ['La piscine est-elle chauffée ?','Is the pool heated?','Oui, le couloir de nage est à l\'eau salée et chauffé en saison. Il est ouvert de mai à septembre, selon la météo.','Yes, the swimming lane is saltwater and heated in season. It is open May to September, weather permitting.'],
+ ['Le petit-déjeuner est-il compris ?','Is breakfast included?','Oui, un petit-déjeuner continental sucré est offert chaque matin. Pour un régime particulier, prévenez-nous avant votre arrivée.','Yes, a sweet continental breakfast is provided every morning. For special diets, let us know before you arrive.'],
+ ['Peut-on dîner sur place ?','Can we have dinner on site?','Oui, sur réservation 48 h avant : planche apéritive à 11 € par personne ou menu traiteur livré sur place à 35 € par personne.','Yes, booked 48 hours ahead: aperitif board at €11 per person or catered dinner delivered at €35 per person.'],
  ['Pouvez-vous préparer une surprise ?','Can you prepare a surprise?','Oui : décoration romantique ou d\'anniversaire, chocolats, champagne. Ajoutez-les en réservant ou écrivez-nous pour une demande particulière.','Yes: romantic or birthday decoration, chocolates, champagne. Add them when booking or write to us for anything special.'],
  ['Quelles sont les conditions d\'annulation ?','What is the cancellation policy?','Le séjour est payé en totalité à la réservation et n\'est pas remboursable. Une pièce d\'identité peut être demandée à l\'arrivée.','The stay is paid in full when booking and is non-refundable. ID may be requested on arrival.'],
  ['La taxe de séjour est-elle incluse ?','Is the tourist tax included?','Non, elle s\'ajoute au prix du séjour selon le barème de la commune, par personne et par nuit.','No, it is added to the stay according to the local rate, per person per night.']
@@ -842,8 +839,7 @@ function renderBook(){
   let h='';
   if(a&&d){
     const n=nights(a,d),sub=n*PRICE;let tot=sub,rows='';
-    OPTS.forEach(o=>{const v=opt[o.id];if(!v)return;const q=o.hours?v:(o.pp?guests:1),amt=o.p*q;tot+=amt;rows+=`<div><span>${T(o.fr,o.en)}${o.hours?` (${v} h)`:o.pp?` × ${guests}`:''}</span><span>${eur(amt)}</span></div>`;
-      if(o.id==='early'){tot-=10;rows+=`<div class="gift"><span>${T('1 h offerte (réservation directe)','1 h free (direct booking)')}</span><span>−${eur(10)}</span></div>`}});
+    OPTS.forEach(o=>{const v=opt[o.id];if(!v)return;const q=o.hours?v:(o.pp?guests:1),amt=o.p*q;tot+=amt;rows+=`<div><span>${T(o.fr,o.en)}${o.hours?` (${v} h)`:o.pp?` × ${guests}`:''}</span><span>${eur(amt)}</span></div>`});
     h=`<div class="lines"><div><span>${eur(PRICE)} × ${n} ${T(n>1?'nuits':'nuit',n>1?'nights':'night')}</span><span>${eur(sub)}</span></div>
       <div><span>${T('Petit-déjeuner','Breakfast')}</span><span>${T('inclus','included')}</span></div>${rows}
       <div class="tot"><span>Total</span><span>${eur(tot)}</span></div>
