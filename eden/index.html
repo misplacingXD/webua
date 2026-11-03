@@ -72,25 +72,27 @@ section,[id]{scroll-margin-top:84px}
 
 /* En-tête */
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;height:70px}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;height:70px;max-width:1360px}
 .logo{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
 .logo svg{width:30px;height:30px;color:var(--vine);flex:none}
 .logo strong{display:block;font-family:var(--f-display);font-weight:400;font-size:1.32rem;line-height:1;white-space:nowrap}
 .logo small{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;white-space:nowrap}
-nav.main{display:none;gap:2px}
-nav.main a{text-decoration:none;padding:8px 12px;border-radius:999px;font-size:.95rem;color:var(--muted)}
+nav.main{display:none;gap:0}
+nav.main a{text-decoration:none;padding:8px 11px;border-radius:999px;font-size:.94rem;color:var(--muted);white-space:nowrap}
 nav.main a:hover{color:var(--ink);background:var(--soft)}
 .tools{display:flex;align-items:center;gap:8px}
 .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
 .lang button{border:0;background:transparent;border-radius:999px;padding:5px 10px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)}
 .lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
-.top .cta{display:none;padding:11px 20px;font-size:.94rem}
+.top .cta{display:none;padding:11px 20px;font-size:.94rem;white-space:nowrap}
+select option{background:var(--surface);color:var(--ink)}
 .menu-btn{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
 .mnav{border-top:1px solid var(--line);background:var(--bg)}
 .mnav .wrap{display:grid;gap:2px;padding-block:10px 18px}
 .mnav a{text-decoration:none;padding:12px 2px;font-size:1.05rem;border-bottom:1px solid var(--line)}
 .mnav .btn{margin-top:12px}
-@media (min-width:1080px){nav.main{display:flex}.top .cta{display:inline-flex}.menu-btn{display:none}.mnav{display:none!important}}
+@media (min-width:1180px){nav.main{display:flex}.top .cta{display:inline-flex}.menu-btn{display:none}.mnav{display:none!important}}
+@media (min-width:1180px) and (max-width:1320px){.logo small{display:none}nav.main a{padding:8px 9px}}
 @media (max-width:420px){.logo small{display:none}.logo strong{font-size:1.08rem}.logo svg{width:24px;height:24px}.tools{gap:6px}}
 
 /* Héros */
@@ -408,7 +410,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
     <form class="search" id="search" aria-label="Disponibilités">
       <div class="f"><label for="s-a" data-en="Check-in">Arrivée</label><input id="s-a" type="date"></div>
       <div class="f"><label for="s-d" data-en="Check-out">Départ</label><input id="s-d" type="date"></div>
-      <div class="f wide"><label for="s-s" data-en="Suite">Suite</label><select id="s-s"><option value="" data-en="Either suite">Peu importe</option><option value="eve" data-en="Ève · soft tones, sunset">Ève · tons doux, couchant</option><option value="adam" data-en="Adam · terracotta, morning sun">Adam · terracotta, soleil du matin</option></select></div>
+      <div class="f wide"><label for="s-s" data-en="Suite">Suite</label><select id="s-s"><option value="eve" selected data-en="Ève · soft tones, sunset">Ève · tons doux, couchant</option><option value="adam" data-en="Adam · terracotta, morning sun">Adam · terracotta, soleil du matin</option></select></div>
       <div class="go"><button class="btn" type="submit" data-en="Check availability">Voir les disponibilités</button></div>
     </form>
   </div>
@@ -750,7 +752,7 @@ let st=(()=>{let d=addD(TODAY,10);while(d.getDay()!==4)d=addD(d,1);return{arr:d,
 const sa=$('#s-a'),sd=$('#s-d');
 sa.min=iso(TODAY);sa.value=iso(st.arr);sd.value=iso(st.dep);sd.min=iso(addD(st.arr,1));
 sa.addEventListener('change',()=>{const a=parse(sa.value);if(!a)return;sd.min=iso(addD(a,1));if(!parse(sd.value)||parse(sd.value)<=a)sd.value=iso(addD(a,2))});
-$('#search').addEventListener('submit',e=>{e.preventDefault();const a=parse(sa.value),d=parse(sd.value);if(a&&d&&d>a&&a>=TODAY)st={arr:a,dep:d};const k=$('#s-s').value;location.hash=k||'suites';if(!k)scrollToId('suites')});
+$('#search').addEventListener('submit',e=>{e.preventDefault();const a=parse(sa.value),d=parse(sd.value);if(a&&d&&d>a&&a>=TODAY)st={arr:a,dep:d};location.hash=$('#s-s').value});
 
 /* ---------- Page suite ---------- */
 let cur=null,sel={a:null,d:null},calM=null,msg='',opt={deco:false,choc:false,board:false,menu:false,early:0,late:0},guests=2;
