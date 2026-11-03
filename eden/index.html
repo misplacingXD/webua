@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="L'Éden Romantique : deux chambres d'hôtes avec spa privé, couloir de nage et petit-déjeuner, à 15 minutes de Carcassonne. Réservation directe.">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
+<title>L'Éden Romantique</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Karla:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Mise en page : photos en grand, texte posé à côté ; deux suites traitées comme deux personnages (Ève sable, Adam terracotta) ; vert vigne pour l'action */
+:root{
+  --bg:#F6F3EE; --surface:#FFFFFF; --soft:#EDE7DE; --ink:#2A2420; --muted:#6D635A; --line:#E3DBD0;
+  --vine:#4B5A37; --vine-ink:#FFFFFF; --vine-soft:#E3E8D9; --eve:#B9986A; --eve-soft:#F1E8DA; --adam:#B4532F; --adam-soft:#F6E3DA; --gold:#C2903F;
+  --night:#1E1A17; --on-night:#F4EEE6; --on-night-muted:#BFB4A8; --booked:#E5DED4; --range:#E3E8D9;
+  --shadow:0 24px 50px -30px rgba(42,36,32,.45);
+  --f-display:"Gloock", "Iowan Old Style", Georgia, serif;
+  --f-body:"Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r-lg:22px; --r-md:14px; --r-sm:9px;
+  --gl:max(clamp(16px,4vw,36px), env(safe-area-inset-left,0px));
+  --gr:max(clamp(16px,4vw,36px), env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15120F; --surface:#1F1A16; --soft:#28221D; --ink:#F1EAE0; --muted:#B4A99C; --line:#372F28;
+    --vine:#AEBE8E; --vine-ink:#171A12; --vine-soft:#2A3122; --eve:#D7BA8E; --eve-soft:#2E271F; --adam:#E4865F; --adam-soft:#35231B; --gold:#E2B865;
+    --night:#0D0B09; --on-night:#F4EEE6; --on-night-muted:#B4A99C; --booked:#2A241F; --range:#2A3122;
+    --shadow:0 24px 50px -28px rgba(0,0,0,.75); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15120F; --surface:#1F1A16; --soft:#28221D; --ink:#F1EAE0; --muted:#B4A99C; --line:#372F28;
+  --vine:#AEBE8E; --vine-ink:#171A12; --vine-soft:#2A3122; --eve:#D7BA8E; --eve-soft:#2E271F; --adam:#E4865F; --adam-soft:#35231B; --gold:#E2B865;
+  --night:#0D0B09; --on-night:#F4EEE6; --on-night-muted:#B4A99C; --booked:#2A241F; --range:#2A3122;
+  --shadow:0 24px 50px -28px rgba(0,0,0,.75); color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;line-height:1.08;letter-spacing:-.01em;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.4rem,6.4vw,4.6rem)}
+h2{font-size:clamp(1.9rem,4.4vw,3.1rem)}
+h3{font-size:1.45rem}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--vine);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr)}
+.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--vine)}
+.lead{color:var(--muted);font-size:1.12rem;max-width:58ch}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.ic{width:20px;height:20px;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:14px 26px;font-weight:700;cursor:pointer;text-decoration:none;background:var(--vine);color:var(--vine-ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.light{background:#F4EEE6;color:#2A2420}
+.btn.block{width:100%}
+.sec{padding-block:clamp(64px,9vw,120px)}
+.head{display:grid;gap:14px;margin-bottom:clamp(30px,5vw,52px);max-width:740px}
+section,[id]{scroll-margin-top:84px}
+
+/* Bandeau */
+.demo{background:var(--soft);color:var(--muted);font-size:.76rem;text-align:center;padding-block:7px;border-bottom:1px solid var(--line);letter-spacing:.03em}
+.demo b{color:var(--ink)}
+
+/* En-tête */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;height:70px}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none;min-width:0}
+.logo svg{width:30px;height:30px;color:var(--vine);flex:none}
+.logo strong{display:block;font-family:var(--f-display);font-weight:400;font-size:1.32rem;line-height:1;white-space:nowrap}
+.logo small{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px;white-space:nowrap}
+nav.main{display:none;gap:2px}
+nav.main a{text-decoration:none;padding:8px 12px;border-radius:999px;font-size:.95rem;color:var(--muted)}
+nav.main a:hover{color:var(--ink);background:var(--soft)}
+.tools{display:flex;align-items:center;gap:8px}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.lang button{border:0;background:transparent;border-radius:999px;padding:5px 10px;font-size:.78rem;font-weight:700;cursor:pointer;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.top .cta{display:none;padding:11px 20px;font-size:.94rem}
+.menu-btn{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);cursor:pointer}
+.mnav{border-top:1px solid var(--line);background:var(--bg)}
+.mnav .wrap{display:grid;gap:2px;padding-block:10px 18px}
+.mnav a{text-decoration:none;padding:12px 2px;font-size:1.05rem;border-bottom:1px solid var(--line)}
+.mnav .btn{margin-top:12px}
+@media (min-width:1080px){nav.main{display:flex}.top .cta{display:inline-flex}.menu-btn{display:none}.mnav{display:none!important}}
+@media (max-width:420px){.logo small{display:none}.logo strong{font-size:1.08rem}.logo svg{width:24px;height:24px}.tools{gap:6px}}
+
+/* Héros */
+.hero{position:relative;color:#F7F1E8;isolation:isolate;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(20,15,10,.78),rgba(20,15,10,.35) 55%,rgba(20,15,10,.1)),linear-gradient(0deg,rgba(20,15,10,.6),transparent 50%)}
+.hero .wrap{display:grid;gap:22px;padding-block:clamp(80px,13vw,170px) clamp(120px,12vw,170px)}
+.hero h1{color:#F7F1E8;max-width:15ch}
+.hero p.lead{color:#E8DED2;max-width:46ch}
+.hero .eyebrow{color:#E7C98E}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(247,241,232,.14);border:1px solid rgba(247,241,232,.25);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-radius:999px;padding:7px 14px;font-size:.88rem;color:#F7F1E8}
+.badge b{font-weight:700}
+.badge svg{width:15px;height:15px;color:#E7C98E}
+.search{position:relative;z-index:2;margin:-74px auto 0;max-width:1060px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 1fr;gap:1px;background-clip:padding-box;overflow:hidden}
+.search{background:var(--line)}
+.search .f{background:var(--surface);padding:12px 16px;display:grid;gap:2px;min-width:0}
+.search label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.search input,.search select{border:0;background:transparent;font-weight:600;padding:2px 0;width:100%;min-width:0}
+.search .f.wide,.search .go{grid-column:1/-1}
+.search .go{background:var(--surface);padding:12px}
+.search .go .btn{width:100%}
+@media (min-width:860px){.search{grid-template-columns:1fr 1fr 1.2fr auto}.search .f.wide,.search .go{grid-column:auto}.search .f{padding:16px 22px}.search .go{display:flex;align-items:center;padding:10px 12px}}
+.direct{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:22px;font-size:.95rem;color:var(--muted);text-align:center}
+.direct b{color:var(--ink)}
+.direct svg{width:18px;height:18px;color:var(--vine)}
+
+/* Suites (accueil) */
+.suites{display:grid;gap:clamp(24px,4vw,40px)}
+@media (min-width:860px){.suites{grid-template-columns:1fr 1fr}}
+.suite-card{display:grid;gap:18px;text-decoration:none;min-width:0}
+.suite-card .ph{position:relative;aspect-ratio:4/3;border-radius:var(--r-lg);overflow:hidden;background:var(--soft)}
+.suite-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.suite-card:hover .ph img{transform:scale(1.04)}
+.suite-card .tag{position:absolute;left:14px;top:14px;background:var(--surface);color:var(--ink);font-size:.78rem;font-weight:700;padding:6px 12px;border-radius:999px;display:inline-flex;gap:7px;align-items:center}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.dot.eve{background:var(--eve)}.dot.adam{background:var(--adam)}
+.suite-card .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.suite-card h3{font-size:2rem}
+.suite-card .price{font-size:.95rem;color:var(--muted)}
+.suite-card .price b{font-size:1.2rem;color:var(--ink)}
+.suite-card .sub{color:var(--muted)}
+.feat{display:flex;flex-wrap:wrap;gap:8px}
+.feat span{font-size:.85rem;padding:6px 12px;border-radius:999px;background:var(--soft)}
+.suite-card.eve .feat span{background:var(--eve-soft)}
+.suite-card.adam .feat span{background:var(--adam-soft)}
+.more{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--vine)}
+
+/* Expérience */
+.exp{display:grid;gap:clamp(48px,7vw,96px)}
+.xp{display:grid;gap:24px;align-items:center}
+.xp .ph{border-radius:var(--r-lg);overflow:hidden;aspect-ratio:3/2;background:var(--soft)}
+.xp .ph img{width:100%;height:100%;object-fit:cover}
+.xp .txt{display:grid;gap:14px;min-width:0}
+.xp .txt p{color:var(--muted);max-width:52ch}
+.xp .fact{font-family:var(--f-display);font-size:1.05rem;color:var(--ink)}
+@media (min-width:860px){.xp{grid-template-columns:1.2fr 1fr;gap:64px}.xp.rev .ph{order:2}}
+
+/* Options */
+.opts{display:grid;gap:14px}
+@media (min-width:640px){.opts{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.opts{grid-template-columns:repeat(3,1fr)}}
+.opt{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:22px;display:grid;gap:8px;align-content:start}
+.opt .p{font-weight:700;font-size:1.1rem}
+.opt .p small{font-weight:400;color:var(--muted);font-size:.85rem}
+.opt p{color:var(--muted);font-size:.95rem}
+.opt svg{width:24px;height:24px;color:var(--gold)}
+.note{font-size:.88rem;color:var(--muted);margin-top:18px}
+
+/* Avis */
+.rev-top{display:grid;gap:28px;margin-bottom:36px}
+@media (min-width:900px){.rev-top{grid-template-columns:auto 1fr;gap:64px;align-items:center}}
+.scores{display:flex;gap:16px;flex-wrap:wrap}
+.score{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;display:grid;gap:2px;min-width:150px}
+.score b{font-family:var(--f-display);font-size:2.4rem;font-weight:400;line-height:1}
+.score span{font-size:.85rem;color:var(--muted)}
+.cats{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.cat{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.9rem;align-items:center}
+.cat i{grid-column:1/-1;height:6px;border-radius:9px;background:var(--soft);overflow:hidden}
+.cat i b{display:block;height:100%;background:var(--vine);border-radius:9px}
+.reviews{display:grid;gap:16px}
+@media (min-width:700px){.reviews{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1050px){.reviews{grid-template-columns:repeat(3,1fr)}}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:24px;display:grid;gap:14px;align-content:space-between}
+.review blockquote{margin:0;font-family:var(--f-display);font-size:1.12rem;line-height:1.45}
+.who{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.9rem;flex-wrap:wrap}
+.src{font-size:.75rem;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--soft);color:var(--muted)}
+
+/* Région */
+.region{display:grid;gap:36px}
+@media (min-width:900px){.region{grid-template-columns:1fr 1.3fr;gap:64px;align-items:start}}
+.places{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.places li{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.places b{font-weight:700}
+.places span{color:var(--muted);font-size:.93rem;grid-column:1}
+.places .t{grid-column:2;grid-row:1/3;align-self:center;font-variant-numeric:tabular-nums;font-weight:700;color:var(--vine);white-space:nowrap}
+
+/* Infos */
+.infos{display:grid;gap:14px}
+@media (min-width:700px){.infos{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1050px){.infos{grid-template-columns:repeat(4,1fr)}}
+.info{border-top:2px solid var(--ink);padding-top:16px;display:grid;gap:6px;align-content:start}
+.info b{font-family:var(--f-display);font-weight:400;font-size:1.25rem}
+.info p{color:var(--muted);font-size:.95rem}
+.faq{margin-top:48px;border-top:1px solid var(--line);max-width:860px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 40px 18px 0;font-weight:700;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:12px;font-family:var(--f-display);font-size:1.6rem;color:var(--vine);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;color:var(--muted);max-width:66ch}
+
+/* Hôtes / contact */
+.hosts{background:var(--night);color:var(--on-night)}
+.hosts .wrap{padding-block:clamp(64px,9vw,112px);display:grid;gap:40px}
+@media (min-width:960px){.hosts .wrap{grid-template-columns:1fr 1fr;gap:64px;align-items:start}}
+.hosts h2{color:var(--on-night)}
+.hosts .eyebrow{color:#E7C98E}
+.hosts p{color:var(--on-night-muted)}
+.hosts .ph{border-radius:var(--r-lg);overflow:hidden;aspect-ratio:3/2}
+.hosts .ph img{width:100%;height:100%;object-fit:cover}
+form.cf{background:var(--surface);color:var(--ink);border-radius:var(--r-lg);padding:clamp(20px,4vw,32px);display:grid;gap:14px}
+.fr{display:grid;gap:14px}
+@media (min-width:560px){.fr.two{grid-template-columns:1fr 1fr}}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label{font-size:.88rem;font-weight:700}
+.fld input,.fld textarea,.fld select{border:1px solid var(--line);background:var(--bg);border-radius:var(--r-sm);padding:12px 14px;width:100%}
+.fld textarea{min-height:100px;resize:vertical}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.85rem;color:var(--muted)}
+.consent input{margin-top:5px;accent-color:var(--vine)}
+.err{color:var(--adam);font-size:.88rem}
+.small{font-size:.8rem;color:var(--muted);text-align:center}
+.ok{background:var(--surface);color:var(--ink);border-radius:var(--r-lg);padding:30px;display:grid;gap:10px}
+
+/* Page suite */
+.back{display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--muted);margin-top:24px;font-size:.94rem}
+.s-head{display:grid;gap:10px;padding-block:16px 24px}
+.s-sub{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:.95rem}
+.s-sub span{display:inline-flex;gap:6px;align-items:center}
+.s-sub svg{width:16px;height:16px}
+.gal{display:grid;grid-auto-flow:column;grid-auto-columns:88%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:var(--r-lg)}
+.gal::-webkit-scrollbar{display:none}
+.gal button{all:unset;cursor:zoom-in;scroll-snap-align:start;border-radius:var(--r-md);overflow:hidden;position:relative;background:var(--soft)}
+.gal button:focus-visible{outline:3px solid var(--vine);outline-offset:-3px}
+.gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.gal .all{position:absolute;right:12px;bottom:12px;background:var(--surface);color:var(--ink);font-size:.82rem;font-weight:700;padding:7px 12px;border-radius:999px}
+@media (min-width:760px){
+  .gal{grid-auto-flow:row;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr));overflow:visible;aspect-ratio:2.25/1;grid-auto-columns:auto}
+  .gal button{border-radius:var(--r-sm)}
+  .gal button:first-child{grid-row:1/3;border-radius:var(--r-lg) var(--r-sm) var(--r-sm) var(--r-lg)}
+  .gal button:nth-child(3){border-top-right-radius:var(--r-lg)}
+  .gal button:nth-child(5){border-bottom-right-radius:var(--r-lg)}
+  .gal button:nth-child(n+6){display:none}
+  .gal img{aspect-ratio:auto}
+}
+.s-body{display:grid;gap:40px;padding-block:36px 80px}
+@media (min-width:1000px){.s-body{grid-template-columns:minmax(0,1fr) 390px;gap:64px;align-items:start}}
+.s-main{display:grid;gap:40px;min-width:0}
+.s-main > section{display:grid;gap:18px;padding-bottom:40px;border-bottom:1px solid var(--line)}
+.s-main > section:last-child{border-bottom:0}
+.s-main h2{font-size:1.8rem}
+.kf{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:640px){.kf{grid-template-columns:repeat(4,1fr)}}
+.kf div{border-radius:var(--r-sm);padding:14px 16px;display:grid;gap:2px;background:var(--soft)}
+.kf span{font-size:.8rem;color:var(--muted)}
+.kf b{font-size:1.02rem}
+.s-desc{display:grid;gap:14px;max-width:64ch}
+.eq{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px 24px}
+.eq li{display:flex;gap:12px;align-items:center}
+.eq svg{color:var(--vine)}
+.bedplan{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:var(--r-md);padding:18px;max-width:420px;background:var(--surface)}
+.bedplan svg{width:44px;height:44px;color:var(--ink);flex:none}
+
+/* Calendrier */
+.cal-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cal-nav{display:flex;gap:8px}
+.cal-nav button{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--surface);cursor:pointer;display:grid;place-items:center}
+.cal-nav button:disabled{opacity:.35;cursor:default}
+.cals{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.month h4{margin:0 0 10px;font-weight:700;text-transform:capitalize}
+.days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-variant-numeric:tabular-nums}
+.dow{font-size:.72rem;color:var(--muted);padding-bottom:6px;font-weight:700}
+.day{all:unset;box-sizing:border-box;height:40px;display:grid;place-items:center;font-size:.92rem;cursor:pointer}
+.day span{width:36px;height:36px;display:grid;place-items:center;border-radius:50%}
+.day:hover span{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.day:focus-visible span{outline:2px solid var(--vine)}
+.day:disabled{cursor:default;color:var(--muted)}
+.day:disabled:hover span{box-shadow:none}
+.day.past{opacity:.4}
+.day.booked span{text-decoration:line-through;opacity:.55}
+.day.inr{background:var(--range)}
+.day.start{background:linear-gradient(90deg,transparent 50%,var(--range) 50%)}
+.day.end{background:linear-gradient(90deg,var(--range) 50%,transparent 50%)}
+.day.start.end{background:none}
+.day.start span,.day.end span{background:var(--vine);color:var(--vine-ink);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.84rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+/* Réservation */
+.book{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow);display:grid;gap:18px}
+@media (min-width:1000px){.book{position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px)}}
+.book .pp{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.book .pp b{font-family:var(--f-display);font-weight:400;font-size:2rem}
+.pill{font-size:.75rem;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--vine-soft);color:var(--vine)}
+.bf{border:1px solid var(--line);border-radius:var(--r-sm);display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.bf > div{padding:10px 14px;display:grid;gap:2px;min-width:0}
+.bf > div + div{border-left:1px solid var(--line)}
+.bf .full{grid-column:1/-1;border-left:0!important;border-top:1px solid var(--line)}
+.bf .l,.bf label{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.bf .v{font-weight:700}
+.bf select{border:0;background:transparent;padding:0;font-weight:700;width:100%}
+.bopts{display:grid;gap:8px}
+.bopts > span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.bo{display:flex;gap:10px;align-items:center;justify-content:space-between;font-size:.92rem;padding:8px 0;border-bottom:1px dashed var(--line)}
+.bo label{display:flex;gap:10px;align-items:center;cursor:pointer;min-width:0}
+.bo input{accent-color:var(--vine);width:17px;height:17px;flex:none}
+.bo select{border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:3px 6px;font-size:.85rem}
+.bo .p{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.lines{display:grid;gap:9px;font-size:.95rem;font-variant-numeric:tabular-nums}
+.lines div{display:flex;justify-content:space-between;gap:12px}
+.lines .gift{color:var(--vine);font-weight:700}
+.lines .tot{border-top:1px solid var(--line);padding-top:12px;font-weight:700;font-size:1.08rem}
+.lines .tax{color:var(--muted);font-size:.85rem}
+.notice{border-radius:var(--r-sm);padding:14px;font-size:.9rem;background:var(--vine-soft)}
+.notice b{display:block;margin-bottom:2px}
+.cond{font-size:.82rem;color:var(--muted);display:grid;gap:4px}
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:1px solid var(--line);padding:12px var(--gr) calc(12px + env(safe-area-inset-bottom,0px)) var(--gl);display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 -10px 30px -20px rgba(0,0,0,.4)}
+.mbar small{display:block;color:var(--muted);font-size:.8rem}
+@media (min-width:1000px){.mbar{display:none!important}}
+@media (max-width:999px){body.has-bar{padding-bottom:84px}}
+.other{display:grid;gap:18px;grid-template-columns:120px 1fr;align-items:center;text-decoration:none;border:1px solid var(--line);border-radius:var(--r-md);padding:12px;background:var(--surface);max-width:560px}
+.other img{width:120px;height:90px;object-fit:cover;border-radius:var(--r-sm)}
+
+/* Visionneuse */
+.lb{position:fixed;inset:0;z-index:60;background:rgba(12,10,8,.94);display:grid;grid-template-rows:auto 1fr auto;padding:calc(12px + env(safe-area-inset-top,0px)) var(--gr) calc(12px + env(safe-area-inset-bottom,0px)) var(--gl);color:#F4EEE6}
+.lb .bar{display:flex;justify-content:space-between;align-items:center}
+.lb button{background:rgba(244,238,230,.12);border:0;color:#F4EEE6;width:44px;height:44px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
+.lb .stage{display:grid;place-items:center;min-height:0}
+.lb .stage img{max-height:78vh;max-width:100%;object-fit:contain;border-radius:8px}
+.lb .nav{display:flex;justify-content:center;gap:16px;align-items:center}
+
+/* Pied */
+footer{border-top:1px solid var(--line)}
+footer .wrap{padding-block:44px 28px;display:grid;gap:28px}
+.fcols{display:grid;gap:26px}
+@media (min-width:820px){.fcols{grid-template-columns:1.4fr 1fr 1fr}}
+footer h4{margin:0 0 10px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:7px;font-size:.95rem}
+footer a{text-decoration:none;color:var(--muted)}
+footer a:hover{color:var(--ink)}
+footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
+.legal{border-top:1px solid var(--line);padding-top:16px;font-size:.86rem;color:var(--muted)}
+.legal summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.legal .lg{display:grid;gap:8px;padding-top:12px;max-width:780px}
+.ph-t{background:var(--soft);padding:0 5px;border-radius:4px;color:var(--ink)}
+.fb{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.82rem;color:var(--muted)}
+.view{animation:fade .35s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<div class="demo"><b data-en="Demo mock-up">Maquette de démonstration</b> · <span data-en="no booking or payment is recorded">aucune réservation ni aucun paiement n'est enregistré</span></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#accueil" aria-label="L'Éden Romantique">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 29c-6-4.5-10-9-10-14a10 10 0 0 1 20 0c0 5-4 9.5-10 14z"/><path d="M16 22V12M16 15c-2.5-1-4-3-4-5.5 2.5 0 4 2 4 5.5zM16 13c2.5-1 4-3 4-5.5-2.5 0-4 2-4 5.5z"/></svg>
+      <span><strong>L'Éden Romantique</strong><small data-en="B&amp;B · Malves-en-Minervois">Chambres d'hôtes · Malves-en-Minervois</small></span>
+    </a>
+    <nav class="main" aria-label="Navigation">
+      <a href="#suites" data-en="The suites">Les suites</a>
+      <a href="#experience" data-en="The experience">L'expérience</a>
+      <a href="#options" data-en="Extras">Options</a>
+      <a href="#avis" data-en="Reviews">Avis</a>
+      <a href="#region" data-en="The area">La région</a>
+      <a href="#infos" data-en="Practical info">Infos pratiques</a>
+    </nav>
+    <div class="tools">
+      <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+      <a class="btn cta" href="#suites" data-en="Book direct">Réserver en direct</a>
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <div class="mnav" id="mnav" hidden>
+    <div class="wrap">
+      <a href="#suites" data-en="The suites">Les suites</a>
+      <a href="#experience" data-en="The experience">L'expérience</a>
+      <a href="#options" data-en="Extras">Options</a>
+      <a href="#avis" data-en="Reviews">Avis</a>
+      <a href="#region" data-en="The area">La région</a>
+      <a href="#infos" data-en="Practical info">Infos pratiques</a>
+      <a class="btn block" href="#suites" data-en="Book direct">Réserver en direct</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ ACCUEIL ============ -->
+<div class="view" id="v-home" data-view="home">
+  <div class="hero">
+    <img class="bg" src="img/32.webp" alt="Spa privé sur la terrasse de la suite Ève, le soir, éclairé de bougies et de guirlandes" fetchpriority="high">
+    <div class="wrap">
+      <span class="eyebrow" data-en="Two B&amp;B suites · 15 min from Carcassonne">Deux chambres d'hôtes · à 15 min de Carcassonne</span>
+      <h1 data-en="Your private spa, under the pergola, just for two">Votre spa privé, sous la pergola, rien que pour deux</h1>
+      <p class="lead" data-en="Two wooden suites in the Minervois vineyards, each with its own terrace and hot tub, a 15-metre saltwater swimming lane and breakfast delivered to your door.">Deux suites en bois au milieu des vignes du Minervois, chacune avec sa terrasse et son jacuzzi, un couloir de nage de 15 mètres à l'eau salée et le petit-déjeuner déposé devant votre porte.</p>
+      <div class="badges">
+        <span class="badge"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><b>9,5/10</b> Booking.com</span>
+        <span class="badge"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><b>5,0/5</b> Airbnb · <span data-en="Guest favourite">Coup de cœur voyageurs</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <form class="search" id="search" aria-label="Disponibilités">
+      <div class="f"><label for="s-a" data-en="Check-in">Arrivée</label><input id="s-a" type="date"></div>
+      <div class="f"><label for="s-d" data-en="Check-out">Départ</label><input id="s-d" type="date"></div>
+      <div class="f wide"><label for="s-s" data-en="Suite">Suite</label><select id="s-s"><option value="" data-en="Either suite">Peu importe</option><option value="eve" data-en="Ève · soft tones, sunset">Ève · tons doux, couchant</option><option value="adam" data-en="Adam · terracotta, morning sun">Adam · terracotta, soleil du matin</option></select></div>
+      <div class="go"><button class="btn" type="submit" data-en="Check availability">Voir les disponibilités</button></div>
+    </form>
+    <p class="direct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg><span data-en="&lt;b&gt;Booking direct:&lt;/b&gt; one hour early check-in on us, and you talk straight to Laure &amp;amp; Paulo.">&lt;b&gt;En réservant ici :&lt;/b&gt; une heure d'arrivée anticipée offerte, et vous échangez directement avec Laure et Paulo.</span></p>
+  </div>
+
+  <section class="sec" id="suites">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-en="The suites">Les suites</span>
+        <h2 data-en="Two suites, two moods">Deux suites, deux ambiances</h2>
+        <p class="lead" data-en="Same comfort, same private spa, same 22 m² and queen-size bed. Choose your light: the sunset or the morning sun.">Même confort, même spa privé, mêmes 22 m² et lit queen size. Choisissez votre lumière : le coucher de soleil ou le soleil du matin.</p>
+      </div>
+      <div class="suites" id="suite-cards"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="experience" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-en="The experience">L'expérience</span>
+        <h2 data-en="Everything is designed for two">Tout est pensé pour deux</h2>
+      </div>
+      <div class="exp">
+        <div class="xp">
+          <div class="ph"><img src="img/45.webp" alt="Couloir de nage de 15 mètres au liner gris minéral, bordé de bois" loading="lazy"></div>
+          <div class="txt">
+            <span class="eyebrow" data-en="Swimming lane">Couloir de nage</span>
+            <h3 data-en="15 metres of saltwater, in the middle of the garden">15 mètres d'eau salée, au milieu du jardin</h3>
+            <p data-en="A 3 × 15 m lane, heated in season, with a mineral-grey liner that recalls a river bed. Swim lengths or simply float, in a 1,000 m² garden.">Un couloir de 3 × 15 m, chauffé en saison, au liner gris minéral qui rappelle le lit d'une rivière. Enchaînez les longueurs ou laissez-vous porter, dans un jardin de 1 000 m².</p>
+            <span class="fact" data-en="Open May to September, weather permitting">Ouvert de mai à septembre, selon la météo</span>
+          </div>
+        </div>
+        <div class="xp rev">
+          <div class="ph"><img src="img/40.webp" alt="Jacuzzi privé le soir, peignoirs et chaussons sur la terrasse" loading="lazy"></div>
+          <div class="txt">
+            <span class="eyebrow" data-en="Private spa">Spa privé</span>
+            <h3 data-en="Your hot tub, on your own terrace">Votre jacuzzi, sur votre propre terrasse</h3>
+            <p data-en="Under the pergola, candles and fairy lights, bathrobes and slippers ready. Nobody else uses it, all year round, even on a frosty winter night.">Sous la pergola, bougies et guirlandes, peignoirs et chaussons prêts. Personne d'autre ne l'utilise, toute l'année, même par une nuit d'hiver.</p>
+            <span class="fact" data-en="One spa per suite, never shared">Un spa par suite, jamais partagé</span>
+          </div>
+        </div>
+        <div class="xp">
+          <div class="ph"><img src="img/59.webp" alt="Petit-déjeuner servi sur la terrasse : viennoiseries, jus d'orange, café" loading="lazy"></div>
+          <div class="txt">
+            <span class="eyebrow" data-en="Breakfast">Petit-déjeuner</span>
+            <h3 data-en="Breakfast, delivered to your terrace">Le petit-déjeuner, déposé sur votre terrasse</h3>
+            <p data-en="Every morning, an insulated basket with golden pastries and treats made by Paulo, left discreetly in your own box. Eat whenever you like.">Chaque matin, un panier isotherme garni de viennoiseries dorées et de douceurs préparées par Paulo, déposé discrètement dans votre coffre. Vous le dégustez à votre rythme.</p>
+            <span class="fact" data-en="Included · alternatives for special diets on request">Inclus · alternatives pour régimes particuliers sur demande</span>
+          </div>
+        </div>
+        <div class="xp rev">
+          <div class="ph"><img src="img/46.webp" alt="Terrasse en bois sous pergola avec jacuzzi, palissade et pins" loading="lazy"></div>
+          <div class="txt">
+            <span class="eyebrow" data-en="Wood &amp; quiet">Bois &amp; calme</span>
+            <h3 data-en="Built in wood by a local craftsman">Une ossature en bois, faite par un artisan du coin</h3>
+            <p data-en="The suites are framed in wood made to measure, warm, quiet, smelling of the forest. Each has its private entrance and its own parking space.">Les suites ont une ossature bois façonnée sur mesure : une chaleur naturelle, une acoustique feutrée, l'odeur de la forêt. Chacune a son entrée privée et sa place de parking.</p>
+            <span class="fact" data-en="Laure &amp; Paulo live on site, close by but discreet">Laure et Paulo vivent sur place, présents mais discrets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="options" style="background:var(--surface);border-block:1px solid var(--line)">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-en="Extras">Options</span>
+        <h2 data-en="For an anniversary, a proposal, or just because">Pour un anniversaire, une demande, ou juste pour vous</h2>
+        <p class="lead" data-en="Add them when you book. Please book at least 48 hours ahead, subject to availability.">À ajouter au moment de réserver, au moins 48 h avant l'arrivée, selon disponibilité.</p>
+      </div>
+      <div class="opts" id="opts"></div>
+      <p class="note" data-en="Bottle of champagne: price on request.">Bouteille de champagne fraîche déposée dans la suite : prix sur demande.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="avis">
+    <div class="wrap">
+      <div class="rev-top">
+        <div style="display:grid;gap:16px">
+          <span class="eyebrow" data-en="Guest reviews">Avis clients</span>
+          <h2 data-en="What our guests say">Ce qu'en disent nos voyageurs</h2>
+          <div class="scores">
+            <div class="score"><b class="num">9,5</b><span data-en="out of 10 · 63 reviews on Booking.com">sur 10 · 63 avis Booking.com</span></div>
+            <div class="score"><b class="num">5,0</b><span data-en="out of 5 · 63 reviews on Airbnb">sur 5 · 63 avis Airbnb</span></div>
+          </div>
+        </div>
+        <div class="cats" id="cats"></div>
+      </div>
+      <div class="reviews" id="reviews"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="region" style="padding-top:0">
+    <div class="wrap region">
+      <div style="display:grid;gap:16px;align-content:start">
+        <span class="eyebrow" data-en="The area">La région</span>
+        <h2 data-en="Between the Cité and the Minervois vineyards">Entre la Cité et les vignes du Minervois</h2>
+        <p class="lead" data-en="Malves-en-Minervois is a quiet wine village, 15 minutes from Carcassonne. Laure is happy to share her favourite spots.">Malves-en-Minervois est un village viticole au calme, à 15 minutes de Carcassonne. Laure partage volontiers ses adresses préférées.</p>
+        <p class="muted" style="font-size:.85rem" data-en="Approximate driving times.">Temps de trajet indicatifs, en voiture.</p>
+      </div>
+      <ul class="places" id="places"></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="infos" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow" data-en="Practical info">Infos pratiques</span>
+        <h2 data-en="Good to know before you come">Bon à savoir avant de venir</h2>
+      </div>
+      <div class="infos" id="infos-grid"></div>
+      <div class="faq" id="faq"></div>
+    </div>
+  </section>
+
+  <section class="hosts" id="contact">
+    <div class="wrap">
+      <div style="display:grid;gap:18px;align-content:start">
+        <span class="eyebrow" data-en="Your hosts">Vos hôtes</span>
+        <h2 data-en="Laure &amp; Paulo">Laure et Paulo</h2>
+        <p data-en="We live on site and look after every detail, from the decoration for your anniversary to the evening meal delivered to your terrace. A question before booking? Write to us.">Nous habitons sur place et soignons chaque détail, de la décoration pour votre anniversaire au dîner livré sur votre terrasse. Une question avant de réserver ? Écrivez-nous.</p>
+        <div class="ph"><img src="img/01.webp" alt="Le jardin avec le couloir de nage, les pergolas et les transats" loading="lazy"></div>
+        <p style="font-size:.92rem">12 rue des Parfaits, 11600 Malves-en-Minervois</p>
+      </div>
+      <div>
+        <form class="cf" id="cf" novalidate>
+          <h3 data-en="Send a message">Envoyer un message</h3>
+          <div class="fr two">
+            <div class="fld"><label for="c-n" data-en="Name">Nom</label><input id="c-n" autocomplete="name"></div>
+            <div class="fld"><label for="c-m" data-en="Email">E-mail</label><input id="c-m" type="email" autocomplete="email"></div>
+          </div>
+          <div class="fld"><label for="c-o" data-en="Occasion">Occasion</label><select id="c-o"><option data-en="Just a getaway">Simple escapade</option><option data-en="Anniversary">Anniversaire</option><option data-en="Wedding anniversary">Anniversaire de mariage</option><option data-en="Proposal">Demande en mariage</option><option data-en="Gift voucher">Bon cadeau</option></select></div>
+          <div class="fld"><label for="c-t" data-en="Your message">Votre message</label><textarea id="c-t"></textarea></div>
+          <label class="consent"><input type="checkbox" id="c-ok"> <span data-en="I agree to be contacted about my request. My details are never shared.">J'accepte d'être recontacté au sujet de ma demande. Mes coordonnées ne sont jamais transmises.</span></label>
+          <p class="err" id="c-err" hidden></p>
+          <button class="btn block" type="submit" data-en="Send">Envoyer</button>
+          <p class="small" data-en="Mock-up: this form sends nothing.">Maquette : ce formulaire n'envoie rien.</p>
+        </form>
+        <div class="ok" id="c-done" hidden>
+          <h3 data-en="Message ready">Message prêt</h3>
+          <p class="muted" data-en="On the real site, Laure would reply by email. In this mock-up nothing was sent.">Sur le vrai site, Laure vous répondrait par e-mail. Dans cette maquette, rien n'a été envoyé.</p>
+          <button class="btn ghost" type="button" id="c-back" style="justify-self:start" data-en="Back to the form">Revenir au formulaire</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ PAGE SUITE ============ -->
+<div class="view" id="v-suite" data-view="suite" hidden></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div style="display:grid;gap:12px;align-content:start">
+        <a class="logo" href="#accueil"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 29c-6-4.5-10-9-10-14a10 10 0 0 1 20 0c0 5-4 9.5-10 14z"/><path d="M16 22V12M16 15c-2.5-1-4-3-4-5.5 2.5 0 4 2 4 5.5zM16 13c2.5-1 4-3 4-5.5-2.5 0-4 2-4 5.5z"/></svg><span><strong>L'Éden Romantique</strong><small data-en="by Les Gîtes de Laure">par Les Gîtes de Laure</small></span></a>
+        <p data-en="Two B&amp;B suites with private spa, 15 minutes from Carcassonne.">Deux chambres d'hôtes avec spa privé, à 15 minutes de Carcassonne.</p>
+      </div>
+      <div><h4 data-en="The stay">Le séjour</h4><ul><li><a href="#eve" data-en="Ève suite">Suite Ève</a></li><li><a href="#adam" data-en="Adam suite">Suite Adam</a></li><li><a href="#options" data-en="Extras">Options</a></li><li><a href="#infos" data-en="Practical info">Infos pratiques</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>12 rue des Parfaits</li><li>11600 Malves-en-Minervois</li><li><span class="ph-t">[téléphone]</span></li><li><span class="ph-t">[e-mail]</span></li></ul></div>
+    </div>
+    <details class="legal">
+      <summary data-en="Legal notice, terms and privacy">Mentions légales, conditions et confidentialité</summary>
+      <div class="lg">
+        <p><b>Exploitant</b> : Les Gîtes de Laure, <span class="ph-t">[nom et statut]</span>, 12 rue des Parfaits, 11600 Malves-en-Minervois. SIRET <span class="ph-t">[à compléter]</span>.</p>
+        <p><b>Numéros d'enregistrement</b> : suite Ève <span class="ph-t">[à compléter]</span>, suite Adam <span class="ph-t">[à compléter]</span>.</p>
+        <p><b>Hébergement du site</b> : <span class="ph-t">[hébergeur et adresse]</span>.</p>
+        <p><b>Conditions de réservation</b> : paiement intégral à la réservation. Réservation non remboursable ; un départ anticipé ne donne pas lieu à remboursement. Le droit de rétractation de 14 jours ne s'applique pas aux hébergements réservés pour des dates précises (article L221-28, 12° du Code de la consommation). Taxe de séjour en sus, selon le barème de la commune.</p>
+        <p><b>Données personnelles</b> : vos coordonnées servent uniquement à gérer votre séjour et vos demandes. Vous pouvez demander leur suppression à tout moment à <span class="ph-t">[e-mail]</span>.</p>
+        <p><b>Cookies</b> : ce site ne dépose pas de cookies de mesure d'audience ni de publicité.</p>
+      </div>
+    </details>
+    <div class="fb"><span>© 2026 L'Éden Romantique · Les Gîtes de Laure</span><span data-en="Demo mock-up by WebUA">Maquette de démonstration réalisée par WebUA</span></div>
+  </div>
+</footer>
+
+<div class="mbar" id="mbar" hidden>
+  <div><b id="mb-p" class="num"></b><small id="mb-d"></small></div>
+  <a class="btn" href="#booking" id="mb-go" data-en="Book">Réserver</a>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photos">
+  <div class="bar"><span id="lb-c" class="num"></span><button type="button" id="lb-x" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="stage"><img id="lb-i" alt=""></div>
+  <div class="nav"><button type="button" id="lb-p" aria-label="Précédente"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><span id="lb-t" style="font-size:.9rem"></span><button type="button" id="lb-n" aria-label="Suivante"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+</div>
+
+<script>
+(function(){
+let LANG='fr';
+const T=(fr,en)=>LANG==='en'?en:fr;
+const $=s=>document.querySelector(s);
+const PRICE=109;
+
+/* ---------- Icônes ---------- */
+const I={
+  spa:'<path d="M3 13h18v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/><path d="M8 9c-1-1.5 1-2.5 0-4M12 9c-1-1.5 1-2.5 0-4M16 9c-1-1.5 1-2.5 0-4"/>',
+  bed:'<path d="M3 19v-8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8M3 15h18M6 9V6h5v3M13 9V6h5v3"/>',
+  area:'<path d="M4 4h16v16H4zM4 9h5M15 20v-5"/>',
+  ac:'<path d="M12 2.5v19M4 7l16 10M20 7L4 17"/>',
+  wifi:'<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M9 16a4.5 4.5 0 0 1 6 0"/><circle cx="12" cy="19.3" r=".9" fill="currentColor"/>',
+  tv:'<rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/>',
+  coffee:'<path d="M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 10.5h1.5a2.5 2.5 0 0 1 0 5H16M8.5 3.5v2.5M12 3.5v2.5"/>',
+  fridge:'<rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M6 10h12M9 6v2M9 13v3"/>',
+  robe:'<path d="M8 3l4 4 4-4 4 3-2 5v10H6V11L4 6z"/><path d="M12 7v14"/>',
+  shower:'<path d="M5 21V8a4 4 0 0 1 8 0M10 11h6M11 14v1M13 15v1M15 14v1M12 17v1M14 18v1"/>',
+  door:'<path d="M5 21V3h11v18M16 5h3v16M13 12h.01"/>',
+  car:'<path d="M5 16V11l2-5h10l2 5v5M5 16h14M5 16v3M19 16v3M7.5 13h.01M16.5 13h.01"/>',
+  pool:'<path d="M3 17c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0M3 21c2 1.5 4 1.5 6 0s4-1.5 6 0 4 1.5 6 0M8 14V5a2 2 0 0 1 4 0M16 14V5a2 2 0 0 0-4 0M8 9h8"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  egg:'<path d="M12 3c4 0 7 6 7 10a7 7 0 0 1-14 0c0-4 3-10 7-10z"/><path d="M8 14h8"/>',
+  hammock:'<path d="M3 5v14M21 5v14M3 8c3 6 15 6 18 0"/>',
+  micro:'<rect x="3" y="5" width="18" height="13" rx="2"/><rect x="6" y="8" width="9" height="7" rx="1"/><path d="M18 9v.01M18 12v.01"/>',
+  breakfast:'<path d="M4 11h16a8 8 0 0 1-16 0zM2 20h20M9 4c-1 1.5 1 2.5 0 4M13 4c-1 1.5 1 2.5 0 4"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/>',
+  heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  gift:'<path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  dish:'<path d="M3 15h18M5 15a7 7 0 0 1 14 0M12 6v2M8 19h8"/>',
+  board:'<rect x="3" y="8" width="18" height="10" rx="2"/><path d="M21 13h2M7 12h.01M11 14h.01M15 12h.01"/>',
+  arrowL:'<path d="M19 12H5M11 6l-6 6 6 6"/>',arrowR:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  prev:'<path d="M15 6l-6 6 6 6"/>',next:'<path d="M9 6l6 6-6 6"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>'
+};
+const ic=(n,c='ic')=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]}</svg>`;
+
+/* ---------- Données ---------- */
+const ALT={
+ '01':'Jardin avec couloir de nage, pergolas et transats','32':'Spa privé de la suite Ève le soir, bougies et fauteuil œuf','40':'Spa privé le soir, peignoirs et chaussons',
+ '45':'Couloir de nage de 15 mètres','46':'Terrasse de la suite Ève avec jacuzzi sous pergola','47':'Terrasse de la suite Ève avec fauteuil œuf suspendu',
+ '48':'Chambre de la suite Ève, tons beige et blanc','49':'Suite Ève, lit et baie vitrée sur la terrasse','50':'Suite Ève, coin repas et rangements',
+ '51':'Salle d\'eau de la suite Ève, vasque et miroir','52':'Douche à l\'italienne de la suite Ève','53':'Coin repas et coin café de la suite Ève',
+ '54':'Terrasse de la suite Adam avec jacuzzi','55':'Jacuzzi de la suite Adam sous la pergola','56':'Jacuzzi de la suite Adam',
+ '57':'Terrasse de la suite Adam avec voile d\'ombrage','58':'Transats sur la terrasse de la suite Adam','59':'Petit-déjeuner sur la terrasse',
+ '60':'Suite Adam, coin café et minibar','61':'Chambre de la suite Adam, tons terracotta','62':'Lit de la suite Adam et baie vitrée',
+ '63':'Vasque de la salle d\'eau de la suite Adam','64':'Salle d\'eau de la suite Adam','65':'Douche à l\'italienne de la suite Adam'
+};
+const S={
+ eve:{name:'Ève',cls:'eve',seed:7,cover:'48',photos:['48','46','47','32','49','53','51','52','50','45','59'],
+  tag:['Douce et lumineuse, face au couchant','Soft and bright, facing the sunset'],
+  expo:['Sud-ouest · vue piscine et coucher de soleil','South-west · pool and sunset view'],
+  desc:[[ 'C\'est la suite souvent choisie pour ses teintes douces, beige et blanc, qui créent une atmosphère très apaisante.','Exposée sud-ouest, elle regarde la piscine et le coucher de soleil. Sur la terrasse, sous la pergola, vous attendent votre jacuzzi privé et un fauteuil œuf suspendu, le meilleur endroit pour voir le ciel changer de couleur.'],
+         ['Guests often choose this suite for its soft beige and white tones, which make it very calming.','Facing south-west, it looks over the pool and the sunset. On the terrace, under the pergola, your private hot tub and a hanging egg chair are waiting: the best seat to watch the sky change colour.']],
+  extra:[['egg','Fauteuil œuf suspendu','Hanging egg chair'],['sun','Soleil couchant','Sunset view']],
+  feats:[['Spa privé','Private spa'],['Vue piscine','Pool view'],['Fauteuil œuf','Egg chair']]},
+ adam:{name:'Adam',cls:'adam',seed:13,cover:'61',photos:['61','56','57','62','55','58','54','60','63','64','65'],
+  tag:['Chaleureuse, au soleil du matin','Warm, in the morning sun'],
+  expo:['Sud-est · soleil le matin et l\'après-midi, vue jardin','South-east · morning and afternoon sun, garden view'],
+  desc:[['Une décoration chaleureuse aux tons terracotta et noir, pour une ambiance plus intense.','Exposée sud-est, la suite Adam profite du soleil dès le matin et l\'après-midi, avec vue sur le jardin. Sa terrasse abrite le jacuzzi sous la pergola, des transats et un hamac suspendu. Elle dispose aussi d\'un micro-ondes.'],
+         ['A warm terracotta and black decor, for a more intense mood.','Facing south-east, the Adam suite gets the sun from the morning into the afternoon, with a garden view. Its terrace has the hot tub under the pergola, sun loungers and a hanging hammock. It also has a microwave.']],
+  extra:[['hammock','Hamac suspendu','Hanging hammock'],['micro','Micro-ondes','Microwave']],
+  feats:[['Spa privé','Private spa'],['Soleil du matin','Morning sun'],['Hamac','Hammock']]}
+};
+const EQ=[['spa','Jacuzzi privé sur la terrasse','Private hot tub on the terrace'],['bed','Lit queen size','Queen-size bed'],['ac','Climatisation','Air conditioning'],['wifi','Wi-Fi fibre (342 Mbit/s)','Fibre Wi-Fi (342 Mbps)'],['tv','Télévision','TV'],['coffee','Machine à café et bouilloire','Coffee machine and kettle'],['fridge','Minibar','Minibar'],['robe','Peignoirs et chaussons','Bathrobes and slippers'],['shower','Douche à l\'italienne','Walk-in shower'],['door','Entrée privée','Private entrance'],['car','Une place de parking','One parking space'],['pool','Couloir de nage partagé','Shared swimming lane'],['breakfast','Petit-déjeuner inclus','Breakfast included']];
+const OPTS=[
+ {id:'deco',ic:'heart',fr:'Décoration romantique ou anniversaire',en:'Romantic or birthday decoration',p:50,u:['forfait','flat'],d:['Pétales, ballons, lettres : la suite décorée à votre arrivée.','Petals, balloons, letters: the suite decorated for your arrival.']},
+ {id:'choc',ic:'gift',fr:'Boîte de chocolats en forme de cœur',en:'Heart-shaped box of chocolates',p:50,u:['la boîte','per box'],d:['Déposée dans la suite avant votre arrivée.','Left in the suite before you arrive.']},
+ {id:'board',ic:'board',fr:'Planche apéritive',en:'Aperitif board',p:11,u:['par personne','per person'],d:['Fromages et charcuterie de la région, pour l\'apéritif en terrasse.','Local cheese and charcuterie for drinks on the terrace.'],pp:true},
+ {id:'menu',ic:'dish',fr:'Menu traiteur livré sur place',en:'Catered dinner delivered',p:35,u:['par personne','per person'],d:['Un dîner aux saveurs locales, servi sur votre terrasse. Le cassoulet a ses fidèles.','A local-flavour dinner served on your terrace. The cassoulet has its fans.'],pp:true},
+ {id:'early',ic:'clock',fr:'Arrivée anticipée',en:'Early check-in',p:10,u:['par heure, 2 h max.','per hour, 2 h max.'],d:['Dès 15 h au lieu de 17 h, selon disponibilité.','From 3 pm instead of 5 pm, subject to availability.'],hours:true},
+ {id:'late',ic:'clock',fr:'Départ tardif',en:'Late check-out',p:10,u:['par heure, 2 h max.','per hour, 2 h max.'],d:['Jusqu\'à 13 h au lieu de 11 h, selon disponibilité.','Until 1 pm instead of 11 am, subject to availability.'],hours:true}
+];
+const CATS=[['Confort','Comfort',9.9],['Propreté','Cleanliness',9.8],['Équipements','Facilities',9.8],['Personnel','Staff',9.6],['Rapport qualité/prix','Value for money',9.3],['Situation géographique','Location',9.3]];
+const REV=[
+ ['Tristan','Love\'nSpa',['Le jacuzzi extérieur est une vraie pépite, même avec un ressenti de −4 °C en plein hiver.','The outdoor hot tub is a real gem, even with a feels-like of −4 °C in midwinter.']],
+ ['Faustine','Booking.com',['La tranquillité du lieu, le logement aménagé avec beaucoup de goût, le spa privatif, la livraison du repas le soir.','The peace and quiet, the tasteful decor, the private spa, the evening meal delivered.']],
+ ['Nicolas','Booking.com',['Merci Laure pour votre conseil : l\'abbaye de Fontfroide, un régal !','Thank you Laure for the tip: Fontfroide Abbey was a treat!']],
+ ['Frédéric','Love\'nSpa',['Petit-déjeuner copieux avec une très bonne salade de fruits frais. La piscine permet même une petite séance de natation.','Generous breakfast with lovely fresh fruit salad. The pool is long enough for a proper swim.']],
+ ['Camille','Booking.com',['Belle piscine de nage, le spa très propre sur la terrasse, la clim pendant la canicule.','Lovely swimming pool, a very clean spa on the terrace, air conditioning during the heatwave.']],
+ ['Lopes','Booking.com',['L\'accueil de Laure et Paulo, les installations au top, la déco avec goût, la literie confortable.','Laure and Paulo\'s welcome, top facilities, tasteful decor, a comfortable bed.']]
+];
+const PLACES=[
+ ['Cité de Carcassonne','Carcassonne\'s medieval Cité','Remparts et château comtal, classés à l\'UNESCO.','Ramparts and castle, a UNESCO World Heritage site.','15 min'],
+ ['Canal du Midi à Trèbes','Canal du Midi at Trèbes','Balade à vélo ou à pied le long des platanes.','Cycle or walk under the plane trees.','15 min'],
+ ['Caunes-Minervois','Caunes-Minervois','Abbaye, marbre rouge et caves du Minervois.','Abbey, red marble and Minervois wine cellars.','15 min'],
+ ['Lac de la Cavayère','Lac de la Cavayère','Baignade et pique-nique en été.','Swimming and picnics in summer.','20 min'],
+ ['Châteaux de Lastours','Lastours castles','Quatre châteaux cathares sur une crête.','Four Cathar castles on a ridge.','25 min'],
+ ['Gouffre géant de Cabrespine','Cabrespine giant chasm','Une des plus grandes salles souterraines visitables.','One of the largest show caves you can visit.','30 min'],
+ ['Minerve','Minerve','Village perché entre deux gorges.','Village perched between two gorges.','45 min'],
+ ['Abbaye de Fontfroide','Fontfroide Abbey','Abbaye cistercienne et roseraie, conseil de Laure.','Cistercian abbey and rose garden, one of Laure\'s tips.','50 min']
+];
+const INFOS=[['Arrivée','Check-in','À partir de 17 h, en autonomie avec boîte à clés. Dès 15 h en option.','From 5 pm, self check-in with a key box. From 3 pm as an extra.'],['Départ','Check-out','Avant 11 h. Jusqu\'à 13 h en option.','Before 11 am. Until 1 pm as an extra.'],['Pour qui','Who for','Séjours en couple, réservés aux adultes. Animaux non acceptés.','Couples, adults only. No pets.'],['Sur place','On site','Non-fumeur, espace fumeur extérieur. Calme de 22 h à 7 h.','Non-smoking, outdoor smoking area. Quiet hours 10 pm to 7 am.']];
+const FAQ=[
+ ['La piscine est-elle chauffée ?','Is the pool heated?','Oui, le couloir de nage est à l\'eau salée et chauffé en saison. Il est ouvert de mai à septembre, selon la météo. Le jacuzzi de chaque suite fonctionne toute l\'année.','Yes, the swimming lane is saltwater and heated in season. It is open May to September, weather permitting. Each suite\'s hot tub works all year round.'],
+ ['Le petit-déjeuner est-il compris ?','Is breakfast included?','Oui. Un petit-déjeuner continental sucré est déposé chaque matin sur votre terrasse. Pour un régime particulier, prévenez-nous avant votre arrivée.','Yes. A sweet continental breakfast is left on your terrace every morning. For special diets, let us know before you arrive.'],
+ ['Peut-on dîner sur place ?','Can we have dinner on site?','Oui, sur réservation 48 h avant : planche apéritive à 11 € par personne ou menu traiteur à 35 € par personne, servis sur votre terrasse.','Yes, booked 48 hours ahead: aperitif board at €11 per person or catered dinner at €35 per person, served on your terrace.'],
+ ['Pouvez-vous préparer une surprise ?','Can you prepare a surprise?','Oui : décoration romantique ou d\'anniversaire, chocolats, champagne. Ajoutez-les en réservant ou écrivez-nous pour une demande particulière.','Yes: romantic or birthday decoration, chocolates, champagne. Add them when booking or write to us for anything special.'],
+ ['Quelles sont les conditions d\'annulation ?','What is the cancellation policy?','Le séjour est payé en totalité à la réservation et n\'est pas remboursable. Une pièce d\'identité peut être demandée à l\'arrivée.','The stay is paid in full when booking and is non-refundable. ID may be requested on arrival.'],
+ ['La taxe de séjour est-elle incluse ?','Is the tourist tax included?','Non, elle s\'ajoute au prix du séjour selon le barème de la commune, par personne et par nuit.','No, it is added to the stay according to the local rate, per person per night.']
+];
+
+/* ---------- Langue ---------- */
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll('[data-en]').forEach(el=>{
+    if(el.dataset.fr===undefined) el.dataset.fr=el.innerHTML;
+    el.innerHTML=LANG==='en'?decode(el.dataset.en):el.dataset.fr;
+  });
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===LANG)));
+  renderHome();
+  route(true);
+}
+function decode(s){const t=document.createElement('textarea');t.innerHTML=s;return t.value}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{LANG=b.dataset.lang;try{localStorage.setItem('eden-lang',LANG)}catch(e){}applyLang()}));
+/* le texte FR avec balises est stocké encodé : on le décode une fois */
+document.querySelectorAll('[data-en]').forEach(el=>{if(/&lt;b&gt;/.test(el.innerHTML)){el.innerHTML=decode(el.innerHTML)}});
+
+/* ---------- Accueil ---------- */
+const eur=n=>n.toLocaleString(LANG==='en'?'en-GB':'fr-FR')+' €';
+function renderHome(){
+  $('#suite-cards').innerHTML=['eve','adam'].map(k=>{const s=S[k];return `<a class="suite-card ${s.cls}" href="#${k}">
+    <div class="ph"><img src="img/${s.cover}.webp" alt="${ALT[s.cover]}" loading="lazy"><span class="tag"><i class="dot ${s.cls}"></i>${T('Suite','Suite')} ${s.name}</span></div>
+    <div class="row"><h3>${T('Suite','Suite')} ${s.name}</h3><span class="price">${T('à partir de','from')} <b class="num">${eur(PRICE)}</b> ${T('la nuit','per night')}</span></div>
+    <p class="sub">${T(...s.tag)} · ${T(...s.expo)}</p>
+    <div class="feat">${s.feats.map(f=>`<span>${T(...f)}</span>`).join('')}<span>22 m²</span><span>${T('Petit-déjeuner inclus','Breakfast included')}</span></div>
+    <span class="more">${T('Voir la suite et réserver','See the suite and book')} ${ic('arrowR')}</span></a>`}).join('');
+  $('#opts').innerHTML=OPTS.map(o=>`<div class="opt">${ic(o.ic)}<b>${T(o.fr,o.en)}</b><span class="p num">${eur(o.p)} <small>${T(...o.u)}</small></span><p>${T(...o.d)}</p></div>`).join('');
+  $('#cats').innerHTML=CATS.map(c=>`<div class="cat"><span>${T(c[0],c[1])}</span><b class="num">${c[2].toLocaleString(LANG==='en'?'en-GB':'fr-FR')}</b><i><b style="width:${c[2]*10}%"></b></i></div>`).join('');
+  $('#reviews').innerHTML=REV.map(r=>`<article class="review"><blockquote>« ${T(...r[2])} »</blockquote><div class="who"><b>${r[0]}</b><span class="src">${T('Avis vérifié','Verified review')} · ${r[1]}</span></div></article>`).join('');
+  $('#places').innerHTML=PLACES.map(p=>`<li><b>${T(p[0],p[1])}</b><span>${T(p[2],p[3])}</span><span class="t">${p[4]}</span></li>`).join('');
+  $('#infos-grid').innerHTML=INFOS.map(i=>`<div class="info"><b>${T(i[0],i[1])}</b><p>${T(i[2],i[3])}</p></div>`).join('');
+  const open=[...document.querySelectorAll('#faq details')].findIndex(d=>d.open);
+  $('#faq').innerHTML=FAQ.map((q,i)=>`<details${i===(open<0?0:open)?' open':''}><summary>${T(q[0],q[1])}</summary><p>${T(q[2],q[3])}</p></details>`).join('');
+}
+
+/* ---------- Dates ---------- */
+const addD=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const parse=v=>{if(!v)return null;const[a,b,c]=v.split('-').map(Number);return new Date(a,b-1,c)};
+const fmt=d=>d.toLocaleDateString(LANG==='en'?'en-GB':'fr-FR',{day:'numeric',month:'short'});
+const nights=(a,d)=>Math.round((d-a)/864e5);
+const TODAY=(()=>{const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate())})();
+function rnd(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function booked(k,d){if(d<TODAY)return false;const r=rnd(S[k].seed*7919+d.getFullYear()*400+d.getMonth()*32+d.getDate());r();return r()<(d.getDay()===5||d.getDay()===6?.42:.16)}
+function free(k,a,d){for(let x=a;x<d;x=addD(x,1))if(booked(k,x))return false;return true}
+function firstFree(k,a,n){let x=a;for(let i=0;i<180;i++){if(free(k,x,addD(x,n)))return x;x=addD(x,1)}return a}
+let st=(()=>{let d=addD(TODAY,10);while(d.getDay()!==4)d=addD(d,1);return{arr:d,dep:addD(d,2)}})();
+
+/* recherche */
+const sa=$('#s-a'),sd=$('#s-d');
+sa.min=iso(TODAY);sa.value=iso(st.arr);sd.value=iso(st.dep);sd.min=iso(addD(st.arr,1));
+sa.addEventListener('change',()=>{const a=parse(sa.value);if(!a)return;sd.min=iso(addD(a,1));if(!parse(sd.value)||parse(sd.value)<=a)sd.value=iso(addD(a,2))});
+$('#search').addEventListener('submit',e=>{e.preventDefault();const a=parse(sa.value),d=parse(sd.value);if(a&&d&&d>a&&a>=TODAY)st={arr:a,dep:d};const k=$('#s-s').value;location.hash=k||'suites';if(!k)scrollToId('suites')});
+
+/* ---------- Page suite ---------- */
+let cur=null,sel={a:null,d:null},calM=null,msg='',opt={deco:false,choc:false,board:false,menu:false,early:0,late:0},guests=2;
+function renderSuite(k){
+  cur=k;const s=S[k];msg='';
+  const n=Math.max(1,nights(st.arr,st.dep));const a=free(k,st.arr,st.dep)?st.arr:firstFree(k,st.arr,n);
+  sel={a,d:addD(a,n)};calM=new Date(a.getFullYear(),a.getMonth(),1);
+  const other=k==='eve'?'adam':'eve',o=S[other];
+  $('#v-suite').innerHTML=`<div class="wrap">
+   <a class="back" href="#suites">${ic('arrowL')}${T('Les deux suites','Both suites')}</a>
+   <div class="s-head"><span class="eyebrow" style="color:var(--${s.cls})"><i class="dot ${s.cls}"></i> ${T(...s.tag)}</span><h1 style="font-size:clamp(2.2rem,5vw,3.6rem)">${T('Suite','Suite')} ${s.name}</h1>
+    <div class="s-sub"><span style="color:var(--ink);font-weight:700">${ic('star')} 9,5/10 · 63 ${T('avis','reviews')}</span><span>${ic('pin')}Malves-en-Minervois</span><span>${ic('user')}${T('2 adultes','2 adults')}</span><span>${T('N° d\'enregistrement','Registration no.')} <span class="ph-t">[${T('à compléter','to complete')}]</span></span></div></div>
+   <div class="gal" id="gal">${s.photos.map((p,i)=>`<button type="button" data-i="${i}" aria-label="${T('Agrandir','Enlarge')} : ${ALT[p]}"><img src="img/${p}.webp" alt="${ALT[p]}" ${i?'loading="lazy"':''}>${i===4?`<span class="all">${T('Voir les','See all')} ${s.photos.length} photos</span>`:''}</button>`).join('')}</div>
+   <div class="s-body">
+    <div class="s-main">
+     <section>
+      <div class="kf"><div><span>${T('Surface','Size')}</span><b class="num">22 m²</b></div><div><span>${T('Couchage','Bed')}</span><b>${T('1 lit queen size','1 queen bed')}</b></div><div><span>${T('Voyageurs','Guests')}</span><b>${T('2 adultes','2 adults')}</b></div><div><span>${T('Exposition','Facing')}</span><b>${T(k==='eve'?'Sud-ouest':'Sud-est',k==='eve'?'South-west':'South-east')}</b></div></div>
+      <div class="s-desc">${s.desc[LANG==='en'?1:0].map(p=>`<p>${p}</p>`).join('')}</div>
+     </section>
+     <section><h2>${T('Équipements','Amenities')}</h2>
+      <ul class="eq">${s.extra.map(e=>`<li>${ic(e[0])}${T(e[1],e[2])}</li>`).join('')}${EQ.map(e=>`<li>${ic(e[0])}${T(e[1],e[2])}</li>`).join('')}</ul>
+      <div class="bedplan">${ic('bed')}<div><b>${T('Chambre','Bedroom')}</b><p class="muted">${T('1 lit queen size, linge de lit et serviettes fournis','1 queen-size bed, bed linen and towels provided')}</p></div></div>
+     </section>
+     <section>
+      <div class="cal-top"><h2>${T('Disponibilités','Availability')}</h2><div class="cal-nav"><button type="button" id="cp" aria-label="${T('Mois précédent','Previous month')}">${ic('prev')}</button><button type="button" id="cn" aria-label="${T('Mois suivant','Next month')}">${ic('next')}</button></div></div>
+      <p class="muted">${T('Choisissez une date d\'arrivée puis une date de départ.','Pick a check-in date, then a check-out date.')}</p>
+      <div class="cals" id="cals"></div>
+      <div class="legend"><span><i style="background:var(--vine)"></i>${T('Votre séjour','Your stay')}</span><span><i style="background:var(--booked)"></i>${T('Déjà réservé','Already booked')}</span></div>
+     </section>
+     <section><h2>${T('L\'autre suite','The other suite')}</h2>
+      <a class="other" href="#${other}"><img src="img/${o.cover}.webp" alt="${ALT[o.cover]}" loading="lazy"><div><b style="font-family:var(--f-display);font-size:1.3rem;font-weight:400">${T('Suite','Suite')} ${o.name}</b><p class="muted">${T(...o.tag)}</p></div></a>
+     </section>
+    </div>
+    <aside class="book" id="booking" aria-label="${T('Réservation','Booking')}">
+     <div class="pp"><div><b class="num">${eur(PRICE)}</b> <span class="muted">/ ${T('nuit','night')}</span></div><span class="pill">${T('Réservation directe','Direct booking')}</span></div>
+     <div class="bf"><div><span class="l">${T('Arrivée','Check-in')}</span><span class="v" id="ba"></span></div><div><span class="l">${T('Départ','Check-out')}</span><span class="v" id="bd"></span></div>
+      <div class="full"><label for="bg">${T('Voyageurs','Guests')}</label><select id="bg"><option value="2"${guests===2?' selected':''}>${T('2 adultes','2 adults')}</option><option value="1"${guests===1?' selected':''}>${T('1 adulte','1 adult')}</option></select></div></div>
+     <div class="bopts"><span>${T('Options','Extras')}</span>
+      ${OPTS.map(o=>o.hours?`<div class="bo"><label for="o-${o.id}">${T(o.fr,o.en)}</label><span style="display:flex;gap:8px;align-items:center"><select id="o-${o.id}" data-o="${o.id}"><option value="0">—</option><option value="1"${opt[o.id]===1?' selected':''}>1 h</option><option value="2"${opt[o.id]===2?' selected':''}>2 h</option></select><span class="p">${o.p} €/h</span></span></div>`
+        :`<div class="bo"><label><input type="checkbox" data-o="${o.id}"${opt[o.id]?' checked':''}>${T(o.fr,o.en)}</label><span class="p">${o.p} €${o.pp?' × '+guests:''}</span></div>`).join('')}
+     </div>
+     <div id="blines"></div>
+     <button class="btn block" id="bgo" type="button">${T('Réserver et payer','Book and pay')}</button>
+     <div id="bmsg"></div>
+     <div class="cond"><span>${ic('check','ic')} ${T('Paiement sécurisé, confirmation immédiate par e-mail','Secure payment, instant email confirmation')}</span><span>${T('Paiement intégral à la réservation · non remboursable','Paid in full when booking · non-refundable')}</span></div>
+    </aside>
+   </div></div>`;
+  $('#gal').addEventListener('click',e=>{const b=e.target.closest('button');if(b)openLb(+b.dataset.i)});
+  $('#cp').onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()-1,1);renderCal()};
+  $('#cn').onclick=()=>{calM=new Date(calM.getFullYear(),calM.getMonth()+1,1);renderCal()};
+  $('#cals').addEventListener('click',e=>{const b=e.target.closest('.day');if(b&&!b.disabled)pick(parse(b.dataset.d))});
+  $('#bg').onchange=()=>{guests=+$('#bg').value;renderSuite(cur);};
+  $('#booking').addEventListener('change',e=>{const id=e.target.dataset.o;if(!id)return;opt[id]=e.target.type==='checkbox'?e.target.checked:+e.target.value;msg='';renderBook()});
+  $('#bgo').onclick=()=>{msg=sel.a&&sel.d?'sent':'dates';renderBook()};
+  renderCal();renderBook();
+}
+function pick(d){
+  if(!sel.a||sel.d||d<=sel.a)sel={a:d,d:null};
+  else if(free(cur,sel.a,d))sel.d=d;
+  else sel={a:d,d:null};
+  if(sel.a&&sel.d)st={arr:sel.a,dep:sel.d};
+  msg='';renderCal();renderBook();
+}
+function month(y,m){
+  const f=new Date(y,m,1),off=(f.getDay()+6)%7,len=new Date(y,m+1,0).getDate();
+  const dows=LANG==='en'?['M','T','W','T','F','S','S']:['L','M','M','J','V','S','D'];
+  let h=`<div class="month"><h4>${f.toLocaleDateString(LANG==='en'?'en-GB':'fr-FR',{month:'long',year:'numeric'})}</h4><div class="days">${dows.map(x=>`<span class="dow">${x}</span>`).join('')}`;
+  for(let i=0;i<off;i++)h+='<span></span>';
+  for(let k=1;k<=len;k++){
+    const d=new Date(y,m,k),t=+d,past=d<TODAY,bk=!past&&booked(cur,d);
+    const a=sel.a&&+sel.a===t,e=sel.d&&+sel.d===t,inr=sel.a&&sel.d&&d>sel.a&&d<sel.d,only=a&&!sel.d;
+    const asDep=sel.a&&!sel.d&&d>sel.a&&free(cur,sel.a,d);
+    const cls=['day',past&&'past',bk&&!a&&!e&&'booked',a&&'start',(e||only)&&'end',inr&&'inr'].filter(Boolean).join(' ');
+    h+=`<button type="button" class="${cls}" data-d="${iso(d)}" ${past||(bk&&!asDep)?'disabled':''} aria-label="${d.toLocaleDateString(LANG==='en'?'en-GB':'fr-FR',{weekday:'long',day:'numeric',month:'long'})}${bk?T(', déjà réservé',', booked'):''}"><span>${k}</span></button>`;
+  }
+  return h+'</div></div>';
+}
+function renderCal(){
+  const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1);
+  $('#cals').innerHTML=month(calM.getFullYear(),calM.getMonth())+month(m2.getFullYear(),m2.getMonth());
+  $('#cp').disabled=calM<=new Date(TODAY.getFullYear(),TODAY.getMonth(),1);
+}
+function renderBook(){
+  const{a,d}=sel;
+  $('#ba').textContent=a?fmt(a):T('Choisir','Select');$('#bd').textContent=d?fmt(d):T('Choisir','Select');
+  let h='';
+  if(a&&d){
+    const n=nights(a,d),sub=n*PRICE;let tot=sub,rows='';
+    OPTS.forEach(o=>{const v=opt[o.id];if(!v)return;const q=o.hours?v:(o.pp?guests:1),amt=o.p*q;tot+=amt;rows+=`<div><span>${T(o.fr,o.en)}${o.hours?` (${v} h)`:o.pp?` × ${guests}`:''}</span><span>${eur(amt)}</span></div>`;
+      if(o.id==='early'){tot-=10;rows+=`<div class="gift"><span>${T('1 h offerte (réservation directe)','1 h free (direct booking)')}</span><span>−${eur(10)}</span></div>`}});
+    h=`<div class="lines"><div><span>${eur(PRICE)} × ${n} ${T(n>1?'nuits':'nuit',n>1?'nights':'night')}</span><span>${eur(sub)}</span></div>
+      <div><span>${T('Petit-déjeuner','Breakfast')}</span><span>${T('inclus','included')}</span></div>${rows}
+      <div class="tot"><span>Total</span><span>${eur(tot)}</span></div>
+      <div class="tax"><span>${T('Taxe de séjour en sus, selon barème communal','Tourist tax extra, at the local rate')}</span></div></div>`;
+  } else h=`<p class="muted" style="font-size:.92rem">${T('Choisissez vos dates dans le calendrier.','Pick your dates in the calendar.')}</p>`;
+  $('#blines').innerHTML=h;
+  $('#bmsg').innerHTML=msg==='sent'?`<div class="notice" role="status"><b>${T('Ceci est une maquette.','This is a mock-up.')}</b>${T('Sur le vrai site, cette étape ouvre le paiement sécurisé du logiciel de réservation. Les dates se ferment aussitôt sur Airbnb et Booking. Ici, rien n\'est réservé ni payé.','On the real site, this step opens the booking software\'s secure payment. The dates close straight away on Airbnb and Booking. Here, nothing is booked or paid.')}</div>`
+    :msg==='dates'?`<div class="notice" role="status"><b>${T('Dates manquantes','Missing dates')}</b>${T('Choisissez une arrivée et un départ.','Choose a check-in and a check-out date.')}</div>`:'';
+  $('#mb-p').textContent=eur(PRICE)+' / '+T('nuit','night');
+  $('#mb-d').textContent=a&&d?`${fmt(a)} – ${fmt(d)}`:T('Choisissez vos dates','Pick your dates');
+}
+$('#mb-go').addEventListener('click',e=>{e.preventDefault();$('#booking').scrollIntoView({behavior:'smooth',block:'start'})});
+
+/* ---------- Visionneuse ---------- */
+let lbI=0;
+function openLb(i){lbI=i;$('#lb').hidden=false;document.body.style.overflow='hidden';showLb();$('#lb-x').focus()}
+function showLb(){const p=S[cur].photos,n=p.length;lbI=(lbI+n)%n;$('#lb-i').src=`img/${p[lbI]}.webp`;$('#lb-i').alt=ALT[p[lbI]];$('#lb-t').textContent=ALT[p[lbI]];$('#lb-c').textContent=`${lbI+1} / ${n}`}
+function closeLb(){$('#lb').hidden=true;document.body.style.overflow=''}
+$('#lb-x').onclick=closeLb;$('#lb-p').onclick=()=>{lbI--;showLb()};$('#lb-n').onclick=()=>{lbI++;showLb()};
+addEventListener('keydown',e=>{if($('#lb').hidden)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft'){lbI--;showLb()}if(e.key==='ArrowRight'){lbI++;showLb()}});
+
+/* ---------- Contact ---------- */
+$('#cf').addEventListener('submit',e=>{e.preventDefault();const n=$('#c-n').value.trim(),m=$('#c-m').value.trim();let er='';
+  if(!n)er=T('Indiquez votre nom.','Please enter your name.');else if(!/^\S+@\S+\.\S+$/.test(m))er=T('Indiquez une adresse e-mail valide.','Please enter a valid email address.');else if(!$('#c-ok').checked)er=T('Cochez la case d\'accord pour envoyer.','Tick the consent box to send.');
+  $('#c-err').textContent=er;$('#c-err').hidden=!er;if(er)return;$('#cf').hidden=true;$('#c-done').hidden=false});
+$('#c-back').onclick=()=>{$('#c-done').hidden=true;$('#cf').hidden=false};
+
+/* ---------- Navigation ---------- */
+const mb=$('#menu-btn'),mn=$('#mnav');
+mb.onclick=()=>{const o=mn.hidden;mn.hidden=!o;mb.setAttribute('aria-expanded',String(o))};
+mn.addEventListener('click',e=>{if(e.target.closest('a')){mn.hidden=true;mb.setAttribute('aria-expanded','false')}});
+function scrollToId(id){requestAnimationFrame(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({block:'start'})})}
+function route(keep){
+  const h=(location.hash||'#accueil').slice(1);
+  const isSuite=h==='eve'||h==='adam';
+  $('#v-home').hidden=isSuite;$('#v-suite').hidden=!isSuite;
+  $('#mbar').hidden=!isSuite;document.body.classList.toggle('has-bar',isSuite);
+  if(isSuite){renderSuite(h);if(!keep)scrollTo(0,0)}
+  else if(!keep){if(h!=='accueil'&&document.getElementById(h))scrollToId(h);else scrollTo(0,0)}
+}
+addEventListener('hashchange',()=>{if(location.hash==='#booking')return;route(false)});
+try{const l=localStorage.getItem('eden-lang');if(l==='en')LANG='en'}catch(e){}
+if(LANG==='en')applyLang();else{renderHome();route(false)}
+})();
+</script>
+
+</body>
+</html>
