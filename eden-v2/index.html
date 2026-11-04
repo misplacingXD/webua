@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="L'Éden Romantique : deux chambres d'hôtes avec spa privé, couloir de nage et petit-déjeuner, à 15 minutes de Carcassonne. Réservation directe.">
+<meta name="description" content="L'Éden Romantique : deux chambres d'hôtes avec spa privé, couloir de nage et petit-déjeuner, à 15 minutes de Carcassonne.">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}</style>
 <title>L'Éden Romantique</title>
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -355,6 +355,21 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
 .view{animation:fade .35s ease}
 @keyframes fade{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Version pub : une seule action, visible en permanence */
+.hero .wrap{padding-block:clamp(64px,10vw,130px) clamp(48px,7vw,90px)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center}
+.hero-price{font-size:.98rem;color:#E8DED2}
+@media (min-width:1000px){.top .cta{display:inline-flex}}
+details.bopts{display:block}
+details.bopts summary{cursor:pointer;font-weight:700;font-size:.92rem;padding:10px 0;color:var(--vine)}
+@media (max-width:999px){
+  .s-main{display:contents}
+  .s-main > section:nth-child(1){order:1}
+  .s-main > section:nth-child(2){order:2}
+  .s-body > .book{order:3}
+  .s-main > section:nth-child(3){order:4}
+  .s-main > section:nth-child(4){order:5}
+}
 </style>
 
 </head>
@@ -367,32 +382,14 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 29c-6-4.5-10-9-10-14a10 10 0 0 1 20 0c0 5-4 9.5-10 14z"/><path d="M16 22V12M16 15c-2.5-1-4-3-4-5.5 2.5 0 4 2 4 5.5zM16 13c2.5-1 4-3 4-5.5-2.5 0-4 2-4 5.5z"/></svg>
       <span><strong>L'Éden Romantique</strong><small data-en="B&amp;B · Malves-en-Minervois">Chambres d'hôtes · Malves-en-Minervois</small></span>
     </a>
-    <nav class="main" aria-label="Navigation">
-      <a href="#suites" data-en="The suites">Les suites</a>
-      <a href="#experience" data-en="The experience">L'expérience</a>
-      <a href="#options" data-en="Extras">Options</a>
-      <a href="#avis" data-en="Reviews">Avis</a>
-      <a href="#region" data-en="The area">La région</a>
-      <a href="#infos" data-en="Practical info">Infos pratiques</a>
-    </nav>
+    
     <div class="tools">
       <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
       <a class="btn cta" href="#suites" data-en="Book direct">Réserver en direct</a>
-      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      
     </div>
   </div>
-  <div class="mnav" id="mnav" hidden>
-    <div class="wrap">
-      <a href="#suites" data-en="The suites">Les suites</a>
-      <a href="#experience" data-en="The experience">L'expérience</a>
-      <a href="#options" data-en="Extras">Options</a>
-      <a href="#avis" data-en="Reviews">Avis</a>
-      <a href="#region" data-en="The area">La région</a>
-      <a href="#infos" data-en="Practical info">Infos pratiques</a>
-      <a class="btn block" href="#suites" data-en="Book direct">Réserver en direct</a>
-    </div>
-  </div>
-</header>
+  </header>
 
 <main>
 <!-- ============ ACCUEIL ============ -->
@@ -403,6 +400,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
       <span class="eyebrow" data-en="Two B&amp;B suites · 15 min from Carcassonne">Deux chambres d'hôtes · à 15 min de Carcassonne</span>
       <h1 data-en="Your private spa, under the pergola, just for two">Votre spa privé, sous la pergola, rien que pour deux</h1>
       <p class="lead" data-en="Two wooden suites in Malves-en-Minervois, each with its own terrace and hot tub, a 15-metre saltwater swimming lane and breakfast included.">Deux suites en bois à Malves-en-Minervois, chacune avec sa terrasse et son jacuzzi, un couloir de nage de 15 mètres à l'eau salée et le petit-déjeuner inclus.</p>
+      <div class="hero-cta"><a class="btn light" href="#suites" data-en="Book direct">Réserver en direct</a><span class="hero-price" data-en="from €109 per night, breakfast included">à partir de 109 € la nuit, petit-déjeuner inclus</span></div>
       <div class="badges">
         <span class="badge"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><b>9,5/10</b> Booking.com</span>
         <span class="badge"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><b>5,0/5</b> Airbnb · <span data-en="Guest favourite">Coup de cœur voyageurs</span></span>
@@ -410,12 +408,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
     </div>
   </div>
   <div class="wrap">
-    <form class="search" id="search" aria-label="Disponibilités">
-      <div class="f"><label for="s-a" data-en="Check-in">Arrivée</label><input id="s-a" type="date"></div>
-      <div class="f"><label for="s-d" data-en="Check-out">Départ</label><input id="s-d" type="date"></div>
-      <div class="f wide"><label for="s-s" data-en="Suite">Suite</label><select id="s-s"><option value="eve" selected data-en="Ève · soft tones, sunset">Ève · tons doux, couchant</option><option value="adam" data-en="Adam · terracotta, morning sun">Adam · terracotta, soleil du matin</option></select></div>
-      <div class="go"><button class="btn" type="submit" data-en="Check availability">Voir les disponibilités</button></div>
-    </form>
+    
   </div>
 
   <section class="sec" id="suites">
@@ -426,6 +419,24 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
         <p class="lead" data-en="Each suite has 22 m², a queen-size bed and its own spa on a private terrace. Ève faces south-west towards the pool, Adam faces south-east towards the garden.">Chaque suite fait 22 m², avec un lit queen size et son propre spa sur une terrasse privée. Ève est exposée sud-ouest, côté piscine ; Adam sud-est, côté jardin.</p>
       </div>
       <div class="suites" id="suite-cards"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="avis" style="padding-top:0">
+    <div class="wrap">
+      <div class="rev-top">
+        <div style="display:grid;gap:16px">
+          <span class="eyebrow" data-en="Guest reviews">Avis clients</span>
+          <h2 data-en="What our guests say">Ce qu'en disent nos voyageurs</h2>
+          <div class="scores">
+            <div class="score"><b class="num">9,5</b><span class="lbl" data-en="Exceptional">Exceptionnel</span><span data-en="out of 10 · 63 reviews on Booking.com">sur 10 · 63 avis Booking.com</span></div>
+            <div class="score"><b class="num">5,0</b><span data-stars></span><span data-en="out of 5 · 63 reviews on Airbnb">sur 5 · 63 avis Airbnb</span></div>
+            <div class="score"><b class="num">5,0</b><span data-stars></span><span data-en="out of 5 · 9 reviews on Love'nSpa">sur 5 · 9 avis Love'nSpa</span></div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="reviews" id="reviews"></div>
     </div>
   </section>
 
@@ -463,60 +474,16 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
             <span class="fact" data-en="Sweet continental breakfast, included · alternatives on request">Continental sucré, inclus · alternatives sur demande</span>
           </div>
         </div>
-        <div class="xp rev">
-          <div class="ph"><img src="img/46.webp" alt="Terrasse en bois sous pergola avec jacuzzi, palissade et pins" loading="lazy"></div>
-          <div class="txt">
-            <span class="eyebrow" data-en="Wood &amp; quiet">Bois &amp; calme</span>
-            <h3 data-en="Built in wood by a local craftsman">Une ossature en bois, faite par un artisan du coin</h3>
-            <p data-en="The suites are framed in wood made to measure: natural warmth and soft acoustics. Each has its private entrance and its own parking space.">Les suites ont une ossature bois façonnée sur mesure : une chaleur naturelle et une acoustique feutrée. Chacune a son entrée privée et sa place de parking.</p>
-            <span class="fact" data-en="Laure &amp; Paulo live on site">Laure et Paulo habitent sur place</span>
-          </div>
-        </div>
+        
       </div>
     </div>
   </section>
 
-  <section class="sec" id="options" style="background:var(--surface);border-block:1px solid var(--line)">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow" data-en="Extras">Options</span>
-        <h2 data-en="For an anniversary, a proposal, or just because">Pour un anniversaire, une demande, ou juste pour vous</h2>
-        <p class="lead" data-en="Add them when you book. Please book at least 48 hours ahead, subject to availability.">À ajouter au moment de réserver, au moins 48 h avant l'arrivée, selon disponibilité.</p>
-      </div>
-      <div class="opts" id="opts"></div>
-      <p class="note" data-en="Bottle of champagne: price on request.">Bouteille de champagne fraîche déposée dans la suite : prix sur demande.</p>
-    </div>
-  </section>
+  
 
-  <section class="sec" id="avis">
-    <div class="wrap">
-      <div class="rev-top">
-        <div style="display:grid;gap:16px">
-          <span class="eyebrow" data-en="Guest reviews">Avis clients</span>
-          <h2 data-en="What our guests say">Ce qu'en disent nos voyageurs</h2>
-          <div class="scores">
-            <div class="score"><b class="num">9,5</b><span class="lbl" data-en="Exceptional">Exceptionnel</span><span data-en="out of 10 · 63 reviews on Booking.com">sur 10 · 63 avis Booking.com</span></div>
-            <div class="score"><b class="num">5,0</b><span data-stars></span><span data-en="out of 5 · 63 reviews on Airbnb">sur 5 · 63 avis Airbnb</span></div>
-            <div class="score"><b class="num">5,0</b><span data-stars></span><span data-en="out of 5 · 9 reviews on Love'nSpa">sur 5 · 9 avis Love'nSpa</span></div>
-          </div>
-        </div>
-        <div class="cats" id="cats"></div>
-      </div>
-      <div class="reviews" id="reviews"></div>
-    </div>
-  </section>
+  
 
-  <section class="sec" id="region" style="padding-top:0">
-    <div class="wrap region">
-      <div style="display:grid;gap:16px;align-content:start">
-        <span class="eyebrow" data-en="The area">La région</span>
-        <h2 data-en="Between the Cité and the Minervois vineyards">Entre la Cité et les vignes du Minervois</h2>
-        <p class="lead" data-en="Malves-en-Minervois is a quiet wine village, 15 minutes from Carcassonne. Laure is happy to share her favourite spots.">Malves-en-Minervois est un village viticole au calme, à 15 minutes de Carcassonne. Laure partage volontiers ses adresses préférées.</p>
-        <p class="muted" style="font-size:.85rem" data-en="Distances from the B&amp;B. A car is recommended.">Distances depuis les chambres d'hôtes. Voiture recommandée.</p>
-      </div>
-      <ul class="places" id="places"></ul>
-    </div>
-  </section>
+  
 
   <section class="sec" id="infos" style="padding-top:0">
     <div class="wrap">
@@ -525,41 +492,11 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
         <h2 data-en="Good to know before you come">Bon à savoir avant de venir</h2>
       </div>
       <div class="infos" id="infos-grid"></div>
-      <div class="faq" id="faq"></div>
+      
     </div>
   </section>
 
-  <section class="hosts" id="contact">
-    <div class="wrap">
-      <div style="display:grid;gap:18px;align-content:start">
-        <span class="eyebrow" data-en="Your hosts">Vos hôtes</span>
-        <h2 data-en="Laure &amp; Paulo">Laure et Paulo</h2>
-        <p data-en="We live on site and will be happy to welcome you. We respect your privacy while staying available. A question before booking? Write to us.">Nous habitons sur place et serons ravis de vous accueillir. Nous respectons votre intimité tout en restant disponibles. Une question avant de réserver ? Écrivez-nous.</p>
-        <div class="ph"><img src="img/01.webp" alt="Le jardin avec le couloir de nage, les pergolas et les transats" loading="lazy"></div>
-        <p style="font-size:.92rem">12 rue des Parfaits, 11600 Malves-en-Minervois</p>
-      </div>
-      <div>
-        <form class="cf" id="cf" novalidate>
-          <h3 data-en="Send a message">Envoyer un message</h3>
-          <div class="fr two">
-            <div class="fld"><label for="c-n" data-en="Name">Nom</label><input id="c-n" autocomplete="name"></div>
-            <div class="fld"><label for="c-m" data-en="Email">E-mail</label><input id="c-m" type="email" autocomplete="email"></div>
-          </div>
-          <div class="fld"><label for="c-o" data-en="Occasion">Occasion</label><select id="c-o"><option data-en="Just a getaway">Simple escapade</option><option data-en="Anniversary">Anniversaire</option><option data-en="Wedding anniversary">Anniversaire de mariage</option><option data-en="Proposal">Demande en mariage</option><option data-en="Gift voucher">Bon cadeau</option></select></div>
-          <div class="fld"><label for="c-t" data-en="Your message">Votre message</label><textarea id="c-t"></textarea></div>
-          <label class="consent"><input type="checkbox" id="c-ok"> <span data-en="I agree to be contacted about my request. My details are never shared.">J'accepte d'être recontacté au sujet de ma demande. Mes coordonnées ne sont jamais transmises.</span></label>
-          <p class="err" id="c-err" hidden></p>
-          <button class="btn block" type="submit" data-en="Send">Envoyer</button>
-          <p class="small" data-en="Mock-up: this form sends nothing.">Maquette : ce formulaire n'envoie rien.</p>
-        </form>
-        <div class="ok" id="c-done" hidden>
-          <h3 data-en="Message ready">Message prêt</h3>
-          <p class="muted" data-en="On the real site, Laure would reply by email. In this mock-up nothing was sent.">Sur le vrai site, Laure vous répondrait par e-mail. Dans cette maquette, rien n'a été envoyé.</p>
-          <button class="btn ghost" type="button" id="c-back" style="justify-self:start" data-en="Back to the form">Revenir au formulaire</button>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 </div>
 
 <!-- ============ PAGE SUITE ============ -->
@@ -573,7 +510,7 @@ footer p{color:var(--muted);font-size:.95rem;max-width:40ch}
         <a class="logo" href="#accueil"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 29c-6-4.5-10-9-10-14a10 10 0 0 1 20 0c0 5-4 9.5-10 14z"/><path d="M16 22V12M16 15c-2.5-1-4-3-4-5.5 2.5 0 4 2 4 5.5zM16 13c2.5-1 4-3 4-5.5-2.5 0-4 2-4 5.5z"/></svg><span><strong>L'Éden Romantique</strong><small data-en="by Les Gîtes de Laure">par Les Gîtes de Laure</small></span></a>
         <p data-en="Two B&amp;B suites with private spa, 15 minutes from Carcassonne.">Deux chambres d'hôtes avec spa privé, à 15 minutes de Carcassonne.</p>
       </div>
-      <div><h4 data-en="The stay">Le séjour</h4><ul><li><a href="#eve" data-en="Ève suite">Suite Ève</a></li><li><a href="#adam" data-en="Adam suite">Suite Adam</a></li><li><a href="#options" data-en="Extras">Options</a></li><li><a href="#infos" data-en="Practical info">Infos pratiques</a></li></ul></div>
+      <div><h4 data-en="The stay">Le séjour</h4><ul><li><a href="#eve" data-en="Ève suite">Suite Ève</a></li><li><a href="#adam" data-en="Adam suite">Suite Adam</a></li><li><a href="#infos" data-en="Practical info">Infos pratiques</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>12 rue des Parfaits</li><li>11600 Malves-en-Minervois</li><li><span class="ph-t">[téléphone]</span></li><li><span class="ph-t">[e-mail]</span></li></ul></div>
     </div>
     <details class="legal">
@@ -731,14 +668,9 @@ function renderHome(){
     <p class="sub">${T(...s.tag)} · ${T(...s.expo)}</p>
     <div class="feat">${s.feats.map(f=>`<span>${T(...f)}</span>`).join('')}<span>22 m²</span><span>${T('Petit-déjeuner inclus','Breakfast included')}</span></div>
     <span class="more">${T('Voir la suite et réserver','See the suite and book')} ${ic('arrowR')}</span></a>`}).join('');
-  $('#opts').innerHTML=OPTS.map(o=>`<div class="opt">${ic(o.ic)}<b>${T(o.fr,o.en)}</b><span class="p num">${eur(o.p)} <small>${T(...o.u)}</small></span><p>${T(...o.d)}</p></div>`).join('');
-  $('#cats').innerHTML=CATS.map(c=>`<div class="cat"><span>${T(c[0],c[1])}</span><b class="num">${c[2].toLocaleString(LANG==='en'?'en-GB':'fr-FR')}</b><i><b style="width:${c[2]*10}%"></b></i></div>`).join('');
-  $('#reviews').innerHTML=REV.map(r=>`<article class="review">${stars(r[1])}<blockquote>« ${T(...r[2])} »</blockquote><div class="who"><b>${r[0]}</b><span class="src">${r[1]}/5 · Love'nSpa</span></div></article>`).join('');
+  $('#reviews').innerHTML=REV.slice(0,3).map(r=>`<article class="review">${stars(r[1])}<blockquote>« ${T(...r[2])} »</blockquote><div class="who"><b>${r[0]}</b><span class="src">${r[1]}/5 · Love'nSpa</span></div></article>`).join('');
   document.querySelectorAll('[data-stars]').forEach(e=>e.innerHTML=stars(5));
-  $('#places').innerHTML=PLACES.map(p=>`<li><b>${T(p[0],p[1])}</b><span>${T(p[2],p[3])}</span><span class="t">${p[4]}</span></li>`).join('');
   $('#infos-grid').innerHTML=INFOS.map(i=>`<div class="info"><b>${T(i[0],i[1])}</b><p>${T(i[2],i[3])}</p></div>`).join('');
-  const open=[...document.querySelectorAll('#faq details')].findIndex(d=>d.open);
-  $('#faq').innerHTML=FAQ.map((q,i)=>`<details${i===(open<0?0:open)?' open':''}><summary>${T(q[0],q[1])}</summary><p>${T(q[2],q[3])}</p></details>`).join('');
 }
 
 /* ---------- Dates ---------- */
@@ -753,12 +685,6 @@ function booked(k,d){if(d<TODAY)return false;const r=rnd(S[k].seed*7919+d.getFul
 function free(k,a,d){for(let x=a;x<d;x=addD(x,1))if(booked(k,x))return false;return true}
 function firstFree(k,a,n){let x=a;for(let i=0;i<180;i++){if(free(k,x,addD(x,n)))return x;x=addD(x,1)}return a}
 let st=(()=>{let d=addD(TODAY,10);while(d.getDay()!==4)d=addD(d,1);return{arr:d,dep:addD(d,2)}})();
-
-/* recherche */
-const sa=$('#s-a'),sd=$('#s-d');
-sa.min=iso(TODAY);sa.value=iso(st.arr);sd.value=iso(st.dep);sd.min=iso(addD(st.arr,1));
-sa.addEventListener('change',()=>{const a=parse(sa.value);if(!a)return;sd.min=iso(addD(a,1));if(!parse(sd.value)||parse(sd.value)<=a)sd.value=iso(addD(a,2))});
-$('#search').addEventListener('submit',e=>{e.preventDefault();const a=parse(sa.value),d=parse(sd.value);if(a&&d&&d>a&&a>=TODAY)st={arr:a,dep:d};location.hash=$('#s-s').value});
 
 /* ---------- Page suite ---------- */
 let cur=null,sel={a:null,d:null},calM=null,msg='',opt={deco:false,choc:false,board:false,menu:false,early:0,late:0},guests=2;
@@ -778,16 +704,17 @@ function renderSuite(k){
       <div class="kf"><div><span>${T('Surface','Size')}</span><b class="num">22 m²</b></div><div><span>${T('Couchage','Bed')}</span><b>${T('1 lit queen size','1 queen bed')}</b></div><div><span>${T('Voyageurs','Guests')}</span><b>${T('2 adultes','2 adults')}</b></div><div><span>${T('Exposition','Facing')}</span><b>${T(k==='eve'?'Sud-ouest':'Sud-est',k==='eve'?'South-west':'South-east')}</b></div></div>
       <div class="s-desc">${s.desc[LANG==='en'?1:0].map(p=>`<p>${p}</p>`).join('')}</div>
      </section>
-     <section><h2>${T('Équipements','Amenities')}</h2>
-      <ul class="eq">${s.extra.map(e=>`<li>${ic(e[0])}${T(e[1],e[2])}</li>`).join('')}${EQ.map(e=>`<li>${ic(e[0])}${T(e[1],e[2])}</li>`).join('')}</ul>
-      <div class="bedplan">${ic('bed')}<div><b>${T('Chambre','Bedroom')}</b><p class="muted">${T('1 lit queen size, linge de lit et serviettes fournis','1 queen-size bed, bed linen and towels provided')}</p></div></div>
-     </section>
      <section>
       <div class="cal-top"><h2>${T('Disponibilités','Availability')}</h2><div class="cal-nav"><button type="button" id="cp" aria-label="${T('Mois précédent','Previous month')}">${ic('prev')}</button><button type="button" id="cn" aria-label="${T('Mois suivant','Next month')}">${ic('next')}</button></div></div>
       <p class="muted">${T('Choisissez une date d\'arrivée puis une date de départ.','Pick a check-in date, then a check-out date.')}</p>
       <div class="cals" id="cals"></div>
       <div class="legend"><span><i style="background:var(--vine)"></i>${T('Votre séjour','Your stay')}</span><span><i style="background:var(--booked)"></i>${T('Déjà réservé','Already booked')}</span></div>
      </section>
+     <section><h2>${T('Équipements','Amenities')}</h2>
+      <ul class="eq">${s.extra.map(e=>`<li>${ic(e[0])}${T(e[1],e[2])}</li>`).join('')}${EQ.map(e=>`<li>${ic(e[0])}${T(e[1],e[2])}</li>`).join('')}</ul>
+      <div class="bedplan">${ic('bed')}<div><b>${T('Chambre','Bedroom')}</b><p class="muted">${T('1 lit queen size, linge de lit et serviettes fournis','1 queen-size bed, bed linen and towels provided')}</p></div></div>
+     </section>
+     
      <section><h2>${T('L\'autre suite','The other suite')}</h2>
       <a class="other" href="#${other}"><img src="img/${o.cover}.webp" alt="${ALT[o.cover]}" loading="lazy"><div><b style="font-family:var(--f-display);font-size:1.3rem;font-weight:400">${T('Suite','Suite')} ${o.name}</b><p class="muted">${T(...o.tag)}</p></div></a>
      </section>
@@ -796,10 +723,10 @@ function renderSuite(k){
      <div class="pp"><div><b class="num">${eur(PRICE)}</b> <span class="muted">/ ${T('nuit','night')}</span></div><span class="pill">${T('Réservation directe','Direct booking')}</span></div>
      <div class="bf"><div><span class="l">${T('Arrivée','Check-in')}</span><span class="v" id="ba"></span></div><div><span class="l">${T('Départ','Check-out')}</span><span class="v" id="bd"></span></div>
       <div class="full"><label for="bg">${T('Voyageurs','Guests')}</label><select id="bg"><option value="2"${guests===2?' selected':''}>${T('2 adultes','2 adults')}</option><option value="1"${guests===1?' selected':''}>${T('1 adulte','1 adult')}</option></select></div></div>
-     <div class="bopts"><span>${T('Options','Extras')}</span>
+     <details class="bopts"${OPTS.some(o=>opt[o.id])?' open':''}><summary>${T('Ajouter une option (facultatif)','Add an extra (optional)')}</summary>
       ${OPTS.map(o=>o.hours?`<div class="bo"><label for="o-${o.id}">${T(o.fr,o.en)}</label><span style="display:flex;gap:8px;align-items:center"><select id="o-${o.id}" data-o="${o.id}"><option value="0">—</option><option value="1"${opt[o.id]===1?' selected':''}>1 h</option><option value="2"${opt[o.id]===2?' selected':''}>2 h</option></select><span class="p">${o.p} €/h</span></span></div>`
         :`<div class="bo"><label><input type="checkbox" data-o="${o.id}"${opt[o.id]?' checked':''}>${T(o.fr,o.en)}</label><span class="p">${o.p} €${o.pp?' × '+guests:''}</span></div>`).join('')}
-     </div>
+     </details>
      <div id="blines"></div>
      <button class="btn block" id="bgo" type="button">${T('Réserver et payer','Book and pay')}</button>
      <div id="bmsg"></div>
@@ -859,7 +786,7 @@ function renderBook(){
   $('#mb-p').textContent=eur(PRICE)+' / '+T('nuit','night');
   $('#mb-d').textContent=a&&d?`${fmt(a)} – ${fmt(d)}`:T('Choisissez vos dates','Pick your dates');
 }
-$('#mb-go').addEventListener('click',e=>{e.preventDefault();$('#booking').scrollIntoView({behavior:'smooth',block:'start'})});
+$('#mb-go').addEventListener('click',e=>{e.preventDefault();document.getElementById($('#v-suite').hidden?'suites':'booking').scrollIntoView({behavior:'smooth',block:'start'})});
 
 /* ---------- Visionneuse ---------- */
 let lbI=0;
@@ -869,22 +796,13 @@ function closeLb(){$('#lb').hidden=true;document.body.style.overflow=''}
 $('#lb-x').onclick=closeLb;$('#lb-p').onclick=()=>{lbI--;showLb()};$('#lb-n').onclick=()=>{lbI++;showLb()};
 addEventListener('keydown',e=>{if($('#lb').hidden)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft'){lbI--;showLb()}if(e.key==='ArrowRight'){lbI++;showLb()}});
 
-/* ---------- Contact ---------- */
-$('#cf').addEventListener('submit',e=>{e.preventDefault();const n=$('#c-n').value.trim(),m=$('#c-m').value.trim();let er='';
-  if(!n)er=T('Indiquez votre nom.','Please enter your name.');else if(!/^\S+@\S+\.\S+$/.test(m))er=T('Indiquez une adresse e-mail valide.','Please enter a valid email address.');else if(!$('#c-ok').checked)er=T('Cochez la case d\'accord pour envoyer.','Tick the consent box to send.');
-  $('#c-err').textContent=er;$('#c-err').hidden=!er;if(er)return;$('#cf').hidden=true;$('#c-done').hidden=false});
-$('#c-back').onclick=()=>{$('#c-done').hidden=true;$('#cf').hidden=false};
-
 /* ---------- Navigation ---------- */
-const mb=$('#menu-btn'),mn=$('#mnav');
-mb.onclick=()=>{const o=mn.hidden;mn.hidden=!o;mb.setAttribute('aria-expanded',String(o))};
-mn.addEventListener('click',e=>{if(e.target.closest('a')){mn.hidden=true;mb.setAttribute('aria-expanded','false')}});
 function scrollToId(id){requestAnimationFrame(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({block:'start'})})}
 function route(keep){
   const h=(location.hash||'#accueil').slice(1);
   const isSuite=h==='eve'||h==='adam';
   $('#v-home').hidden=isSuite;$('#v-suite').hidden=!isSuite;
-  $('#mbar').hidden=!isSuite;document.body.classList.toggle('has-bar',isSuite);
+  $('#mbar').hidden=false;document.body.classList.add('has-bar');if(!isSuite){$('#mb-p').textContent=T('Dès ','From ')+eur(PRICE)+' / '+T('nuit','night');$('#mb-d').textContent=T('Petit-déjeuner inclus','Breakfast included')}
   if(isSuite){renderSuite(h);if(!keep)scrollTo(0,0)}
   else if(!keep){if(h!=='accueil'&&document.getElementById(h))scrollToId(h);else scrollTo(0,0)}
 }
