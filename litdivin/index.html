@@ -619,11 +619,9 @@ footer a:hover{color:var(--gold2)}
       </div>
       <div>
         <div class="plat" id="cats"></div>
-        <div class="bk"><b class="num">9,1/10</b><span data-en="72 reviews on Booking.com · location rated 9.9/10">72 avis sur Booking.com · situation notée 9,9/10</span></div>
       </div>
     </div>
     <div class="reviews" id="reviews"></div>
-    <div class="rev-more"><a class="lk" href="https://www.airbnb.fr/rooms/48413277/reviews" target="_blank" rel="noopener" data-en="Read all reviews on Airbnb">Lire tous les avis sur Airbnb</a><a class="lk" href="https://www.booking.com/hotel/fr/o-lit-divin-instant-de-volupte-balneo-sauna.fr.html#tab-reviews" target="_blank" rel="noopener" data-en="Reviews on Booking.com">Les avis sur Booking.com</a></div>
   </div>
 </section>
 
@@ -1161,7 +1159,7 @@ const rvIO='IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motio
 function rvShow(el){el.classList.add('in');rvIO.unobserve(el);setTimeout(()=>{el.classList.remove('rv','rvp','in');el.style.transitionDelay=''},1900)}
 function reveal(){
   if(!rvIO)return;
-  $$('.sec .head>*,.intro>.wrap>*,.facts>div,.chap .ph,.chap .tx>*,.gal button,.amen li,.opt,.calcard,.book,.big>*,.plat,.bk,.review,.region>div>*,.region figure,.info,.faq details,.hosts>div>*,.hosts .cf').forEach(el=>{
+  $$('.sec .head>*,.intro>.wrap>*,.facts>div,.chap .ph,.chap .tx>*,.gal button,.amen li,.opt,.calcard,.book,.big>*,.plat,.review,.region>div>*,.region figure,.info,.faq details,.hosts>div>*,.hosts .cf').forEach(el=>{
     const r=el.getBoundingClientRect();
     if(r.top<innerHeight&&r.bottom>0)return; /* déjà à l'écran : on n'y touche pas */
     const p=el.parentElement;if(p.scrollWidth>p.clientWidth+1&&[...p.children].indexOf(el)>0)return; /* carrousel */
