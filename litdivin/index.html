@@ -64,7 +64,14 @@ p{margin:0}
 .lead{font-size:clamp(1.05rem,1.5vw,1.2rem);color:var(--ink2);max-width:60ch}
 .muted{color:var(--mute)}
 .small{font-size:.86rem}
-.sec{padding:clamp(80px,12vw,150px) 0;position:relative}
+.sec{padding:clamp(80px,12vw,150px) 0;position:relative;isolation:isolate}
+/* Touches de dégradé dans chaque partie : halos qui s'effacent entièrement avant leurs bords, en alternant bordeaux à droite et champagne à gauche */
+.sec::before,.sec::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:min(1000px,110vw);aspect-ratio:1}
+.sec::before{top:-8%;right:-28%;background:radial-gradient(closest-side,rgba(128,22,40,.17),rgba(128,22,40,.05) 60%,transparent)}
+.sec::after{bottom:-12%;left:-30%;background:radial-gradient(closest-side,rgba(201,164,92,.08),rgba(201,164,92,.025) 60%,transparent)}
+.sec:nth-of-type(even)::before{right:auto;left:-28%;top:20%;background:radial-gradient(closest-side,rgba(201,164,92,.075),transparent)}
+.sec:nth-of-type(even)::after{left:auto;right:-30%;bottom:0;background:radial-gradient(closest-side,rgba(110,18,34,.16),transparent)}
+main{overflow-x:clip}
 .head{display:grid;gap:18px;margin-bottom:clamp(40px,6vw,70px)}
 .head.center{text-align:center;justify-items:center}
 .orn{display:block;width:64px;height:12px;margin:0 auto;color:var(--gold)}
@@ -203,7 +210,7 @@ p{margin:0}
 @media (max-width:860px){.chap,.chap.rev{grid-template-columns:1fr}.chap.rev .ph{order:0}}
 /* ---------- Galerie ---------- */
 .gal-sec,.book-sec{background:var(--band)}
-.gal{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(90px,11vw,150px);gap:10px}
+.gal{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:clamp(90px,11vw,150px);gap:10px;grid-auto-flow:row dense}
 .gal button{position:relative;padding:0;border:0;background:var(--bg3);overflow:hidden;cursor:zoom-in;grid-column:span 4;grid-row:span 2}
 .gal button.w{grid-column:span 8;grid-row:span 3}
 .gal button.t{grid-column:span 4;grid-row:span 3}
@@ -213,15 +220,14 @@ p{margin:0}
 .gal button:hover img{transform:scale(1.05)}
 .gal button:hover::after,.gal button:focus-visible::after{opacity:1;transform:none}
 .gal-more{display:flex;justify-content:center;margin-top:34px}
-@media (max-width:760px){.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:42vw;gap:6px}.gal button,.gal button.m{grid-column:span 1;grid-row:span 1}.gal button.w{grid-column:1/-1;grid-row:span 1}.gal button.t{grid-column:span 1;grid-row:span 2}.gal button::after{display:none}}
+@media (max-width:760px){.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:42vw;gap:6px}.gal button,.gal button.m{grid-column:span 1;grid-row:span 1}.gal button.w{grid-column:1/-1;grid-row:span 1}.gal button.t{grid-column:span 1;grid-row:span 2}.gal button::after{display:none}.gal button:last-child{grid-column:1/-1;grid-row:span 2}}
 /* ---------- Équipements ---------- */
 .amen{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0;border-top:1px solid var(--line)}
 .amen li{list-style:none;display:flex;align-items:center;gap:14px;padding:18px 6px;border-bottom:1px solid var(--line);font-size:.95rem;color:var(--ink2)}
 .amen li svg{color:var(--gold)}
 .amen{padding:0;margin:0}
 /* ---------- Options ---------- */
-.opts-sec{isolation:isolate}
-.opts-sec::before{content:"";position:absolute;inset:-10% 0;z-index:-1;background:radial-gradient(closest-side,rgba(130,24,40,.24),rgba(130,24,40,.08) 55%,transparent);pointer-events:none}
+.sec.opts-sec::before{content:"";position:absolute;inset:-10% 0;width:auto;aspect-ratio:auto;z-index:-1;background:radial-gradient(closest-side,rgba(130,24,40,.24),rgba(130,24,40,.08) 55%,transparent);pointer-events:none}
 .opts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .opt{background:var(--card);padding:34px 26px;display:grid;gap:12px;align-content:start;transition:background .5s}
 .opt:hover{background:rgba(24,19,17,.9)}
@@ -548,15 +554,15 @@ footer a:hover{color:var(--gold2)}
       <button type="button" data-cap="Sauna pour deux personnes" data-cap-en="Sauna for two"><img src="img/sauna-infrarouge-privatif-deux-personnes.jpg" width="1920" height="1281" loading="lazy" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two"></button>
       <button type="button" class="t" data-cap="Tête de lit en bois doré" data-cap-en="Golden wood headboard"><img src="img/tete-de-lit-bois-dore-applique.jpg" width="960" height="1439" loading="lazy" alt="Tête de lit en bois doré et applique" data-en-alt="Golden wood headboard and wall light"></button>
       <button type="button" class="w" data-cap="Murs rouges et tête de lit lumineuse" data-cap-en="Red walls and glowing headboard"><img src="img/chambre-tete-de-lit-lumineuse-murs-rouges.jpg" width="1920" height="1281" loading="lazy" alt="Chambre aux murs rouges et tête de lit lumineuse" data-en-alt="Bedroom with red walls and a glowing headboard"></button>
-      <button type="button" class="t" data-cap="Les jets de la balnéo" data-cap-en="The whirlpool jets"><img src="img/baignoire-balneo-jets-tableau-noir-et-blanc.jpg" width="960" height="1439" loading="lazy" alt="Jets de la baignoire balnéo sous un tableau en noir et blanc" data-en-alt="Whirlpool bath jets beneath a black and white artwork"></button>
-      <button type="button" class="m" data-cap="Le salon et sa cheminée" data-cap-en="The lounge and its fireplace"><img src="img/salon-cuisine-ouverte-equipee.jpg" width="1920" height="1281" loading="lazy" alt="Salon et cuisine ouverte équipée" data-en-alt="Lounge and open, equipped kitchen"></button>
-      <button type="button" class="m" data-cap="La cuisine sur mesure" data-cap-en="The made-to-measure kitchen"><img src="img/cuisine-equipee-sur-mesure.jpg" width="1920" height="1281" loading="lazy" alt="Cuisine sur mesure équipée" data-en-alt="Equipped made-to-measure kitchen"></button>
-      <button type="button" class="t" data-cap="Le fauteuil doré" data-cap-en="The golden armchair"><img src="img/fauteuil-dore-coussin-noir-chambre.jpg" width="960" height="1439" loading="lazy" alt="Fauteuil doré et coussin noir dans la chambre" data-en-alt="Golden armchair and black cushion in the bedroom"></button>
+      <button type="button" data-cap="Le salon et sa cheminée" data-cap-en="The lounge and its fireplace"><img src="img/salon-cuisine-ouverte-equipee.jpg" width="1920" height="1281" loading="lazy" alt="Salon et cuisine ouverte équipée" data-en-alt="Lounge and open, equipped kitchen"></button>
+      <button type="button" data-cap="La cuisine sur mesure" data-cap-en="The made-to-measure kitchen"><img src="img/cuisine-equipee-sur-mesure.jpg" width="1920" height="1281" loading="lazy" alt="Cuisine sur mesure équipée" data-en-alt="Equipped made-to-measure kitchen"></button>
       <button type="button" data-cap="Le coin repas" data-cap-en="The dining corner"><img src="img/coin-repas-table-pour-deux.jpg" width="1920" height="1281" loading="lazy" alt="Coin repas, table pour deux" data-en-alt="Dining corner, table for two"></button>
-      <button type="button" data-cap="La salle de douche" data-cap-en="The shower room"><img src="img/salle-de-douche-vasque-miroir-lumineux.jpg" width="1920" height="1281" loading="lazy" alt="Salle de douche, vasque et miroir lumineux" data-en-alt="Shower room, basin and illuminated mirror"></button>
+      <button type="button" class="w" data-cap="La balnéo XXL pour deux" data-cap-en="The XXL whirlpool bath for two"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne.jpg" width="1920" height="1281" loading="lazy" alt="Baignoire balnéo XXL pour deux personnes" data-en-alt="XXL whirlpool bath for two"></button>
+      <button type="button" class="t" data-cap="Les jets de la balnéo" data-cap-en="The whirlpool jets"><img src="img/baignoire-balneo-jets-tableau-noir-et-blanc.jpg" width="960" height="1439" loading="lazy" alt="Jets de la baignoire balnéo sous un tableau en noir et blanc" data-en-alt="Whirlpool bath jets beneath a black and white artwork"></button>
+      <button type="button" class="t" data-cap="Le fauteuil doré" data-cap-en="The golden armchair"><img src="img/fauteuil-dore-coussin-noir-chambre.jpg" width="960" height="1439" loading="lazy" alt="Fauteuil doré et coussin noir dans la chambre" data-en-alt="Golden armchair and black cushion in the bedroom"></button>
+      <button type="button" class="w" data-cap="La salle de douche" data-cap-en="The shower room"><img src="img/salle-de-douche-vasque-miroir-lumineux.jpg" width="1920" height="1281" loading="lazy" alt="Salle de douche, vasque et miroir lumineux" data-en-alt="Shower room, basin and illuminated mirror"></button>
+      <button type="button" class="w" data-cap="L'immeuble, au pied de la Cité" data-cap-en="The building, at the foot of the Cité"><img src="img/facade-immeuble-pied-de-la-cite-carcassonne.jpg" width="1200" height="801" loading="lazy" alt="Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne" data-en-alt="The Ô Lit Divin building, at the foot of the Cité of Carcassonne"></button>
       <button type="button" class="t" data-cap="Peignoirs et miroir éclairé" data-cap-en="Bathrobes and illuminated mirror"><img src="img/salle-de-douche-peignoirs-miroir-eclaire.jpg" width="960" height="1439" loading="lazy" alt="Salle de douche et peignoirs" data-en-alt="Shower room and bathrobes"></button>
-      <button type="button" class="m" data-cap="L'immeuble, au pied de la Cité" data-cap-en="The building, at the foot of the Cité"><img src="img/facade-immeuble-pied-de-la-cite-carcassonne.jpg" width="1200" height="801" loading="lazy" alt="Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne" data-en-alt="The Ô Lit Divin building, at the foot of the Cité of Carcassonne"></button>
-      <button type="button" class="m" data-cap="La balnéo XXL pour deux" data-cap-en="The XXL whirlpool bath for two"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne.jpg" width="1920" height="1281" loading="lazy" alt="Baignoire balnéo XXL pour deux personnes" data-en-alt="XXL whirlpool bath for two"></button>
     </div>
   </div>
 </section>
@@ -862,7 +868,8 @@ let sel={a:null,d:null},guests=2,calM=new Date(TODAY.getFullYear(),TODAY.getMont
 
 /* Nuits libres, lues dans Beds24 par dispo.php. Sans réponse, le calendrier reste sans couleurs et le prix est vérifié au choix des dates. */
 let AV=null;
-fetch('dispo.php').then(r=>r.json()).then(j=>{
+/* Aperçu sur GitHub (sans PHP) : on lit une copie des dates, dispo.json, mise à jour à chaque publication de l'aperçu */
+fetch('dispo.php').then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>location.hostname.endsWith('github.io')?fetch('dispo.json').then(r=>r.json()):null).then(j=>{if(!j)return;
   if(!j.ok||!Array.isArray(j.dates))return;
   AV={s:new Set(j.dates),last:j.dates.reduce((m,x)=>x>m?x:m,'')};
   renderAll();
