@@ -36,6 +36,11 @@
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px}
+/* Défilement doux (Lenis) */
+html.lenis,html.lenis body{height:auto}
+html.lenis,html.lenis *{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+[data-lenis-prevent]{overscroll-behavior:contain}
 html{background:var(--bg)}
 /* Fond de page : lueurs chaudes fixes (bordeaux et champagne) et grain très léger, pour une ambiance continue sans coupure entre les parties */
 body::before,body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;transform:translateZ(0);will-change:transform}
@@ -449,7 +454,7 @@ footer a:hover{color:var(--gold2)}
     <button class="burger" id="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span></button>
   </div>
 </header>
-<nav class="mnav" id="mnav" aria-label="Menu">
+<nav class="mnav" id="mnav" data-lenis-prevent aria-label="Menu">
   <a href="#suite" data-en="The suite">La suite</a>
   <a href="#galerie" data-en="Gallery">Galerie</a>
   <a href="#options" data-en="Extras">Options</a>
@@ -502,7 +507,7 @@ footer a:hover{color:var(--gold2)}
 <section class="sec" style="padding-top:0" aria-label="L'expérience">
   <div class="wrap">
     <article class="chap">
-      <div class="ph"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Baignoire balnéo XXL pour deux personnes et flûtes de champagne, Ô Lit Divin à Carcassonne" data-en-alt="XXL whirlpool bath for two and champagne flutes, Ô Lit Divin in Carcassonne"></div>
+      <div class="ph"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo XXL pour deux personnes et flûtes de champagne, Ô Lit Divin à Carcassonne" data-en-alt="XXL whirlpool bath for two and champagne flutes, Ô Lit Divin in Carcassonne"></div>
       <div class="tx">
         <span class="idx">I.</span>
         <h2 data-en="The &lt;em&gt;XXL&lt;/em&gt; whirlpool bath">La balnéo <em>XXL</em></h2>
@@ -514,7 +519,7 @@ footer a:hover{color:var(--gold2)}
       </div>
     </article>
     <article class="chap rev">
-      <div class="ph duo"><img src="img/sauna-infrarouge-luminotherapie-suite-1280.webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite"><img src="img/sauna-infrarouge-privatif-deux-personnes-1920.webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two" style="object-position:50% 50%"></div>
+      <div class="ph duo"><img src="img/sauna-infrarouge-luminotherapie-suite-1280.webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" decoding="async" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite"><img src="img/sauna-infrarouge-privatif-deux-personnes-1920.webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two" style="object-position:50% 50%"></div>
       <div class="tx">
         <span class="idx">II.</span>
         <h2 data-en="The private &lt;em&gt;sauna&lt;/em&gt;">Le <em>sauna</em> privé</h2>
@@ -523,7 +528,7 @@ footer a:hover{color:var(--gold2)}
       </div>
     </article>
     <article class="chap">
-      <div class="ph"><img src="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp" srcset="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1024.webp 1024w, img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Lit king size, tête de lit dorée lumineuse et pétales de rose" data-en-alt="King-size bed, glowing golden headboard and rose petals"></div>
+      <div class="ph"><img src="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp" srcset="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1024.webp 1024w, img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Lit king size, tête de lit dorée lumineuse et pétales de rose" data-en-alt="King-size bed, glowing golden headboard and rose petals"></div>
       <div class="tx">
         <span class="idx">III.</span>
         <h2 data-en="A &lt;em&gt;royal&lt;/em&gt; night">Une nuit <em>royale</em></h2>
@@ -532,7 +537,7 @@ footer a:hover{color:var(--gold2)}
       </div>
     </article>
     <article class="chap rev">
-      <div class="ph"><img src="img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp" srcset="img/salon-cheminee-electrique-canape-suite-carcassonne-1024.webp 1024w, img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Salon de la suite avec canapé et cheminée électrique, à Carcassonne" data-en-alt="The suite's lounge with sofa and electric fireplace, in Carcassonne"></div>
+      <div class="ph"><img src="img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp" srcset="img/salon-cheminee-electrique-canape-suite-carcassonne-1024.webp 1024w, img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Salon de la suite avec canapé et cheminée électrique, à Carcassonne" data-en-alt="The suite's lounge with sofa and electric fireplace, in Carcassonne"></div>
       <div class="tx">
         <span class="idx">IV.</span>
         <h2 data-en="Your &lt;em&gt;alcove&lt;/em&gt;, at your own pace">Votre <em>alcôve</em>, à votre rythme</h2>
@@ -547,22 +552,22 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap">
     <div class="head center"><span class="eyebrow" data-en="Gallery">Galerie</span><h2 data-en="Step &lt;em&gt;inside&lt;/em&gt;">Entrez dans l'<em>alcôve</em></h2></div>
     <div class="gal" id="gal">
-      <button type="button" class="w" data-cap="Le lit king size et la baignoire balnéo" data-cap-en="The king-size bed and the whirlpool bath"><img src="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp" srcset="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1024.webp 1024w, img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Chambre d'Ô Lit Divin à Carcassonne : lit king size et baignoire balnéo pour deux" data-en-alt="Ô Lit Divin bedroom in Carcassonne: king-size bed and whirlpool bath for two"></button>
-      <button type="button" class="t" data-cap="Le sauna infrarouge, dans la suite" data-cap-en="The infrared sauna, inside the suite"><img src="img/sauna-infrarouge-luminotherapie-suite-1280.webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite"></button>
-      <button type="button" data-cap="Baignoire balnéo, peignoirs et champagne" data-cap-en="Whirlpool bath, bathrobes and champagne"><img src="img/baignoire-balneo-peignoirs-champagne-1920.webp" srcset="img/baignoire-balneo-peignoirs-champagne-1024.webp 1024w, img/baignoire-balneo-peignoirs-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Baignoire balnéo, peignoirs et champagne" data-en-alt="Whirlpool bath, bathrobes and champagne"></button>
-      <button type="button" data-cap="Lumière tamisée sur le lit et la balnéo" data-cap-en="Soft light on the bed and the whirlpool bath"><img src="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp" srcset="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1024.webp 1024w, img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Le lit et la baignoire balnéo double, lumière tamisée" data-en-alt="The bed and the double whirlpool bath in soft light"></button>
-      <button type="button" data-cap="Sauna pour deux personnes" data-cap-en="Sauna for two"><img src="img/sauna-infrarouge-privatif-deux-personnes-1920.webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two"></button>
-      <button type="button" class="t" data-cap="Tête de lit en bois doré" data-cap-en="Golden wood headboard"><img src="img/tete-de-lit-bois-dore-applique-1280.webp" srcset="img/tete-de-lit-bois-dore-applique-720.webp 720w, img/tete-de-lit-bois-dore-applique-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" alt="Tête de lit en bois doré et applique" data-en-alt="Golden wood headboard and wall light"></button>
-      <button type="button" class="w" data-cap="Murs rouges et tête de lit lumineuse" data-cap-en="Red walls and glowing headboard"><img src="img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp" srcset="img/chambre-tete-de-lit-lumineuse-murs-rouges-1024.webp 1024w, img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Chambre aux murs rouges et tête de lit lumineuse" data-en-alt="Bedroom with red walls and a glowing headboard"></button>
-      <button type="button" data-cap="Le salon et sa cheminée" data-cap-en="The lounge and its fireplace"><img src="img/salon-cuisine-ouverte-equipee-1920.webp" srcset="img/salon-cuisine-ouverte-equipee-1024.webp 1024w, img/salon-cuisine-ouverte-equipee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Salon et cuisine ouverte équipée" data-en-alt="Lounge and open, equipped kitchen"></button>
-      <button type="button" data-cap="La cuisine sur mesure" data-cap-en="The made-to-measure kitchen"><img src="img/cuisine-equipee-sur-mesure-1920.webp" srcset="img/cuisine-equipee-sur-mesure-1024.webp 1024w, img/cuisine-equipee-sur-mesure-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Cuisine sur mesure équipée" data-en-alt="Equipped made-to-measure kitchen"></button>
-      <button type="button" data-cap="Le coin repas" data-cap-en="The dining corner"><img src="img/coin-repas-table-pour-deux-1920.webp" srcset="img/coin-repas-table-pour-deux-1024.webp 1024w, img/coin-repas-table-pour-deux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Coin repas, table pour deux" data-en-alt="Dining corner, table for two"></button>
-      <button type="button" class="w" data-cap="La balnéo XXL pour deux" data-cap-en="The XXL whirlpool bath for two"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Baignoire balnéo XXL pour deux personnes" data-en-alt="XXL whirlpool bath for two"></button>
-      <button type="button" class="t" data-cap="Les jets de la balnéo" data-cap-en="The whirlpool jets"><img src="img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp" srcset="img/baignoire-balneo-jets-tableau-noir-et-blanc-720.webp 720w, img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" alt="Jets de la baignoire balnéo sous un tableau en noir et blanc" data-en-alt="Whirlpool bath jets beneath a black and white artwork"></button>
-      <button type="button" class="t" data-cap="Le fauteuil doré" data-cap-en="The golden armchair"><img src="img/fauteuil-dore-coussin-noir-chambre-1280.webp" srcset="img/fauteuil-dore-coussin-noir-chambre-720.webp 720w, img/fauteuil-dore-coussin-noir-chambre-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" alt="Fauteuil doré et coussin noir dans la chambre" data-en-alt="Golden armchair and black cushion in the bedroom"></button>
-      <button type="button" class="w" data-cap="La salle de douche" data-cap-en="The shower room"><img src="img/salle-de-douche-vasque-miroir-lumineux-1920.webp" srcset="img/salle-de-douche-vasque-miroir-lumineux-1024.webp 1024w, img/salle-de-douche-vasque-miroir-lumineux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" alt="Salle de douche, vasque et miroir lumineux" data-en-alt="Shower room, basin and illuminated mirror"></button>
-      <button type="button" class="w" data-cap="L'immeuble, au pied de la Cité" data-cap-en="The building, at the foot of the Cité"><img src="img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp" srcset="img/facade-immeuble-pied-de-la-cite-carcassonne-1024.webp 1024w, img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1200" height="801" loading="lazy" alt="Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne" data-en-alt="The Ô Lit Divin building, at the foot of the Cité of Carcassonne"></button>
-      <button type="button" class="t" data-cap="Peignoirs et miroir éclairé" data-cap-en="Bathrobes and illuminated mirror"><img src="img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp" srcset="img/salle-de-douche-peignoirs-miroir-eclaire-720.webp 720w, img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" alt="Salle de douche et peignoirs" data-en-alt="Shower room and bathrobes"></button>
+      <button type="button" class="w" data-cap="Le lit king size et la baignoire balnéo" data-cap-en="The king-size bed and the whirlpool bath"><img src="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp" srcset="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1024.webp 1024w, img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Chambre d'Ô Lit Divin à Carcassonne : lit king size et baignoire balnéo pour deux" data-en-alt="Ô Lit Divin bedroom in Carcassonne: king-size bed and whirlpool bath for two"></button>
+      <button type="button" class="t" data-cap="Le sauna infrarouge, dans la suite" data-cap-en="The infrared sauna, inside the suite"><img src="img/sauna-infrarouge-luminotherapie-suite-1280.webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" decoding="async" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite"></button>
+      <button type="button" data-cap="Baignoire balnéo, peignoirs et champagne" data-cap-en="Whirlpool bath, bathrobes and champagne"><img src="img/baignoire-balneo-peignoirs-champagne-1920.webp" srcset="img/baignoire-balneo-peignoirs-champagne-1024.webp 1024w, img/baignoire-balneo-peignoirs-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo, peignoirs et champagne" data-en-alt="Whirlpool bath, bathrobes and champagne"></button>
+      <button type="button" data-cap="Lumière tamisée sur le lit et la balnéo" data-cap-en="Soft light on the bed and the whirlpool bath"><img src="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp" srcset="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1024.webp 1024w, img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Le lit et la baignoire balnéo double, lumière tamisée" data-en-alt="The bed and the double whirlpool bath in soft light"></button>
+      <button type="button" data-cap="Sauna pour deux personnes" data-cap-en="Sauna for two"><img src="img/sauna-infrarouge-privatif-deux-personnes-1920.webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two"></button>
+      <button type="button" class="t" data-cap="Tête de lit en bois doré" data-cap-en="Golden wood headboard"><img src="img/tete-de-lit-bois-dore-applique-1280.webp" srcset="img/tete-de-lit-bois-dore-applique-720.webp 720w, img/tete-de-lit-bois-dore-applique-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" decoding="async" alt="Tête de lit en bois doré et applique" data-en-alt="Golden wood headboard and wall light"></button>
+      <button type="button" class="w" data-cap="Murs rouges et tête de lit lumineuse" data-cap-en="Red walls and glowing headboard"><img src="img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp" srcset="img/chambre-tete-de-lit-lumineuse-murs-rouges-1024.webp 1024w, img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Chambre aux murs rouges et tête de lit lumineuse" data-en-alt="Bedroom with red walls and a glowing headboard"></button>
+      <button type="button" data-cap="Le salon et sa cheminée" data-cap-en="The lounge and its fireplace"><img src="img/salon-cuisine-ouverte-equipee-1920.webp" srcset="img/salon-cuisine-ouverte-equipee-1024.webp 1024w, img/salon-cuisine-ouverte-equipee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Salon et cuisine ouverte équipée" data-en-alt="Lounge and open, equipped kitchen"></button>
+      <button type="button" data-cap="La cuisine sur mesure" data-cap-en="The made-to-measure kitchen"><img src="img/cuisine-equipee-sur-mesure-1920.webp" srcset="img/cuisine-equipee-sur-mesure-1024.webp 1024w, img/cuisine-equipee-sur-mesure-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Cuisine sur mesure équipée" data-en-alt="Equipped made-to-measure kitchen"></button>
+      <button type="button" data-cap="Le coin repas" data-cap-en="The dining corner"><img src="img/coin-repas-table-pour-deux-1920.webp" srcset="img/coin-repas-table-pour-deux-1024.webp 1024w, img/coin-repas-table-pour-deux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Coin repas, table pour deux" data-en-alt="Dining corner, table for two"></button>
+      <button type="button" class="w" data-cap="La balnéo XXL pour deux" data-cap-en="The XXL whirlpool bath for two"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo XXL pour deux personnes" data-en-alt="XXL whirlpool bath for two"></button>
+      <button type="button" class="t" data-cap="Les jets de la balnéo" data-cap-en="The whirlpool jets"><img src="img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp" srcset="img/baignoire-balneo-jets-tableau-noir-et-blanc-720.webp 720w, img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" decoding="async" alt="Jets de la baignoire balnéo sous un tableau en noir et blanc" data-en-alt="Whirlpool bath jets beneath a black and white artwork"></button>
+      <button type="button" class="t" data-cap="Le fauteuil doré" data-cap-en="The golden armchair"><img src="img/fauteuil-dore-coussin-noir-chambre-1280.webp" srcset="img/fauteuil-dore-coussin-noir-chambre-720.webp 720w, img/fauteuil-dore-coussin-noir-chambre-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" decoding="async" alt="Fauteuil doré et coussin noir dans la chambre" data-en-alt="Golden armchair and black cushion in the bedroom"></button>
+      <button type="button" class="w" data-cap="La salle de douche" data-cap-en="The shower room"><img src="img/salle-de-douche-vasque-miroir-lumineux-1920.webp" srcset="img/salle-de-douche-vasque-miroir-lumineux-1024.webp 1024w, img/salle-de-douche-vasque-miroir-lumineux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1920" height="1281" loading="lazy" decoding="async" alt="Salle de douche, vasque et miroir lumineux" data-en-alt="Shower room, basin and illuminated mirror"></button>
+      <button type="button" class="w" data-cap="L'immeuble, au pied de la Cité" data-cap-en="The building, at the foot of the Cité"><img src="img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp" srcset="img/facade-immeuble-pied-de-la-cite-carcassonne-1024.webp 1024w, img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw" width="1200" height="801" loading="lazy" decoding="async" alt="Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne" data-en-alt="The Ô Lit Divin building, at the foot of the Cité of Carcassonne"></button>
+      <button type="button" class="t" data-cap="Peignoirs et miroir éclairé" data-cap-en="Bathrobes and illuminated mirror"><img src="img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp" srcset="img/salle-de-douche-peignoirs-miroir-eclaire-720.webp 720w, img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw" width="960" height="1439" loading="lazy" decoding="async" alt="Salle de douche et peignoirs" data-en-alt="Shower room and bathrobes"></button>
     </div>
   </div>
 </section>
@@ -635,7 +640,7 @@ footer a:hover{color:var(--gold2)}
       <p class="small muted" data-en="Walking times calculated with OpenStreetMap. The way up to the Cité is a climb.">Temps de marche calculés avec OpenStreetMap. La montée vers la Cité est en pente.</p>
     </div>
     <figure>
-      <img src="img/cite-de-carcassonne-remparts-pont-vieux.webp" width="960" height="640" loading="lazy" alt="La Cité de Carcassonne et ses remparts, vue depuis le Pont Vieux, à quelques minutes à pied d'Ô Lit Divin" data-en-alt="The Cité of Carcassonne and its ramparts seen from the Pont Vieux, a few minutes' walk from Ô Lit Divin">
+      <img src="img/cite-de-carcassonne-remparts-pont-vieux.webp" width="960" height="640" loading="lazy" decoding="async" alt="La Cité de Carcassonne et ses remparts, vue depuis le Pont Vieux, à quelques minutes à pied d'Ô Lit Divin" data-en-alt="The Cité of Carcassonne and its ramparts seen from the Pont Vieux, a few minutes' walk from Ô Lit Divin">
       <figcaption><span data-en="The Cité of Carcassonne seen from the Pont Vieux">La Cité de Carcassonne vue du Pont Vieux</span> · Photo <a href="https://commons.wikimedia.org/wiki/File:Cit%C3%A9_de_Carcassonne_%E2%80%93_Vue_depuis_le_Pont-Vieux.jpg" target="_blank" rel="noopener">Lynx1211</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
     </figure>
   </div>
@@ -702,7 +707,7 @@ footer a:hover{color:var(--gold2)}
         <p><b>Règlement</b> : logement non-fumeur, réservé aux adultes, animaux non acceptés, fêtes et soirées non autorisées, tranquillité du voisinage à respecter entre 22 h et 7 h. Des caméras sont présentes dans les parties communes de l'immeuble.</p>
         <p><b>Données personnelles</b> : vos coordonnées servent uniquement à gérer votre séjour et vos demandes. Vous pouvez demander leur suppression à tout moment à <a href="mailto:lesgitesdelaure@gmail.com">lesgitesdelaure@gmail.com</a>.</p>
         <p><b>Cookies</b> : ce site ne dépose pas de cookies de mesure d'audience ni de publicité.</p>
-        <p><b>Crédits</b> : photo de la Cité de Carcassonne par Lynx1211 (Wikimedia Commons, licence CC BY-SA 4.0). Polices Cormorant Garamond et Jost (licence SIL Open Font).</p>
+        <p><b>Crédits</b> : photo de la Cité de Carcassonne par Lynx1211 (Wikimedia Commons, licence CC BY-SA 4.0). Polices Cormorant Garamond et Jost (licence SIL Open Font). Défilement doux : Lenis (licence MIT).</p>
       </div>
     </details>
     <div class="fb"><span>© 2026 Ô Lit Divin · Les Gîtes de Laure</span><span data-en="Website by WebUA">Site réalisé par WebUA</span></div>
@@ -716,7 +721,7 @@ footer a:hover{color:var(--gold2)}
 
 <div class="sheet" id="sheet" hidden>
   <div class="sh-back" id="sh-back"></div>
-  <div class="sh-panel" id="sh-panel" role="dialog" aria-modal="true" aria-labelledby="sh-title" tabindex="-1">
+  <div class="sh-panel" id="sh-panel" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="sh-title" tabindex="-1">
     <div class="sh-drag" id="sh-drag">
       <div class="sh-grab" aria-hidden="true"></div>
       <div class="sh-head"><h2 id="sh-title" data-en="Your dates">Vos dates</h2><button type="button" class="sh-x" id="sh-x" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
@@ -731,18 +736,52 @@ footer a:hover{color:var(--gold2)}
   </div>
 </div>
 
-<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photos">
+<div class="lb" id="lb" data-lenis-prevent hidden role="dialog" aria-modal="true" aria-label="Photos">
   <div class="bar"><span id="lb-c" class="num"></span><button type="button" id="lb-x" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="stage" id="lb-s"><img id="lb-i" alt=""></div>
   <div class="nav2"><button type="button" id="lb-p" aria-label="Photo précédente"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><span id="lb-t"></span><button type="button" id="lb-n" aria-label="Photo suivante"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
 </div>
 
+<script src="js/lenis.min.js"></script>
 <script>
 (function(){
 let LANG='fr';
 const T=(fr,en)=>LANG==='en'?en:fr;
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
+/* ---------- Défilement doux ----------
+   Molette et pavé tactile : la page glisse avec une légère inertie (Lenis, fichier js/lenis.min.js inclus dans le site).
+   Sur téléphone, le défilement au doigt reste celui du téléphone. Rien de tout ça si « réduire les animations » est activé. */
+const HEAD=84;
+const lenis=window.Lenis&&!matchMedia('(prefers-reduced-motion:reduce)').matches?new Lenis({lerp:.085,wheelMultiplier:1,smoothWheel:true}):null;
+if(lenis){
+  document.documentElement.classList.add('lenis-on');window.lenis=lenis;
+  const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
+  /* Page bloquée (menu, panneau de réservation, visionneuse) : le défilement doux s'arrête aussi */
+  new MutationObserver(()=>document.body.classList.contains('lock')?lenis.stop():lenis.start()).observe(document.body,{attributes:true,attributeFilter:['class']});
+}
+const locked=()=>document.body.classList.contains('lock');
+/* Fait défiler la page jusqu'à un élément : en haut (sous l'en-tête), au centre, ou juste assez pour le voir */
+function goTo(el,block='start',done){
+  if(!el)return;
+  if(!lenis){el.scrollIntoView({behavior:'smooth',block});if(done)setTimeout(done,650);return}
+  if(!locked())lenis.start();
+  const r=el.getBoundingClientRect();
+  if(block==='nearest'){
+    if(r.top>=HEAD&&r.bottom<=innerHeight){if(done)done();return}
+    lenis.scrollTo(el,{offset:r.top<HEAD?-HEAD:-(innerHeight-r.height-24),onComplete:done});
+  }else lenis.scrollTo(el,{offset:block==='center'?-(innerHeight-r.height)/2:-HEAD,onComplete:done});
+}
+/* Liens internes (#galerie, #avis…) : même glissé doux */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(!a||a.hasAttribute('data-book')||!lenis)return;
+  const id=a.getAttribute('href').slice(1),t=id&&document.getElementById(id);
+  if(!t)return;
+  e.preventDefault();
+  setTimeout(()=>{id==='accueil'?(lenis.start(),lenis.scrollTo(0)):goTo(t)},0);
+  history.replaceState(null,'','#'+id);
+});
 /* ---------- Réglages (repris de Beds24, à mettre à jour si Laure change ses tarifs) ---------- */
 const PRICE=105;   /* prix « à partir de » affiché avant le choix des dates */
 const TAX=4.81;    /* taxe de séjour par personne et par nuit, comme dans Beds24 */
@@ -1013,7 +1052,7 @@ function dpOpen(cell,field){
   const r=cell.getBoundingClientRect(),w=el.offsetWidth,vw=document.documentElement.clientWidth;
   el.style.left=Math.max(12,Math.min(r.left,vw-w-12))+scrollX+'px';
   el.style.top=r.bottom+scrollY+8+'px';
-  el.scrollIntoView({block:'nearest',behavior:'smooth'});
+  goTo(el,'nearest');
 }
 function setDate(f,v,cell){
   if(f==='a'){
@@ -1025,7 +1064,7 @@ function setDate(f,v,cell){
     if(!keep){const next=cell.id==='c-sa'?'#c-sd':'#c-bd';openPicker(next)}
   }else{
     sel={a:sel.a,d:v};renderAll();
-    if(cell.id==='c-sd')$('#hres').scrollIntoView({block:'nearest',behavior:'smooth'});
+    if(cell.id==='c-sd')goTo($('#hres'),'nearest');
   }
 }
 const shMq=matchMedia('(max-width:999px)');
@@ -1036,7 +1075,7 @@ function cellToggle(cell){
   const target=f==='d'&&!sel.a?$(cell.id==='c-sd'?'#c-sa':'#c-ba'):cell;
   if(dp.cell===target)dpClose();else dpOpen(target,target===cell?f:'a');
 }
-function openPicker(sel_){const c=$(sel_);if(shMq.matches){openSheet(c.id.endsWith('a')?'a':'d');return}c.scrollIntoView({block:'center',behavior:'smooth'});setTimeout(()=>dpOpen(c,c.id.endsWith('a')?'a':'d'),280)}
+function openPicker(sel_){const c=$(sel_);if(shMq.matches){openSheet(c.id.endsWith('a')?'a':'d');return}goTo(c,'center',()=>dpOpen(c,c.id.endsWith('a')?'a':'d'))}
 ['#c-sa','#c-sd','#c-ba','#c-bd'].forEach(s=>{const c=$(s);c.addEventListener('click',()=>cellToggle(c));c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();cellToggle(c)}})});
 document.addEventListener('pointerdown',e=>{if(dp.el&&!dp.el.contains(e.target)&&!e.target.closest('.dcell,.bdate'))dpClose()});
 addEventListener('keydown',e=>{if(e.key==='Escape'&&dp.el){const c=dp.cell;dpClose();c.focus()}});
@@ -1045,14 +1084,13 @@ $('#search').addEventListener('submit',e=>{
   e.preventDefault();
   if(!sel.a)return openPicker('#c-sa');
   if(!sel.d)return openPicker('#c-sd');
-  $('#reserver').scrollIntoView({behavior:'smooth',block:'start'});
+  goTo($('#reserver'));
 });
 
 /* ---------- Bouton Réserver (en-tête, menu, barre du bas) ---------- */
 function goBook(){
   if(shMq.matches){openSheet();return}
-  $('#reserver').scrollIntoView({behavior:'smooth',block:'start'});
-  if(!(sel.a&&sel.d))setTimeout(()=>dpOpen($(sel.a?'#c-bd':'#c-ba'),sel.a?'d':'a'),650);
+  goTo($('#reserver'),'start',()=>{if(!(sel.a&&sel.d))dpOpen($(sel.a?'#c-bd':'#c-ba'),sel.a?'d':'a')});
 }
 document.addEventListener('click',e=>{const b=e.target.closest('[data-book]');if(b){e.preventDefault();closeMenu();goBook()}});
 
