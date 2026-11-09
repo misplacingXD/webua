@@ -19,7 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne.jpg" as="image" fetchpriority="high">
+<link rel="preload" as="image" imagesrcset="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1280.webp 1280w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1920.webp 1920w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-2560.webp 2560w" imagesizes="(max-aspect-ratio: 3/2) 150vh, 100vw" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Ô Lit Divin","alternateName":"Ô Lit Divin, Instant de volupté, balnéo et sauna","url":"https://litdivin.fr/","image":["https://litdivin.fr/img/o-lit-divin-suite-balneo-sauna-carcassonne-partage.jpg","https://litdivin.fr/img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne.jpg"],"description":"Suite romantique pour deux adultes avec baignoire balnéo XXL et sauna privés, lit king size et cheminée électrique, au pied de la Cité médiévale de Carcassonne.","telephone":"+33603523184","email":"lesgitesdelaure@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Carcassonne","postalCode":"11000","addressRegion":"Occitanie","addressCountry":"FR"},"priceRange":"À partir de 105 € la nuit","checkinTime":"17:00","checkoutTime":"12:00","petsAllowed":false,"smokingAllowed":false,"numberOfRooms":1,"brand":{"@type":"Brand","name":"Les Gîtes de Laure"},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Baignoire balnéo privée","value":true},{"@type":"LocationFeatureSpecification","name":"Sauna privé","value":true},{"@type":"LocationFeatureSpecification","name":"Lit king size","value":true},{"@type":"LocationFeatureSpecification","name":"Climatisation","value":true},{"@type":"LocationFeatureSpecification","name":"Cuisine équipée","value":true},{"@type":"LocationFeatureSpecification","name":"Wi-Fi","value":true},{"@type":"LocationFeatureSpecification","name":"Stationnement gratuit dans la rue","value":true}]}</script>
 <style>
 @font-face{font-family:'Cormorant';src:url(fonts/cormorant.woff2) format('woff2');font-weight:300 600;font-style:normal;font-display:swap}
@@ -123,7 +123,7 @@ main{overflow-x:clip}
 /* La photo et son voile s'effacent vers le bas pour se fondre dans le fond de page, sans bord net */
 .hero-img,.hero::before{-webkit-mask-image:linear-gradient(to bottom,#000 62%,rgba(0,0,0,.6) 82%,transparent);mask-image:linear-gradient(to bottom,#000 62%,rgba(0,0,0,.6) 82%,transparent)}
 .hero-img img{width:100%;height:100%;object-fit:cover;object-position:62% 55%;animation:kb 22s var(--ease) both}
-@keyframes kb{from{transform:scale(1.12)}to{transform:scale(1)}}
+@keyframes kb{from{transform:scale(1.06)}to{transform:scale(1)}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
   radial-gradient(120% 90% at 85% 40%,transparent 0 30%,rgba(8,6,5,.55) 75%),
   linear-gradient(90deg,rgba(8,6,5,.88) 0%,rgba(8,6,5,.55) 42%,rgba(8,6,5,.05) 72%),
@@ -463,7 +463,7 @@ footer a:hover{color:var(--gold2)}
 
 <main>
 <section class="hero" id="accueil">
-  <div class="hero-img"><img src="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne.jpg" width="1920" height="1281" alt="Ô Lit Divin, suite romantique à Carcassonne : lit king size et baignoire balnéo en lumière rouge tamisée" data-en-alt="Ô Lit Divin, romantic suite in Carcassonne: king-size bed and whirlpool bath in soft red light" fetchpriority="high"></div>
+  <div class="hero-img"><img src="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne.jpg" srcset="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1280.webp 1280w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1920.webp 1920w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-2560.webp 2560w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw" width="1920" height="1281" alt="Ô Lit Divin, suite romantique à Carcassonne : lit king size et baignoire balnéo en lumière rouge tamisée" data-en-alt="Ô Lit Divin, romantic suite in Carcassonne: king-size bed and whirlpool bath in soft red light" fetchpriority="high"></div>
   <div class="wrap">
     <div class="hero-in">
       <span class="eyebrow" data-en="Instant of pleasure">Instant de volupté</span>
