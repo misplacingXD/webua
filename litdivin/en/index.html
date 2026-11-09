@@ -811,9 +811,12 @@ const PRICE=105;   /* prix « à partir de » affiché avant le choix des dates 
 const TAX=4.81;    /* taxe de séjour par personne et par nuit, comme dans Beds24 */
 const FEE=35;      /* ménage et linge, par séjour, comme dans Beds24 */
 const PROP=130955,ROOM=292537;
-const beds24=(a,d)=>`https://beds24.com/booking.php?propid=${PROP}&roomid=${ROOM}&checkin=${iso(a)}&numnight=${nights(a,d)}&numadult=${guests}&lang=${LANG}&referer=site`;
+/* Provenance de la réservation, enregistrée par Beds24 (champ « referer ») : « site » pour les visiteurs ordinaires,
+   « meta2 » (ou toute étiquette mise dans ?src=) pour ceux qui arrivent d'une pub. L'étiquette est gardée pendant la visite. */
+const REF=(()=>{try{const s=new URLSearchParams(location.search).get('src');if(s&&/^[a-z0-9_-]{1,20}$/i.test(s))sessionStorage.setItem('litdivin-src',s);return sessionStorage.getItem('litdivin-src')||'site'}catch(e){return 'site'}})();
+const beds24=(a,d)=>`https://beds24.com/booking.php?propid=${PROP}&roomid=${ROOM}&checkin=${iso(a)}&numnight=${nights(a,d)}&numadult=${guests}&lang=${LANG}&referer=${REF}`;
 /* Arrive directement sur l'étape coordonnées et options de Beds24, quand le prix a été confirmé */
-const beds24go=(a,d)=>`https://beds24.com/booking.php?propid=${PROP}&roomid=${ROOM}&width=960&page=book3&limitstart=0&checkin_hide=${iso(a)}&checkout_hide=${iso(d)}&numnight=${nights(a,d)}&numadult=${guests}&lang=${LANG}&referer=site&br1-${ROOM}=R%C3%A9server`;
+const beds24go=(a,d)=>`https://beds24.com/booking.php?propid=${PROP}&roomid=${ROOM}&width=960&page=book3&limitstart=0&checkin_hide=${iso(a)}&checkout_hide=${iso(d)}&numnight=${nights(a,d)}&numadult=${guests}&lang=${LANG}&referer=${REF}&br1-${ROOM}=R%C3%A9server`;
 
 /* ---------- Icônes ---------- */
 const I={
@@ -1240,11 +1243,11 @@ function reveal(){
    Éteint tant que PIXEL_ID est vide : ni bandeau, ni cookie, ni appel à Meta.
    Une fois l'identifiant collé ici, le bandeau demande l'accord du visiteur ; le pixel ne se charge qu'après « Accepter ».
    Mesures envoyées : PageView (page vue), Search (dates choisies avec un prix), InitiateCheckout (clic vers la réservation Beds24, avec le montant), Contact (message envoyé). */
-const PIXEL_ID='';
+const PIXEL_ID='1589715122087922'; /* pixel des Gîtes de Laure, le même que sur L'Éden Romantique */
 const CK='litdivin-cookies',CK_DUREE=182*864e5;
 function ckGet(){try{const v=(localStorage.getItem(CK)||'').split('|');return +v[1]>Date.now()-CK_DUREE?v[0]:null}catch(e){return null}}
 function ckSet(v){try{localStorage.setItem(CK,v+'|'+Date.now())}catch(e){}}
-function track(ev,data){if(window.fbq)window.fbq('track',ev,data||{})}
+function track(ev,data){if(window.fbq)window.fbq('track',ev,Object.assign({content_name:'Ô Lit Divin'},data||{}))} /* chaque mesure porte le nom du logement */
 function pixelOn(){
   if(window.fbq)return;
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
