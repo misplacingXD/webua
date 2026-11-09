@@ -6,6 +6,10 @@
 <title>Suite romantique avec balnéo et sauna privés à Carcassonne · Ô Lit Divin</title>
 <meta name="description" content="Ô Lit Divin : suite romantique pour deux avec baignoire balnéo XXL et sauna privés, lit king size et cheminée, au pied de la Cité de Carcassonne. Réservation directe.">
 <link rel="canonical" href="https://litdivin.fr/">
+<link rel="alternate" hreflang="fr" href="https://litdivin.fr/">
+<link rel="alternate" hreflang="en" href="https://litdivin.fr/en/">
+<link rel="alternate" hreflang="es" href="https://litdivin.fr/es/">
+<link rel="alternate" hreflang="x-default" href="https://litdivin.fr/">
 <meta name="theme-color" content="#0c0a09">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
@@ -107,8 +111,8 @@ main{overflow-x:clip}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
 .nav a:hover{color:var(--ink)}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
 .lang{display:flex;border:1px solid var(--line);border-radius:var(--r)}
-.lang button{background:none;border:0;padding:7px 10px;font:400 .7rem/1 var(--sans);letter-spacing:.14em;color:var(--mute);cursor:pointer}
-.lang button[aria-pressed=true]{color:var(--bg);background:var(--champ)}
+.lang a{text-decoration:none;padding:7px 10px;font:400 .7rem/1 var(--sans);letter-spacing:.14em;color:var(--mute);cursor:pointer}
+.lang a[aria-current=page]{color:var(--bg);background:var(--champ)}
 .top .cta{min-height:42px;padding:0 20px}
 .burger{display:none;width:44px;height:44px;border:1px solid var(--line);background:none;border-radius:var(--r);cursor:pointer;place-items:center}
 .burger span{display:block;width:18px;height:1px;background:var(--ink);position:relative;transition:transform .4s var(--ease),background .3s}
@@ -420,6 +424,14 @@ footer a:hover{color:var(--gold2)}
 #sh-res{display:grid;gap:12px;margin-top:16px}
 .sh-tip{text-align:center;color:var(--champ);font:300 italic 1.2rem var(--serif);padding:6px 0}
 /* ---------- Visionneuse ---------- */
+/* ---------- Bandeau cookies (seulement si le pixel Meta est activé) ---------- */
+.ck{position:fixed;left:var(--gut);bottom:24px;z-index:65;max-width:440px;display:grid;gap:16px;padding:22px 24px;background:rgba(17,13,12,.97);border:1px solid var(--line2);box-shadow:0 30px 80px -20px rgba(0,0,0,.8);font-size:.88rem;color:var(--ink2);animation:rise .6s var(--ease) both}
+.ck b{font:400 1.25rem/1.2 var(--serif);font-style:italic;color:var(--ink)}
+.ck div{display:flex;gap:10px;flex-wrap:wrap}
+.ck .btn{min-height:44px;padding:0 20px;flex:1}
+.ck-link{background:none;border:0;padding:0;cursor:pointer;color:var(--ink2);font:inherit}
+.ck-link:hover{color:var(--gold2)}
+@media (max-width:999px){.ck{left:12px;right:12px;bottom:calc(92px + env(safe-area-inset-bottom));max-width:none}}
 .lb{position:fixed;top:0;right:0;bottom:0;left:0;z-index:80;background:rgba(6,5,4,.97);display:grid;grid-template-rows:auto 1fr auto}
 .lb[hidden]{display:none}
 .lb .bar,.lb .nav2{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px var(--gut);color:var(--ink2)}
@@ -443,66 +455,66 @@ footer a:hover{color:var(--gold2)}
 <body>
 <header class="top" id="top">
   <div class="wrap">
-    <a class="brand" href="#accueil" aria-label="Ô Lit Divin, accueil"><b>Ô Lit Divin</b><small data-en="Carcassonne · La Cité">Carcassonne · La Cité</small></a>
+    <a class="brand" href="#accueil" aria-label="Ô Lit Divin, accueil"><b>Ô Lit Divin</b><small data-en="Carcassonne · La Cité" data-es="Carcasona · La Cité">Carcassonne · La Cité</small></a>
     <nav class="nav" aria-label="Menu">
-      <a href="#suite" data-en="The suite">La suite</a>
-      <a href="#galerie" data-en="Gallery">Galerie</a>
-      <a href="#options" data-en="Extras">Options</a>
-      <a href="#avis" data-en="Reviews">Avis</a>
-      <a href="#quartier" data-en="Area">Le quartier</a>
-      <a href="#infos" data-en="Info">Infos</a>
+      <a href="#suite" data-en="The suite" data-es="La suite">La suite</a>
+      <a href="#galerie" data-en="Gallery" data-es="Galería">Galerie</a>
+      <a href="#options" data-en="Extras" data-es="Extras">Options</a>
+      <a href="#avis" data-en="Reviews" data-es="Opiniones">Avis</a>
+      <a href="#quartier" data-en="Area" data-es="El barrio">Le quartier</a>
+      <a href="#infos" data-en="Info" data-es="Info">Infos</a>
     </nav>
-    <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-    <a class="btn cta" href="#reserver" data-book data-en="Book">Réserver</a>
+    <div class="lang" role="group" aria-label="Langue / Language / Idioma"><a href="./" hreflang="fr" data-l="fr">FR</a><a href="en/" hreflang="en" data-l="en">EN</a><a href="es/" hreflang="es" data-l="es">ES</a></div>
+    <a class="btn cta" href="#reserver" data-book data-en="Book" data-es="Reservar">Réserver</a>
     <button class="burger" id="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span></button>
   </div>
 </header>
 <nav class="mnav" id="mnav" data-lenis-prevent aria-label="Menu">
-  <a href="#suite" data-en="The suite">La suite</a>
-  <a href="#galerie" data-en="Gallery">Galerie</a>
-  <a href="#options" data-en="Extras">Options</a>
-  <a href="#avis" data-en="Reviews">Avis</a>
-  <a href="#quartier" data-en="Area">Le quartier</a>
-  <a href="#infos" data-en="Practical info">Infos pratiques</a>
-  <a href="#contact" data-en="Contact">Contact</a>
-  <div class="lang" role="group" aria-label="Langue / Language"><button type="button" data-lang="fr" aria-pressed="true">FR</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
-  <a class="btn" href="#reserver" data-book data-en="Book">Réserver</a>
+  <a href="#suite" data-en="The suite" data-es="La suite">La suite</a>
+  <a href="#galerie" data-en="Gallery" data-es="Galería">Galerie</a>
+  <a href="#options" data-en="Extras" data-es="Extras">Options</a>
+  <a href="#avis" data-en="Reviews" data-es="Opiniones">Avis</a>
+  <a href="#quartier" data-en="Area" data-es="El barrio">Le quartier</a>
+  <a href="#infos" data-en="Practical info" data-es="Información práctica">Infos pratiques</a>
+  <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+  <div class="lang" role="group" aria-label="Langue / Language / Idioma"><a href="./" hreflang="fr" data-l="fr">FR</a><a href="en/" hreflang="en" data-l="en">EN</a><a href="es/" hreflang="es" data-l="es">ES</a></div>
+  <a class="btn" href="#reserver" data-book data-en="Book" data-es="Reservar">Réserver</a>
 </nav>
 
 <main>
 <section class="hero" id="accueil">
-  <div class="hero-img"><picture><source type="image/webp" srcset="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1280.webp 1280w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1920.webp 1920w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-2560.webp 2560w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"><img src="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne.jpg" width="1920" height="1281" alt="Ô Lit Divin, suite romantique à Carcassonne : lit king size et baignoire balnéo en lumière rouge tamisée" data-en-alt="Ô Lit Divin, romantic suite in Carcassonne: king-size bed and whirlpool bath in soft red light" fetchpriority="high" data-full="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-2560.webp"></picture></div>
+  <div class="hero-img"><picture><source type="image/webp" srcset="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1280.webp 1280w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-1920.webp 1920w, img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-2560.webp 2560w" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"><img src="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne.jpg" width="1920" height="1281" alt="Ô Lit Divin, suite romantique à Carcassonne : lit king size et baignoire balnéo en lumière rouge tamisée" data-en-alt="Ô Lit Divin, romantic suite in Carcassonne: king-size bed and whirlpool bath in soft red light" data-es-alt="Ô Lit Divin, suite romántica en Carcasona: cama king size y bañera de hidromasaje con luz roja tenue" fetchpriority="high" data-full="img/suite-romantique-lumiere-rouge-lit-king-size-balneo-carcassonne-2560.webp"></picture></div>
   <div class="wrap">
     <div class="hero-in">
-      <span class="eyebrow" data-en="Instant of pleasure">Instant de volupté</span>
+      <span class="eyebrow" data-en="Instant of pleasure" data-es="Instante de placer">Instant de volupté</span>
       <p class="wordmark">Ô Lit <em>Divin</em></p>
-      <h1 data-en="Romantic suite for two with a private whirlpool bath and sauna, at the foot of the medieval Cité of Carcassonne.">Suite romantique pour deux avec balnéo et sauna privés, au pied de la Cité médiévale de Carcassonne.</h1>
-      <div class="rating"><span data-stars></span><span><b class="num">4,97/5</b> · <span data-en="388 reviews on Airbnb">388 avis sur Airbnb</span></span><i class="sep"></i><span data-en="Guest favourite">Coup de cœur voyageurs</span></div>
+      <h1 data-en="Romantic suite for two with a private whirlpool bath and sauna, at the foot of the medieval Cité of Carcassonne." data-es="Suite romántica para dos con bañera de hidromasaje y sauna privadas, al pie de la Cité medieval de Carcasona.">Suite romantique pour deux avec balnéo et sauna privés, au pied de la Cité médiévale de Carcassonne.</h1>
+      <div class="rating"><span data-stars></span><span><b class="num">4,97/5</b> · <span data-en="388 reviews on Airbnb" data-es="388 opiniones en Airbnb">388 avis sur Airbnb</span></span><i class="sep"></i><span data-en="Guest favourite" data-es="Favorito de los viajeros">Coup de cœur voyageurs</span></div>
       <form class="search" id="search" novalidate>
-        <div class="dcell" id="c-sa" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-in">Arrivée</span><span class="v" id="s-av"></span></div>
-        <div class="dcell" id="c-sd" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-out">Départ</span><span class="v" id="s-dv"></span></div>
-        <div class="gcell"><label for="s-g" data-en="Guests">Voyageurs</label><select id="s-g" data-guests><option value="2" data-en="2 adults">2 adultes</option><option value="1" data-en="1 adult">1 adulte</option></select></div>
-        <button class="btn" type="submit" data-en="See the price">Voir le prix</button>
+        <div class="dcell" id="c-sa" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-in" data-es="Llegada">Arrivée</span><span class="v" id="s-av"></span></div>
+        <div class="dcell" id="c-sd" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-out" data-es="Salida">Départ</span><span class="v" id="s-dv"></span></div>
+        <div class="gcell"><label for="s-g" data-en="Guests" data-es="Huéspedes">Voyageurs</label><select id="s-g" data-guests><option value="2" data-en="2 adults" data-es="2 adultos">2 adultes</option><option value="1" data-en="1 adult" data-es="1 adulto">1 adulte</option></select></div>
+        <button class="btn" type="submit" data-en="See the price" data-es="Ver el precio">Voir le prix</button>
       </form>
       <div class="hres" id="hres" aria-live="polite" hidden></div>
       <div class="we" id="we"></div>
     </div>
   </div>
-  <span class="scroll-cue" aria-hidden="true" data-en="Discover">Découvrir</span>
+  <span class="scroll-cue" aria-hidden="true" data-en="Discover" data-es="Descubrir">Découvrir</span>
 </section>
 
 <section class="sec intro" id="suite">
   <div class="wrap">
-    <span class="eyebrow" data-en="100% unique">100 % unique</span>
-    <p class="q" data-en="When did you last have breakfast in bed?">À quand remonte votre dernier petit-déjeuner au lit ?</p>
-    <p class="lead" data-en="Ô Lit Divin is an exceptional place where calm awaits you for a moment of intimacy for two. A soft cocoon at the foot of the medieval Cité, away from prying eyes.">Ô Lit Divin, un lieu d'exception où le calme vous tend les bras pour un moment d'intimité à deux. Un cocon de douceur au pied de la Cité médiévale, à l'abri des regards indiscrets.</p>
-    <p data-en="A wedding night, an anniversary or simply time for the two of you: treat yourselves to an enchanted interlude.">Pour une nuit de noces, un anniversaire ou simplement pour vous retrouver, offrez-vous une parenthèse enchantée.</p>
+    <span class="eyebrow" data-en="100% unique" data-es="100 % única">100 % unique</span>
+    <p class="q" data-en="When did you last have breakfast in bed?" data-es="¿Cuándo fue la última vez que desayunasteis en la cama?">À quand remonte votre dernier petit-déjeuner au lit ?</p>
+    <p class="lead" data-en="Ô Lit Divin is an exceptional place where calm awaits you for a moment of intimacy for two. A soft cocoon at the foot of the medieval Cité, away from prying eyes." data-es="Ô Lit Divin, un lugar excepcional donde la calma os espera para un momento de intimidad en pareja. Un nido de dulzura al pie de la Cité medieval, lejos de miradas indiscretas.">Ô Lit Divin, un lieu d'exception où le calme vous tend les bras pour un moment d'intimité à deux. Un cocon de douceur au pied de la Cité médiévale, à l'abri des regards indiscrets.</p>
+    <p data-en="A wedding night, an anniversary or simply time for the two of you: treat yourselves to an enchanted interlude." data-es="Para una noche de bodas, un aniversario o simplemente para reencontraros, regalaos un paréntesis encantado.">Pour une nuit de noces, un anniversaire ou simplement pour vous retrouver, offrez-vous une parenthèse enchantée.</p>
     <div class="facts">
-      <div><b class="num">45 m²</b><span data-en="Whole apartment">Appartement entier</span></div>
-      <div><b>2</b><span data-en="Adults only">Adultes uniquement</span></div>
-      <div><b class="num">180 × 200</b><span data-en="King-size bed">Lit king size</span></div>
-      <div><b class="num">160 m</b><span data-en="From the Cité">De la Cité</span></div>
-      <div><b>24 h/24</b><span data-en="Private spa, all year">Balnéo et sauna, toute l'année</span></div>
+      <div><b class="num">45 m²</b><span data-en="Whole apartment" data-es="Apartamento entero">Appartement entier</span></div>
+      <div><b>2</b><span data-en="Adults only" data-es="Solo adultos">Adultes uniquement</span></div>
+      <div><b class="num">180 × 200</b><span data-en="King-size bed" data-es="Cama king size">Lit king size</span></div>
+      <div><b class="num">160 m</b><span data-en="From the Cité" data-es="De la Cité">De la Cité</span></div>
+      <div><b>24 h/24</b><span data-en="Private spa, all year" data-es="Hidromasaje y sauna, todo el año">Balnéo et sauna, toute l'année</span></div>
     </div>
   </div>
 </section>
@@ -510,42 +522,42 @@ footer a:hover{color:var(--gold2)}
 <section class="sec" style="padding-top:0" aria-label="L'expérience">
   <div class="wrap">
     <article class="chap">
-      <div class="ph"><picture><source type="image/webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo XXL pour deux personnes et flûtes de champagne, Ô Lit Divin à Carcassonne" data-en-alt="XXL whirlpool bath for two and champagne flutes, Ô Lit Divin in Carcassonne" data-full="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp"></picture></div>
+      <div class="ph"><picture><source type="image/webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo XXL pour deux personnes et flûtes de champagne, Ô Lit Divin à Carcassonne" data-en-alt="XXL whirlpool bath for two and champagne flutes, Ô Lit Divin in Carcassonne" data-es-alt="Bañera de hidromasaje XXL para dos y copas de champán, Ô Lit Divin en Carcasona" data-full="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp"></picture></div>
       <div class="tx">
         <span class="idx">I.</span>
-        <h2 data-en="The &lt;em&gt;XXL&lt;/em&gt; whirlpool bath">La balnéo <em>XXL</em></h2>
-        <p data-en="A whirlpool bath for two, right in the suite. Sink into caressing bubbles and let them sweep away the stress of everyday life.">Une baignoire balnéothérapie pour deux, dans la suite. Plongez dans des bulles caressantes et laissez-les balayer le stress du quotidien.</p>
+        <h2 data-en="The &lt;em&gt;XXL&lt;/em&gt; whirlpool bath" data-es="La bañera &lt;em&gt;XXL&lt;/em&gt;">La balnéo <em>XXL</em></h2>
+        <p data-en="A whirlpool bath for two, right in the suite. Sink into caressing bubbles and let them sweep away the stress of everyday life." data-es="Una bañera de hidromasaje para dos, dentro de la suite. Sumergíos en burbujas que acarician y dejad que se lleven el estrés del día a día.">Une baignoire balnéothérapie pour deux, dans la suite. Plongez dans des bulles caressantes et laissez-les balayer le stress du quotidien.</p>
         <ul>
-          <li data-en="Private, available all year round, day and night">Privée, disponible toute l'année, à toute heure</li>
-          <li data-en="Soft bathrobes and large towels waiting for you">Peignoirs doux et grandes serviettes à votre arrivée</li>
+          <li data-en="Private, available all year round, day and night" data-es="Privada, disponible todo el año, a cualquier hora">Privée, disponible toute l'année, à toute heure</li>
+          <li data-en="Soft bathrobes and large towels waiting for you" data-es="Albornoces suaves y toallas grandes a vuestra llegada">Peignoirs doux et grandes serviettes à votre arrivée</li>
         </ul>
       </div>
     </article>
     <article class="chap rev">
-      <div class="ph duo"><picture><source type="image/webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/sauna-infrarouge-luminotherapie-suite.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite" data-full="img/sauna-infrarouge-luminotherapie-suite-1280.webp"></picture><picture><source type="image/webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/sauna-infrarouge-privatif-deux-personnes.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two" style="object-position:50% 50%" data-full="img/sauna-infrarouge-privatif-deux-personnes-1920.webp"></picture></div>
+      <div class="ph duo"><picture><source type="image/webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/sauna-infrarouge-luminotherapie-suite.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite" data-es-alt="Sauna de infrarrojos con cromoterapia, dentro de la suite" data-full="img/sauna-infrarouge-luminotherapie-suite-1280.webp"></picture><picture><source type="image/webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/sauna-infrarouge-privatif-deux-personnes.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two" data-es-alt="Sauna de infrarrojos privada para dos" style="object-position:50% 50%" data-full="img/sauna-infrarouge-privatif-deux-personnes-1920.webp"></picture></div>
       <div class="tx">
         <span class="idx">II.</span>
-        <h2 data-en="The private &lt;em&gt;sauna&lt;/em&gt;">Le <em>sauna</em> privé</h2>
-        <p data-en="A bubble of purifying warmth to relax the body and soothe the mind. An infrared sauna for two, with light therapy and music over Bluetooth.">Une bulle de chaleur purifiante pour relaxer le corps et apaiser l'esprit. Un sauna infrarouge pour deux, avec luminothérapie et musique par Bluetooth.</p>
-        <ul><li data-en="Yours alone, in the privacy of the suite">Rien qu'à vous, dans l'intimité de la suite</li></ul>
+        <h2 data-en="The private &lt;em&gt;sauna&lt;/em&gt;" data-es="La &lt;em&gt;sauna&lt;/em&gt; privada">Le <em>sauna</em> privé</h2>
+        <p data-en="A bubble of purifying warmth to relax the body and soothe the mind. An infrared sauna for two, with light therapy and music over Bluetooth." data-es="Una burbuja de calor purificante para relajar el cuerpo y calmar la mente. Una sauna de infrarrojos para dos, con cromoterapia y música por Bluetooth.">Une bulle de chaleur purifiante pour relaxer le corps et apaiser l'esprit. Un sauna infrarouge pour deux, avec luminothérapie et musique par Bluetooth.</p>
+        <ul><li data-en="Yours alone, in the privacy of the suite" data-es="Solo para vosotros, en la intimidad de la suite">Rien qu'à vous, dans l'intimité de la suite</li></ul>
       </div>
     </article>
     <article class="chap">
-      <div class="ph"><picture><source type="image/webp" srcset="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1024.webp 1024w, img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/lit-king-size-tete-de-lit-doree-petales-de-rose.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Lit king size, tête de lit dorée lumineuse et pétales de rose" data-en-alt="King-size bed, glowing golden headboard and rose petals" data-full="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp"></picture></div>
+      <div class="ph"><picture><source type="image/webp" srcset="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1024.webp 1024w, img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/lit-king-size-tete-de-lit-doree-petales-de-rose.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Lit king size, tête de lit dorée lumineuse et pétales de rose" data-en-alt="King-size bed, glowing golden headboard and rose petals" data-es-alt="Cama king size, cabecero dorado iluminado y pétalos de rosa" data-full="img/lit-king-size-tete-de-lit-doree-petales-de-rose-1920.webp"></picture></div>
       <div class="tx">
         <span class="idx">III.</span>
-        <h2 data-en="A &lt;em&gt;royal&lt;/em&gt; night">Une nuit <em>royale</em></h2>
-        <p data-en="A king-size bed (180 × 200 cm) with premium bedding. Play with the mood lighting and the flicker of the electric fireplace to create a hushed, intimate and deeply romantic atmosphere.">Un lit king size (180 × 200 cm) et une literie haut de gamme. Jouez avec les lumières d'ambiance et le crépitement visuel de la cheminée électrique pour créer une atmosphère feutrée, intime et hautement romantique.</p>
-        <ul><li data-en="Light therapy and electric fireplace">Luminothérapie et cheminée électrique</li><li data-en="Air conditioning in the bedroom">Climatisation dans la chambre</li></ul>
+        <h2 data-en="A &lt;em&gt;royal&lt;/em&gt; night" data-es="Una noche &lt;em&gt;de reyes&lt;/em&gt;">Une nuit <em>royale</em></h2>
+        <p data-en="A king-size bed (180 × 200 cm) with premium bedding. Play with the mood lighting and the flicker of the electric fireplace to create a hushed, intimate and deeply romantic atmosphere." data-es="Una cama king size (180 × 200 cm) y ropa de cama de alta gama. Jugad con las luces de ambiente y el chisporroteo visual de la chimenea eléctrica para crear una atmósfera tenue, íntima y profundamente romántica.">Un lit king size (180 × 200 cm) et une literie haut de gamme. Jouez avec les lumières d'ambiance et le crépitement visuel de la cheminée électrique pour créer une atmosphère feutrée, intime et hautement romantique.</p>
+        <ul><li data-en="Light therapy and electric fireplace" data-es="Cromoterapia y chimenea eléctrica">Luminothérapie et cheminée électrique</li><li data-en="Air conditioning in the bedroom" data-es="Aire acondicionado en el dormitorio">Climatisation dans la chambre</li></ul>
       </div>
     </article>
     <article class="chap rev">
-      <div class="ph"><picture><source type="image/webp" srcset="img/salon-cheminee-electrique-canape-suite-carcassonne-1024.webp 1024w, img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/salon-cheminee-electrique-canape-suite-carcassonne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Salon de la suite avec canapé et cheminée électrique, à Carcassonne" data-en-alt="The suite's lounge with sofa and electric fireplace, in Carcassonne" data-full="img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp"></picture></div>
+      <div class="ph"><picture><source type="image/webp" srcset="img/salon-cheminee-electrique-canape-suite-carcassonne-1024.webp 1024w, img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/salon-cheminee-electrique-canape-suite-carcassonne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Salon de la suite avec canapé et cheminée électrique, à Carcassonne" data-en-alt="The suite's lounge with sofa and electric fireplace, in Carcassonne" data-es-alt="Salón de la suite con sofá y chimenea eléctrica, en Carcasona" data-full="img/salon-cheminee-electrique-canape-suite-carcassonne-1920.webp"></picture></div>
       <div class="tx">
         <span class="idx">IV.</span>
-        <h2 data-en="Your &lt;em&gt;alcove&lt;/em&gt;, at your own pace">Votre <em>alcôve</em>, à votre rythme</h2>
-        <p data-en="A modern made-to-measure kitchen, perfect for a candlelit dinner. A Nespresso machine for a gentle start to the day, Netflix for cosy movie nights and a Google Home speaker for your favourite playlist.">Une cuisine sur mesure, moderne et fonctionnelle, idéale pour un dîner aux chandelles. Une machine Nespresso pour démarrer la journée en douceur, Netflix pour vos soirées cinéma et une enceinte Google Home pour votre playlist préférée.</p>
-        <ul><li data-en="Self check-in with a secure key box, instructions sent before you arrive">Arrivée autonome avec boîtier à clés sécurisé, instructions envoyées avant votre arrivée</li><li data-en="Private entrance, on the ground floor">Entrée privée, en rez-de-chaussée</li></ul>
+        <h2 data-en="Your &lt;em&gt;alcove&lt;/em&gt;, at your own pace" data-es="Vuestro &lt;em&gt;rincón&lt;/em&gt;, a vuestro ritmo">Votre <em>alcôve</em>, à votre rythme</h2>
+        <p data-en="A modern made-to-measure kitchen, perfect for a candlelit dinner. A Nespresso machine for a gentle start to the day, Netflix for cosy movie nights and a Google Home speaker for your favourite playlist." data-es="Una cocina a medida, moderna y funcional, ideal para una cena a la luz de las velas. Una cafetera Nespresso para empezar el día con calma, Netflix para vuestras noches de cine y un altavoz Google Home para vuestra música favorita.">Une cuisine sur mesure, moderne et fonctionnelle, idéale pour un dîner aux chandelles. Une machine Nespresso pour démarrer la journée en douceur, Netflix pour vos soirées cinéma et une enceinte Google Home pour votre playlist préférée.</p>
+        <ul><li data-en="Self check-in with a secure key box, instructions sent before you arrive" data-es="Llegada autónoma con caja de llaves segura, instrucciones enviadas antes de vuestra llegada">Arrivée autonome avec boîtier à clés sécurisé, instructions envoyées avant votre arrivée</li><li data-en="Private entrance, on the ground floor" data-es="Entrada privada, en planta baja">Entrée privée, en rez-de-chaussée</li></ul>
       </div>
     </article>
   </div>
@@ -553,64 +565,64 @@ footer a:hover{color:var(--gold2)}
 
 <section class="sec gal-sec" id="galerie">
   <div class="wrap">
-    <div class="head center"><span class="eyebrow" data-en="Gallery">Galerie</span><h2 data-en="Step &lt;em&gt;inside&lt;/em&gt;">Entrez dans l'<em>alcôve</em></h2></div>
+    <div class="head center"><span class="eyebrow" data-en="Gallery" data-es="Galería">Galerie</span><h2 data-en="Step &lt;em&gt;inside&lt;/em&gt;" data-es="Entrad en el &lt;em&gt;rincón&lt;/em&gt;">Entrez dans l'<em>alcôve</em></h2></div>
     <div class="gal" id="gal">
-      <button type="button" class="w" data-cap="Le lit king size et la baignoire balnéo" data-cap-en="The king-size bed and the whirlpool bath"><picture><source type="image/webp" srcset="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1024.webp 1024w, img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Chambre d'Ô Lit Divin à Carcassonne : lit king size et baignoire balnéo pour deux" data-en-alt="Ô Lit Divin bedroom in Carcassonne: king-size bed and whirlpool bath for two" data-full="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp"></picture></button>
-      <button type="button" class="t" data-cap="Le sauna infrarouge, dans la suite" data-cap-en="The infrared sauna, inside the suite"><picture><source type="image/webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/sauna-infrarouge-luminotherapie-suite.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite" data-full="img/sauna-infrarouge-luminotherapie-suite-1280.webp"></picture></button>
-      <button type="button" data-cap="Baignoire balnéo, peignoirs et champagne" data-cap-en="Whirlpool bath, bathrobes and champagne"><picture><source type="image/webp" srcset="img/baignoire-balneo-peignoirs-champagne-1024.webp 1024w, img/baignoire-balneo-peignoirs-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/baignoire-balneo-peignoirs-champagne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo, peignoirs et champagne" data-en-alt="Whirlpool bath, bathrobes and champagne" data-full="img/baignoire-balneo-peignoirs-champagne-1920.webp"></picture></button>
-      <button type="button" data-cap="Lumière tamisée sur le lit et la balnéo" data-cap-en="Soft light on the bed and the whirlpool bath"><picture><source type="image/webp" srcset="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1024.webp 1024w, img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/suite-lit-baignoire-balneo-double-lumiere-tamisee.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Le lit et la baignoire balnéo double, lumière tamisée" data-en-alt="The bed and the double whirlpool bath in soft light" data-full="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp"></picture></button>
-      <button type="button" data-cap="Sauna pour deux personnes" data-cap-en="Sauna for two"><picture><source type="image/webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/sauna-infrarouge-privatif-deux-personnes.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two" data-full="img/sauna-infrarouge-privatif-deux-personnes-1920.webp"></picture></button>
-      <button type="button" class="t" data-cap="Tête de lit en bois doré" data-cap-en="Golden wood headboard"><picture><source type="image/webp" srcset="img/tete-de-lit-bois-dore-applique-720.webp 720w, img/tete-de-lit-bois-dore-applique-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/tete-de-lit-bois-dore-applique.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Tête de lit en bois doré et applique" data-en-alt="Golden wood headboard and wall light" data-full="img/tete-de-lit-bois-dore-applique-1280.webp"></picture></button>
-      <button type="button" class="w" data-cap="Murs rouges et tête de lit lumineuse" data-cap-en="Red walls and glowing headboard"><picture><source type="image/webp" srcset="img/chambre-tete-de-lit-lumineuse-murs-rouges-1024.webp 1024w, img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/chambre-tete-de-lit-lumineuse-murs-rouges.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Chambre aux murs rouges et tête de lit lumineuse" data-en-alt="Bedroom with red walls and a glowing headboard" data-full="img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp"></picture></button>
-      <button type="button" data-cap="Le salon et sa cheminée" data-cap-en="The lounge and its fireplace"><picture><source type="image/webp" srcset="img/salon-cuisine-ouverte-equipee-1024.webp 1024w, img/salon-cuisine-ouverte-equipee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/salon-cuisine-ouverte-equipee.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Salon et cuisine ouverte équipée" data-en-alt="Lounge and open, equipped kitchen" data-full="img/salon-cuisine-ouverte-equipee-1920.webp"></picture></button>
-      <button type="button" data-cap="La cuisine sur mesure" data-cap-en="The made-to-measure kitchen"><picture><source type="image/webp" srcset="img/cuisine-equipee-sur-mesure-1024.webp 1024w, img/cuisine-equipee-sur-mesure-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/cuisine-equipee-sur-mesure.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Cuisine sur mesure équipée" data-en-alt="Equipped made-to-measure kitchen" data-full="img/cuisine-equipee-sur-mesure-1920.webp"></picture></button>
-      <button type="button" data-cap="Le coin repas" data-cap-en="The dining corner"><picture><source type="image/webp" srcset="img/coin-repas-table-pour-deux-1024.webp 1024w, img/coin-repas-table-pour-deux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/coin-repas-table-pour-deux.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Coin repas, table pour deux" data-en-alt="Dining corner, table for two" data-full="img/coin-repas-table-pour-deux-1920.webp"></picture></button>
-      <button type="button" class="w" data-cap="La balnéo XXL pour deux" data-cap-en="The XXL whirlpool bath for two"><picture><source type="image/webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo XXL pour deux personnes" data-en-alt="XXL whirlpool bath for two" data-full="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp"></picture></button>
-      <button type="button" class="t" data-cap="Les jets de la balnéo" data-cap-en="The whirlpool jets"><picture><source type="image/webp" srcset="img/baignoire-balneo-jets-tableau-noir-et-blanc-720.webp 720w, img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/baignoire-balneo-jets-tableau-noir-et-blanc.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Jets de la baignoire balnéo sous un tableau en noir et blanc" data-en-alt="Whirlpool bath jets beneath a black and white artwork" data-full="img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp"></picture></button>
-      <button type="button" class="t" data-cap="Le fauteuil doré" data-cap-en="The golden armchair"><picture><source type="image/webp" srcset="img/fauteuil-dore-coussin-noir-chambre-720.webp 720w, img/fauteuil-dore-coussin-noir-chambre-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/fauteuil-dore-coussin-noir-chambre.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Fauteuil doré et coussin noir dans la chambre" data-en-alt="Golden armchair and black cushion in the bedroom" data-full="img/fauteuil-dore-coussin-noir-chambre-1280.webp"></picture></button>
-      <button type="button" class="w" data-cap="La salle de douche" data-cap-en="The shower room"><picture><source type="image/webp" srcset="img/salle-de-douche-vasque-miroir-lumineux-1024.webp 1024w, img/salle-de-douche-vasque-miroir-lumineux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/salle-de-douche-vasque-miroir-lumineux.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Salle de douche, vasque et miroir lumineux" data-en-alt="Shower room, basin and illuminated mirror" data-full="img/salle-de-douche-vasque-miroir-lumineux-1920.webp"></picture></button>
-      <button type="button" class="w" data-cap="L'immeuble, au pied de la Cité" data-cap-en="The building, at the foot of the Cité"><picture><source type="image/webp" srcset="img/facade-immeuble-pied-de-la-cite-carcassonne-1024.webp 1024w, img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/facade-immeuble-pied-de-la-cite-carcassonne.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne" data-en-alt="The Ô Lit Divin building, at the foot of the Cité of Carcassonne" data-full="img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp"></picture></button>
-      <button type="button" class="t" data-cap="Peignoirs et miroir éclairé" data-cap-en="Bathrobes and illuminated mirror"><picture><source type="image/webp" srcset="img/salle-de-douche-peignoirs-miroir-eclaire-720.webp 720w, img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/salle-de-douche-peignoirs-miroir-eclaire.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Salle de douche et peignoirs" data-en-alt="Shower room and bathrobes" data-full="img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp"></picture></button>
+      <button type="button" class="w" data-cap="Le lit king size et la baignoire balnéo" data-cap-en="The king-size bed and the whirlpool bath" data-cap-es="La cama king size y la bañera de hidromasaje"><picture><source type="image/webp" srcset="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1024.webp 1024w, img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Chambre d'Ô Lit Divin à Carcassonne : lit king size et baignoire balnéo pour deux" data-en-alt="Ô Lit Divin bedroom in Carcassonne: king-size bed and whirlpool bath for two" data-es-alt="Dormitorio de Ô Lit Divin en Carcasona: cama king size y bañera de hidromasaje para dos" data-full="img/chambre-lit-king-size-baignoire-balneo-o-lit-divin-carcassonne-1920.webp"></picture></button>
+      <button type="button" class="t" data-cap="Le sauna infrarouge, dans la suite" data-cap-en="The infrared sauna, inside the suite" data-cap-es="La sauna de infrarrojos, dentro de la suite"><picture><source type="image/webp" srcset="img/sauna-infrarouge-luminotherapie-suite-720.webp 720w, img/sauna-infrarouge-luminotherapie-suite-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/sauna-infrarouge-luminotherapie-suite.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Sauna infrarouge avec luminothérapie, dans la suite" data-en-alt="Infrared sauna with light therapy, inside the suite" data-es-alt="Sauna de infrarrojos con cromoterapia, dentro de la suite" data-full="img/sauna-infrarouge-luminotherapie-suite-1280.webp"></picture></button>
+      <button type="button" data-cap="Baignoire balnéo, peignoirs et champagne" data-cap-en="Whirlpool bath, bathrobes and champagne" data-cap-es="Bañera de hidromasaje, albornoces y champán"><picture><source type="image/webp" srcset="img/baignoire-balneo-peignoirs-champagne-1024.webp 1024w, img/baignoire-balneo-peignoirs-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/baignoire-balneo-peignoirs-champagne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo, peignoirs et champagne" data-en-alt="Whirlpool bath, bathrobes and champagne" data-es-alt="Bañera de hidromasaje, albornoces y champán" data-full="img/baignoire-balneo-peignoirs-champagne-1920.webp"></picture></button>
+      <button type="button" data-cap="Lumière tamisée sur le lit et la balnéo" data-cap-en="Soft light on the bed and the whirlpool bath" data-cap-es="Luz tenue sobre la cama y la bañera"><picture><source type="image/webp" srcset="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1024.webp 1024w, img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/suite-lit-baignoire-balneo-double-lumiere-tamisee.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Le lit et la baignoire balnéo double, lumière tamisée" data-en-alt="The bed and the double whirlpool bath in soft light" data-es-alt="La cama y la bañera de hidromasaje doble, con luz tenue" data-full="img/suite-lit-baignoire-balneo-double-lumiere-tamisee-1920.webp"></picture></button>
+      <button type="button" data-cap="Sauna pour deux personnes" data-cap-en="Sauna for two" data-cap-es="Sauna para dos"><picture><source type="image/webp" srcset="img/sauna-infrarouge-privatif-deux-personnes-1024.webp 1024w, img/sauna-infrarouge-privatif-deux-personnes-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/sauna-infrarouge-privatif-deux-personnes.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Sauna infrarouge privatif pour deux personnes" data-en-alt="Private infrared sauna for two" data-es-alt="Sauna de infrarrojos privada para dos" data-full="img/sauna-infrarouge-privatif-deux-personnes-1920.webp"></picture></button>
+      <button type="button" class="t" data-cap="Tête de lit en bois doré" data-cap-en="Golden wood headboard" data-cap-es="Cabecero de madera dorada"><picture><source type="image/webp" srcset="img/tete-de-lit-bois-dore-applique-720.webp 720w, img/tete-de-lit-bois-dore-applique-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/tete-de-lit-bois-dore-applique.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Tête de lit en bois doré et applique" data-en-alt="Golden wood headboard and wall light" data-es-alt="Cabecero de madera dorada y aplique" data-full="img/tete-de-lit-bois-dore-applique-1280.webp"></picture></button>
+      <button type="button" class="w" data-cap="Murs rouges et tête de lit lumineuse" data-cap-en="Red walls and glowing headboard" data-cap-es="Paredes rojas y cabecero iluminado"><picture><source type="image/webp" srcset="img/chambre-tete-de-lit-lumineuse-murs-rouges-1024.webp 1024w, img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/chambre-tete-de-lit-lumineuse-murs-rouges.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Chambre aux murs rouges et tête de lit lumineuse" data-en-alt="Bedroom with red walls and a glowing headboard" data-es-alt="Dormitorio de paredes rojas y cabecero iluminado" data-full="img/chambre-tete-de-lit-lumineuse-murs-rouges-1920.webp"></picture></button>
+      <button type="button" data-cap="Le salon et sa cheminée" data-cap-en="The lounge and its fireplace" data-cap-es="El salón y su chimenea"><picture><source type="image/webp" srcset="img/salon-cuisine-ouverte-equipee-1024.webp 1024w, img/salon-cuisine-ouverte-equipee-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/salon-cuisine-ouverte-equipee.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Salon et cuisine ouverte équipée" data-en-alt="Lounge and open, equipped kitchen" data-es-alt="Salón y cocina abierta equipada" data-full="img/salon-cuisine-ouverte-equipee-1920.webp"></picture></button>
+      <button type="button" data-cap="La cuisine sur mesure" data-cap-en="The made-to-measure kitchen" data-cap-es="La cocina a medida"><picture><source type="image/webp" srcset="img/cuisine-equipee-sur-mesure-1024.webp 1024w, img/cuisine-equipee-sur-mesure-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/cuisine-equipee-sur-mesure.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Cuisine sur mesure équipée" data-en-alt="Equipped made-to-measure kitchen" data-es-alt="Cocina a medida equipada" data-full="img/cuisine-equipee-sur-mesure-1920.webp"></picture></button>
+      <button type="button" data-cap="Le coin repas" data-cap-en="The dining corner" data-cap-es="El rincón de comedor"><picture><source type="image/webp" srcset="img/coin-repas-table-pour-deux-1024.webp 1024w, img/coin-repas-table-pour-deux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/coin-repas-table-pour-deux.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Coin repas, table pour deux" data-en-alt="Dining corner, table for two" data-es-alt="Rincón de comedor, mesa para dos" data-full="img/coin-repas-table-pour-deux-1920.webp"></picture></button>
+      <button type="button" class="w" data-cap="La balnéo XXL pour deux" data-cap-en="The XXL whirlpool bath for two" data-cap-es="La bañera XXL para dos"><picture><source type="image/webp" srcset="img/baignoire-balneo-xxl-deux-personnes-champagne-1024.webp 1024w, img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/baignoire-balneo-xxl-deux-personnes-champagne.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Baignoire balnéo XXL pour deux personnes" data-en-alt="XXL whirlpool bath for two" data-es-alt="Bañera de hidromasaje XXL para dos" data-full="img/baignoire-balneo-xxl-deux-personnes-champagne-1920.webp"></picture></button>
+      <button type="button" class="t" data-cap="Les jets de la balnéo" data-cap-en="The whirlpool jets" data-cap-es="Los chorros de la bañera"><picture><source type="image/webp" srcset="img/baignoire-balneo-jets-tableau-noir-et-blanc-720.webp 720w, img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/baignoire-balneo-jets-tableau-noir-et-blanc.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Jets de la baignoire balnéo sous un tableau en noir et blanc" data-en-alt="Whirlpool bath jets beneath a black and white artwork" data-es-alt="Chorros de la bañera de hidromasaje bajo un cuadro en blanco y negro" data-full="img/baignoire-balneo-jets-tableau-noir-et-blanc-1280.webp"></picture></button>
+      <button type="button" class="t" data-cap="Le fauteuil doré" data-cap-en="The golden armchair" data-cap-es="El sillón dorado"><picture><source type="image/webp" srcset="img/fauteuil-dore-coussin-noir-chambre-720.webp 720w, img/fauteuil-dore-coussin-noir-chambre-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/fauteuil-dore-coussin-noir-chambre.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Fauteuil doré et coussin noir dans la chambre" data-en-alt="Golden armchair and black cushion in the bedroom" data-es-alt="Sillón dorado y cojín negro en el dormitorio" data-full="img/fauteuil-dore-coussin-noir-chambre-1280.webp"></picture></button>
+      <button type="button" class="w" data-cap="La salle de douche" data-cap-en="The shower room" data-cap-es="El baño con ducha"><picture><source type="image/webp" srcset="img/salle-de-douche-vasque-miroir-lumineux-1024.webp 1024w, img/salle-de-douche-vasque-miroir-lumineux-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/salle-de-douche-vasque-miroir-lumineux.jpg" width="1920" height="1281" loading="lazy" decoding="async" alt="Salle de douche, vasque et miroir lumineux" data-en-alt="Shower room, basin and illuminated mirror" data-es-alt="Baño con ducha, lavabo y espejo iluminado" data-full="img/salle-de-douche-vasque-miroir-lumineux-1920.webp"></picture></button>
+      <button type="button" class="w" data-cap="L'immeuble, au pied de la Cité" data-cap-en="The building, at the foot of the Cité" data-cap-es="El edificio, al pie de la Cité"><picture><source type="image/webp" srcset="img/facade-immeuble-pied-de-la-cite-carcassonne-1024.webp 1024w, img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp 1920w" sizes="(max-width:760px) 100vw, 50vw"><img src="img/facade-immeuble-pied-de-la-cite-carcassonne.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne" data-en-alt="The Ô Lit Divin building, at the foot of the Cité of Carcassonne" data-es-alt="Fachada del edificio de Ô Lit Divin, al pie de la Cité de Carcasona" data-full="img/facade-immeuble-pied-de-la-cite-carcassonne-1920.webp"></picture></button>
+      <button type="button" class="t" data-cap="Peignoirs et miroir éclairé" data-cap-en="Bathrobes and illuminated mirror" data-cap-es="Albornoces y espejo iluminado"><picture><source type="image/webp" srcset="img/salle-de-douche-peignoirs-miroir-eclaire-720.webp 720w, img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp 1280w" sizes="(max-width:760px) 50vw, 34vw"><img src="img/salle-de-douche-peignoirs-miroir-eclaire.jpg" width="960" height="1439" loading="lazy" decoding="async" alt="Salle de douche et peignoirs" data-en-alt="Shower room and bathrobes" data-es-alt="Baño con ducha y albornoces" data-full="img/salle-de-douche-peignoirs-miroir-eclaire-1280.webp"></picture></button>
     </div>
   </div>
 </section>
 
 <section class="sec" id="equipements">
   <div class="wrap">
-    <div class="head"><span class="eyebrow" data-en="Amenities">Équipements</span><h2 data-en="Every &lt;em&gt;detail&lt;/em&gt; considered">Il ne manque pas un <em>détail</em></h2></div>
+    <div class="head"><span class="eyebrow" data-en="Amenities" data-es="Equipamiento">Équipements</span><h2 data-en="Every &lt;em&gt;detail&lt;/em&gt; considered" data-es="No falta ningún &lt;em&gt;detalle&lt;/em&gt;">Il ne manque pas un <em>détail</em></h2></div>
     <ul class="amen" id="amen"></ul>
   </div>
 </section>
 
 <section class="sec opts-sec" id="options" style="padding-top:0">
   <div class="wrap">
-    <div class="head center"><span class="eyebrow" data-en="Extras">Options</span><h2 data-en="A little &lt;em&gt;spice&lt;/em&gt;?">Un peu de <em>piment</em> ?</h2><p class="lead" data-en="Add the cherry on top when you book. Shh! The rest of the story is yours to write.">Ajoutez la cerise sur le gâteau en réservant. Mais chut ! La suite, c'est à vous de l'écrire.</p></div>
+    <div class="head center"><span class="eyebrow" data-en="Extras" data-es="Extras">Options</span><h2 data-en="A little &lt;em&gt;spice&lt;/em&gt;?" data-es="¿Un poco de &lt;em&gt;picante&lt;/em&gt;?">Un peu de <em>piment</em> ?</h2><p class="lead" data-en="Add the cherry on top when you book. Shh! The rest of the story is yours to write." data-es="Añadid la guinda del pastel al reservar. Pero ¡chis! El resto de la historia lo escribís vosotros.">Ajoutez la cerise sur le gâteau en réservant. Mais chut ! La suite, c'est à vous de l'écrire.</p></div>
     <div class="opts" id="opts"></div>
-    <p class="opts-note" data-en="Extras are added on the booking page, subject to availability.">Les options s'ajoutent sur la page de réservation, sous réserve de disponibilité.</p>
+    <p class="opts-note" data-en="Extras are added on the booking page, subject to availability." data-es="Los extras se añaden en la página de reserva, según disponibilidad.">Les options s'ajoutent sur la page de réservation, sous réserve de disponibilité.</p>
   </div>
 </section>
 
 <section class="sec book-sec" id="reserver">
   <div class="wrap">
-    <div class="head"><span class="eyebrow" data-en="Direct booking">Réservation directe</span><h2 data-en="Choose your &lt;em&gt;dates&lt;/em&gt;">Choisissez vos <em>dates</em></h2></div>
+    <div class="head"><span class="eyebrow" data-en="Direct booking" data-es="Reserva directa">Réservation directe</span><h2 data-en="Choose your &lt;em&gt;dates&lt;/em&gt;" data-es="Elegid vuestras &lt;em&gt;fechas&lt;/em&gt;">Choisissez vos <em>dates</em></h2></div>
     <div class="book-grid">
       <div class="calcard">
-        <div class="cal-top"><h3 data-en="Availability">Disponibilités</h3><div class="navs"><button class="cnav" id="cp" type="button" aria-label="Mois précédent"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg></button><button class="cnav" id="cn" type="button" aria-label="Mois suivant"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+        <div class="cal-top"><h3 data-en="Availability" data-es="Disponibilidad">Disponibilités</h3><div class="navs"><button class="cnav" id="cp" type="button" aria-label="Mois précédent"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 6l-6 6 6 6"/></svg></button><button class="cnav" id="cn" type="button" aria-label="Mois suivant"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
         <div class="cals" id="cals"></div>
         <div class="legend" id="lg-av"></div>
       </div>
       <aside class="book" id="booking" aria-label="Réservation">
-        <div class="pp"><div><span class="muted" data-en="From">Dès</span> <b class="num" id="b-from"></b> <span class="muted" data-en="/ night">/ nuit</span></div><span class="pill" data-en="Direct booking">Réservation directe</span></div>
+        <div class="pp"><div><span class="muted" data-en="From" data-es="Desde">Dès</span> <b class="num" id="b-from"></b> <span class="muted" data-en="/ night" data-es="/ noche">/ nuit</span></div><span class="pill" data-en="Direct booking" data-es="Reserva directa">Réservation directe</span></div>
         <div class="bf">
-          <div class="bdate" id="c-ba" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-in">Arrivée</span><span class="v" id="ba"></span></div>
-          <div class="bdate" id="c-bd" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-out">Départ</span><span class="v" id="bd"></span></div>
-          <div class="full"><label for="bg" data-en="Guests">Voyageurs</label><select id="bg" data-guests><option value="2" data-en="2 adults">2 adultes</option><option value="1" data-en="1 adult">1 adulte</option></select></div>
+          <div class="bdate" id="c-ba" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-in" data-es="Llegada">Arrivée</span><span class="v" id="ba"></span></div>
+          <div class="bdate" id="c-bd" role="button" tabindex="0" aria-haspopup="dialog"><span class="l" data-en="Check-out" data-es="Salida">Départ</span><span class="v" id="bd"></span></div>
+          <div class="full"><label for="bg" data-en="Guests" data-es="Huéspedes">Voyageurs</label><select id="bg" data-guests><option value="2" data-en="2 adults" data-es="2 adultos">2 adultes</option><option value="1" data-en="1 adult" data-es="1 adulto">1 adulte</option></select></div>
         </div>
         <div id="blines"></div>
         <button class="btn block" id="bgo" type="button"></button>
-        <p class="cond" data-en="Paid in full when booking · non-refundable · €500 security deposit taken as a card pre-authorisation.">Paiement intégral à la réservation · non remboursable · dépôt de garantie de 500 € par empreinte bancaire.</p>
-        <p class="bnext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-en="Next step: your details and extras (champagne, chocolates, surprise box…), then secure payment on Beds24.">Étape suivante : vos coordonnées et vos options (champagne, chocolats, paquet surprise…), puis le paiement sécurisé sur Beds24.</span></p>
-        <p class="ask"><span data-en="A question?">Une question ?</span> <a href="tel:+33603523184">06 03 52 31 84</a></p>
+        <p class="cond" data-en="Paid in full when booking · non-refundable · €500 security deposit taken as a card pre-authorisation." data-es="Pago íntegro al reservar · no reembolsable · fianza de 500 € mediante preautorización bancaria.">Paiement intégral à la réservation · non remboursable · dépôt de garantie de 500 € par empreinte bancaire.</p>
+        <p class="bnext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span data-en="Next step: your details and extras (champagne, chocolates, surprise box…), then secure payment on Beds24." data-es="Siguiente paso: vuestros datos y extras (champán, bombones, caja sorpresa…), y después el pago seguro en Beds24.">Étape suivante : vos coordonnées et vos options (champagne, chocolats, paquet surprise…), puis le paiement sécurisé sur Beds24.</span></p>
+        <p class="ask"><span data-en="A question?" data-es="¿Alguna pregunta?">Une question ?</span> <a href="tel:+33603523184">06 03 52 31 84</a></p>
       </aside>
     </div>
   </div>
@@ -620,10 +632,10 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap">
     <div class="rev-top">
       <div class="big">
-        <span class="eyebrow" data-en="Guest reviews">Avis des voyageurs</span>
+        <span class="eyebrow" data-en="Guest reviews" data-es="Opiniones de los viajeros">Avis des voyageurs</span>
         <div class="score num">4,97<small>/5</small></div>
         <span data-stars></span>
-        <p class="muted" data-en="388 reviews on Airbnb · Guest favourite, top 10% of homes">388 avis sur Airbnb · Coup de cœur voyageurs, parmi les 10 % de logements préférés</p>
+        <p class="muted" data-en="388 reviews on Airbnb · Guest favourite, top 10% of homes" data-es="388 opiniones en Airbnb · Favorito de los viajeros, entre el 10 % de alojamientos preferidos">388 avis sur Airbnb · Coup de cœur voyageurs, parmi les 10 % de logements préférés</p>
       </div>
       <div>
         <div class="plat" id="cats"></div>
@@ -636,22 +648,22 @@ footer a:hover{color:var(--gold2)}
 <section class="sec" id="quartier" style="padding-top:0">
   <div class="wrap region">
     <div style="display:grid;gap:20px">
-      <span class="eyebrow" data-en="The neighbourhood">Le quartier</span>
-      <h2 data-en="At the foot of the &lt;em&gt;fortress&lt;/em&gt;">Au pied de la <em>forteresse</em></h2>
-      <p data-en="The Barbacane district is one of the oldest in Carcassonne, in the heart of the Cité's old suburbs. A grocery, a newsagent, a pharmacy and restaurants are a few minutes' walk away, as are the banks of the Aude with its fitness trail and the Pont Vieux.">Le quartier de la Barbacane est l'un des plus vieux de Carcassonne, au cœur des faubourgs de la Cité. Épicerie, presse, pharmacie et restaurants sont à quelques minutes à pied, tout comme les bords de l'Aude, leur parcours de santé et le Pont Vieux.</p>
+      <span class="eyebrow" data-en="The neighbourhood" data-es="El barrio">Le quartier</span>
+      <h2 data-en="At the foot of the &lt;em&gt;fortress&lt;/em&gt;" data-es="Al pie de la &lt;em&gt;fortaleza&lt;/em&gt;">Au pied de la <em>forteresse</em></h2>
+      <p data-en="The Barbacane district is one of the oldest in Carcassonne, in the heart of the Cité's old suburbs. A grocery, a newsagent, a pharmacy and restaurants are a few minutes' walk away, as are the banks of the Aude with its fitness trail and the Pont Vieux." data-es="El barrio de la Barbacane es uno de los más antiguos de Carcasona, en pleno arrabal de la Cité. Tienda de alimentación, quiosco, farmacia y restaurantes están a pocos minutos a pie, al igual que la orilla del Aude, su circuito deportivo y el Pont Vieux.">Le quartier de la Barbacane est l'un des plus vieux de Carcassonne, au cœur des faubourgs de la Cité. Épicerie, presse, pharmacie et restaurants sont à quelques minutes à pied, tout comme les bords de l'Aude, leur parcours de santé et le Pont Vieux.</p>
       <ul class="places" id="places"></ul>
-      <p class="small muted" data-en="Walking times calculated with OpenStreetMap. The way up to the Cité is a climb.">Temps de marche calculés avec OpenStreetMap. La montée vers la Cité est en pente.</p>
+      <p class="small muted" data-en="Walking times calculated with OpenStreetMap. The way up to the Cité is a climb." data-es="Tiempos a pie calculados con OpenStreetMap. La subida a la Cité es en cuesta.">Temps de marche calculés avec OpenStreetMap. La montée vers la Cité est en pente.</p>
     </div>
     <figure>
-      <img src="img/cite-de-carcassonne-remparts-pont-vieux.webp" width="960" height="640" loading="lazy" decoding="async" alt="La Cité de Carcassonne et ses remparts, vue depuis le Pont Vieux, à quelques minutes à pied d'Ô Lit Divin" data-en-alt="The Cité of Carcassonne and its ramparts seen from the Pont Vieux, a few minutes' walk from Ô Lit Divin">
-      <figcaption><span data-en="The Cité of Carcassonne seen from the Pont Vieux">La Cité de Carcassonne vue du Pont Vieux</span> · Photo <a href="https://commons.wikimedia.org/wiki/File:Cit%C3%A9_de_Carcassonne_%E2%80%93_Vue_depuis_le_Pont-Vieux.jpg" target="_blank" rel="noopener">Lynx1211</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
+      <img src="img/cite-de-carcassonne-remparts-pont-vieux.webp" width="960" height="640" loading="lazy" decoding="async" alt="La Cité de Carcassonne et ses remparts, vue depuis le Pont Vieux, à quelques minutes à pied d'Ô Lit Divin" data-en-alt="The Cité of Carcassonne and its ramparts seen from the Pont Vieux, a few minutes' walk from Ô Lit Divin" data-es-alt="La Cité de Carcasona y sus murallas vistas desde el Pont Vieux, a pocos minutos a pie de Ô Lit Divin">
+      <figcaption><span data-en="The Cité of Carcassonne seen from the Pont Vieux" data-es="La Cité de Carcasona vista desde el Pont Vieux">La Cité de Carcassonne vue du Pont Vieux</span> · Photo <a href="https://commons.wikimedia.org/wiki/File:Cit%C3%A9_de_Carcassonne_%E2%80%93_Vue_depuis_le_Pont-Vieux.jpg" target="_blank" rel="noopener">Lynx1211</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a></figcaption>
     </figure>
   </div>
 </section>
 
 <section class="sec" id="infos" style="padding-top:0">
   <div class="wrap">
-    <div class="head center"><span class="eyebrow" data-en="Practical info">Infos pratiques</span><h2 data-en="Good to &lt;em&gt;know&lt;/em&gt;">Bon à <em>savoir</em></h2></div>
+    <div class="head center"><span class="eyebrow" data-en="Practical info" data-es="Información práctica">Infos pratiques</span><h2 data-en="Good to &lt;em&gt;know&lt;/em&gt;" data-es="Conviene &lt;em&gt;saber&lt;/em&gt;">Bon à <em>savoir</em></h2></div>
     <div class="infos" id="infos-grid"></div>
     <div class="faq" id="faq"></div>
   </div>
@@ -661,28 +673,28 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap hosts">
     <div style="display:grid;gap:22px;align-content:start">
       <span class="eyebrow">Contact</span>
-      <h2 data-en="A &lt;em&gt;question&lt;/em&gt;?">Une <em>question</em> ?</h2>
-      <p data-en="Write to us before booking. Once there, you settle in at your own pace, in complete discretion: check-in is entirely self-service.">Écrivez-nous avant de réserver. Sur place, vous vous installez à votre rythme, en toute discrétion : l'arrivée se fait en toute autonomie.</p>
+      <h2 data-en="A &lt;em&gt;question&lt;/em&gt;?" data-es="¿Alguna &lt;em&gt;pregunta&lt;/em&gt;?">Une <em>question</em> ?</h2>
+      <p data-en="Write to us before booking. Once there, you settle in at your own pace, in complete discretion: check-in is entirely self-service." data-es="Escribidnos antes de reservar. Allí os instaláis a vuestro ritmo, con total discreción: la llegada es totalmente autónoma.">Écrivez-nous avant de réserver. Sur place, vous vous installez à votre rythme, en toute discrétion : l'arrivée se fait en toute autonomie.</p>
       <p class="meta"><a class="lk" href="tel:+33603523184">06 03 52 31 84</a><a class="lk" href="mailto:lesgitesdelaure@gmail.com">lesgitesdelaure@gmail.com</a></p>
     </div>
     <div>
       <form class="cf" id="cf" novalidate><input type="text" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-        <h3 data-en="Send a message">Envoyer un message</h3>
+        <h3 data-en="Send a message" data-es="Enviar un mensaje">Envoyer un message</h3>
         <div class="two">
-          <div class="fld"><label for="c-n" data-en="Name">Nom</label><input id="c-n" name="nom" autocomplete="name"></div>
-          <div class="fld"><label for="c-m" data-en="Email">E-mail</label><input id="c-m" name="email" type="email" autocomplete="email"></div>
+          <div class="fld"><label for="c-n" data-en="Name" data-es="Nombre">Nom</label><input id="c-n" name="nom" autocomplete="name"></div>
+          <div class="fld"><label for="c-m" data-en="Email" data-es="Correo electrónico">E-mail</label><input id="c-m" name="email" type="email" autocomplete="email"></div>
         </div>
-        <div class="fld"><label for="c-o" data-en="Occasion">Occasion</label><select id="c-o" name="occasion"><option data-en="Just the two of us">Se retrouver à deux</option><option data-en="Anniversary">Anniversaire</option><option data-en="Wedding night">Nuit de noces</option><option data-en="Other">Autre</option></select></div>
-        <div class="fld"><label for="c-t" data-en="Your message">Votre message</label><textarea id="c-t" name="message"></textarea></div>
-        <label class="consent"><input type="checkbox" id="c-ok"> <span data-en="I agree to be contacted about my request. My details are never shared.">J'accepte d'être recontacté au sujet de ma demande. Mes coordonnées ne sont jamais transmises.</span></label>
+        <div class="fld"><label for="c-o" data-en="Occasion" data-es="Ocasión">Occasion</label><select id="c-o" name="occasion"><option data-en="Just the two of us" data-es="Un momento para dos">Se retrouver à deux</option><option data-en="Anniversary" data-es="Aniversario">Anniversaire</option><option data-en="Wedding night" data-es="Noche de bodas">Nuit de noces</option><option data-en="Other" data-es="Otra">Autre</option></select></div>
+        <div class="fld"><label for="c-t" data-en="Your message" data-es="Vuestro mensaje">Votre message</label><textarea id="c-t" name="message"></textarea></div>
+        <label class="consent"><input type="checkbox" id="c-ok"> <span data-en="I agree to be contacted about my request. My details are never shared." data-es="Acepto que me contacten sobre mi solicitud. Mis datos nunca se comparten.">J'accepte d'être recontacté au sujet de ma demande. Mes coordonnées ne sont jamais transmises.</span></label>
         <p class="err" id="c-err" hidden></p>
-        <button class="btn block" type="submit" data-en="Send">Envoyer</button>
-        <p class="small muted" data-en="We reply by email.">Réponse par e-mail.</p>
+        <button class="btn block" type="submit" data-en="Send" data-es="Enviar">Envoyer</button>
+        <p class="small muted" data-en="We reply by email." data-es="Respuesta por correo electrónico.">Réponse par e-mail.</p>
       </form>
       <div class="ok" id="c-done" hidden>
-        <h3 data-en="Message sent">Message envoyé</h3>
-        <p class="muted" data-en="Thank you, we will reply by email.">Merci, nous vous répondrons par e-mail.</p>
-        <button class="btn ghost" type="button" id="c-back" style="justify-self:start" data-en="Back to the form">Revenir au formulaire</button>
+        <h3 data-en="Message sent" data-es="Mensaje enviado">Message envoyé</h3>
+        <p class="muted" data-en="Thank you, we will reply by email." data-es="Gracias, os responderemos por correo electrónico.">Merci, nous vous répondrons par e-mail.</p>
+        <button class="btn ghost" type="button" id="c-back" style="justify-self:start" data-en="Back to the form" data-es="Volver al formulario">Revenir au formulaire</button>
       </div>
     </div>
   </div>
@@ -693,14 +705,14 @@ footer a:hover{color:var(--gold2)}
   <div class="wrap">
     <div class="fcols">
       <div style="display:grid;gap:14px;align-content:start">
-        <a class="brand" href="#accueil"><b>Ô Lit Divin</b><small data-en="by Les Gîtes de Laure">par Les Gîtes de Laure</small></a>
-        <p class="muted" data-en="Romantic suite with private whirlpool bath and sauna, at the foot of the Cité of Carcassonne.">Suite romantique avec balnéo et sauna privés, au pied de la Cité de Carcassonne.</p>
+        <a class="brand" href="#accueil"><b>Ô Lit Divin</b><small data-en="by Les Gîtes de Laure" data-es="por Les Gîtes de Laure">par Les Gîtes de Laure</small></a>
+        <p class="muted" data-en="Romantic suite with private whirlpool bath and sauna, at the foot of the Cité of Carcassonne." data-es="Suite romántica con bañera de hidromasaje y sauna privadas, al pie de la Cité de Carcasona.">Suite romantique avec balnéo et sauna privés, au pied de la Cité de Carcassonne.</p>
       </div>
-      <div><h4 data-en="The stay">Le séjour</h4><ul><li><a href="#suite" data-en="The suite">La suite</a></li><li><a href="#options" data-en="Extras">Options</a></li><li><a href="#reserver" data-en="Book">Réserver</a></li><li><a href="#infos" data-en="Practical info">Infos pratiques</a></li></ul></div>
-      <div><h4>Contact</h4><ul><li>Carcassonne, <span data-en="at the foot of the Cité">au pied de la Cité</span></li><li><a href="tel:+33603523184">06 03 52 31 84</a></li><li><a href="mailto:lesgitesdelaure@gmail.com">lesgitesdelaure@gmail.com</a></li><li><a href="https://www.facebook.com/lesgitesdelaure" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+      <div><h4 data-en="The stay" data-es="La estancia">Le séjour</h4><ul><li><a href="#suite" data-en="The suite" data-es="La suite">La suite</a></li><li><a href="#options" data-en="Extras" data-es="Extras">Options</a></li><li><a href="#reserver" data-en="Book" data-es="Reservar">Réserver</a></li><li><a href="#infos" data-en="Practical info" data-es="Información práctica">Infos pratiques</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Carcassonne, <span data-en="at the foot of the Cité" data-es="al pie de la Cité">au pied de la Cité</span></li><li><a href="tel:+33603523184">06 03 52 31 84</a></li><li><a href="mailto:lesgitesdelaure@gmail.com">lesgitesdelaure@gmail.com</a></li><li><a href="https://www.facebook.com/lesgitesdelaure" target="_blank" rel="noopener">Facebook</a></li></ul></div>
     </div>
     <details class="legal">
-      <summary data-en="Legal notice, terms and privacy">Mentions légales, conditions et confidentialité</summary>
+      <summary data-en="Legal notice, terms and privacy" data-es="Aviso legal, condiciones y privacidad">Mentions légales, conditions et confidentialité</summary>
       <div class="lg">
         <p><b>Exploitant</b> : SAS Les Clés de Laure (Les Gîtes de Laure), au capital de 1 000 €, 12 rue des Parfaits, 11600 Malves-en-Minervois. RCS Carcassonne 850 873 282. SIRET 850 873 282 00022. TVA non applicable (non assujettie). Téléphone : 06 03 52 31 84. E-mail : lesgitesdelaure@gmail.com.</p>
         <p><b>Responsable de la publication</b> : Laure Fernandes, présidente.</p>
@@ -709,17 +721,18 @@ footer a:hover{color:var(--gold2)}
         <p><b>Prix</b> : le prix des nuits s'affiche selon les dates choisies. S'y ajoutent les frais de ménage et de linge (35 € par séjour) et la taxe de séjour de Carcassonne (4,81 € par personne et par nuit). Le total exact est affiché avant le paiement.</p>
         <p><b>Règlement</b> : logement non-fumeur, réservé aux adultes, animaux non acceptés, fêtes et soirées non autorisées, tranquillité du voisinage à respecter entre 22 h et 7 h. Des caméras sont présentes dans les parties communes de l'immeuble.</p>
         <p><b>Données personnelles</b> : vos coordonnées servent uniquement à gérer votre séjour et vos demandes. Vous pouvez demander leur suppression à tout moment à <a href="mailto:lesgitesdelaure@gmail.com">lesgitesdelaure@gmail.com</a>.</p>
-        <p><b>Cookies</b> : ce site ne dépose pas de cookies de mesure d'audience ni de publicité.</p>
+        <p data-pixel="off"><b>Cookies</b> : ce site ne dépose pas de cookies de mesure d'audience ni de publicité.</p>
+        <p data-pixel="on" hidden><b>Cookies</b> : avec votre accord seulement, ce site utilise le pixel Meta (Facebook et Instagram) pour mesurer l'efficacité de nos publicités : pages vues, recherche de dates, clic vers la réservation, envoi du formulaire. Ces informations sont traitées par Meta Platforms Ireland Ltd. Sans votre accord, rien n'est déposé. Votre choix est gardé 6 mois et vous pouvez le changer à tout moment avec le lien « Gérer les cookies » en bas de page.</p>
         <p><b>Crédits</b> : photo de la Cité de Carcassonne par Lynx1211 (Wikimedia Commons, licence CC BY-SA 4.0). Polices Cormorant Garamond et Jost (licence SIL Open Font). Défilement doux : Lenis (licence MIT).</p>
       </div>
     </details>
-    <div class="fb"><span>© 2026 Ô Lit Divin · Les Gîtes de Laure</span><span data-en="Website by WebUA">Site réalisé par WebUA</span></div>
+    <div class="fb"><span>© 2026 Ô Lit Divin · Les Gîtes de Laure</span><button type="button" class="ck-link" id="ck-open" hidden data-en="Manage cookies" data-es="Gestionar las cookies">Gérer les cookies</button><span data-en="Website by WebUA" data-es="Web creada por WebUA">Site réalisé par WebUA</span></div>
   </div>
 </footer>
 
 <div class="mbar" id="mbar">
   <div><b id="mb-p" class="num"></b><small id="mb-d"></small></div>
-  <a class="btn" href="#reserver" id="mb-go" data-book data-en="Book">Réserver</a>
+  <a class="btn" href="#reserver" id="mb-go" data-book data-en="Book" data-es="Reservar">Réserver</a>
 </div>
 
 <div class="sheet" id="sheet" hidden>
@@ -727,13 +740,13 @@ footer a:hover{color:var(--gold2)}
   <div class="sh-panel" id="sh-panel" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="sh-title" tabindex="-1">
     <div class="sh-drag" id="sh-drag">
       <div class="sh-grab" aria-hidden="true"></div>
-      <div class="sh-head"><h2 id="sh-title" data-en="Your dates">Vos dates</h2><button type="button" class="sh-x" id="sh-x" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="sh-head"><h2 id="sh-title" data-en="Your dates" data-es="Vuestras fechas">Vos dates</h2><button type="button" class="sh-x" id="sh-x" aria-label="Fermer"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
     </div>
     <div class="sh-steps">
-      <button type="button" class="sh-step" id="sh-sa"><span class="l" data-en="Check-in">Arrivée</span><span class="v" id="sh-av"></span></button>
-      <button type="button" class="sh-step" id="sh-sd"><span class="l" data-en="Check-out">Départ</span><span class="v" id="sh-dv"></span></button>
+      <button type="button" class="sh-step" id="sh-sa"><span class="l" data-en="Check-in" data-es="Llegada">Arrivée</span><span class="v" id="sh-av"></span></button>
+      <button type="button" class="sh-step" id="sh-sd"><span class="l" data-en="Check-out" data-es="Salida">Départ</span><span class="v" id="sh-dv"></span></button>
     </div>
-    <div class="sh-g"><label for="sh-gs" data-en="Guests">Voyageurs</label><select id="sh-gs" data-guests><option value="2" data-en="2 adults">2 adultes</option><option value="1" data-en="1 adult">1 adulte</option></select></div>
+    <div class="sh-g"><label for="sh-gs" data-en="Guests" data-es="Huéspedes">Voyageurs</label><select id="sh-gs" data-guests><option value="2" data-en="2 adults" data-es="2 adultos">2 adultes</option><option value="1" data-en="1 adult" data-es="1 adulto">1 adulte</option></select></div>
     <div id="sh-cal"></div>
     <div id="sh-res" aria-live="polite"></div>
   </div>
@@ -745,11 +758,19 @@ footer a:hover{color:var(--gold2)}
   <div class="nav2"><button type="button" id="lb-p" aria-label="Photo précédente"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><span id="lb-t"></span><button type="button" id="lb-n" aria-label="Photo suivante"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
 </div>
 
+<div class="ck" id="ck" hidden role="dialog" aria-labelledby="ck-t">
+  <b id="ck-t" data-en="A cookie, with your permission" data-es="Una cookie, con vuestro permiso">Un cookie, avec votre accord</b>
+  <p data-en="We would like to measure how well our Facebook and Instagram ads work, using a Meta cookie. You can accept or decline: the site works exactly the same." data-es="Nos gustaría medir la eficacia de nuestros anuncios de Facebook e Instagram con una cookie de Meta. Podéis aceptar o rechazar: la web funciona exactamente igual.">Nous aimerions mesurer l'efficacité de nos publicités Facebook et Instagram grâce à un cookie Meta. Vous pouvez accepter ou refuser : le site fonctionne exactement de la même façon.</p>
+  <div><button type="button" class="btn ghost" id="ck-no" data-en="Decline" data-es="Rechazar">Refuser</button><button type="button" class="btn" id="ck-yes" data-en="Accept" data-es="Aceptar">Accepter</button></div>
+</div>
 <script src="js/lenis.min.js"></script>
 <script>
 (function(){
-let LANG='fr';
-const T=(fr,en)=>LANG==='en'?en:fr;
+let LANG=document.documentElement.dataset.lang||'fr';
+/* Dossier racine du site : '' pour la page française, '../' pour /en/ et /es/ */
+const ROOT=document.documentElement.dataset.root||'';
+/*ES-DEBUT*/const ES={", déjà réservé":", ya reservado","/ nuit":"/ noche","1 adulte":"1 adulto","100 % unique":"100 % única","2 adultes":"2 adultos","2 h maximum":"2 h como máximo","388 avis sur Airbnb":"388 opiniones en Airbnb","388 avis sur Airbnb · Coup de cœur voyageurs, parmi les 10 % de logements préférés":"388 opiniones en Airbnb · Favorito de los viajeros, entre el 10 % de alojamientos preferidos","Accepter":"Aceptar","Adultes uniquement":"Solo adultos","Agrandir : ":"Ampliar:","Ajoutez la cerise sur le gâteau en réservant. Mais chut ! La suite, c'est à vous de l'écrire.":"Añadid la guinda del pastel al reservar. Pero ¡chis! El resto de la historia lo escribís vosotros.","Anniversaire":"Aniversario","Appartement entier":"Apartamento entero","Arrivée":"Llegada","Arrivée anticipée ou départ tardif":"Llegada anticipada o salida tardía","Arrivée autonome avec boîtier à clés sécurisé, instructions envoyées avant votre arrivée":"Llegada autónoma con caja de llaves segura, instrucciones enviadas antes de vuestra llegada","Au cœur de la Cité.":"En el corazón de la Cité.","Au pied de la <em>forteresse</em>":"Al pie de la <em>fortaleza</em>","Autre":"Otra","Avis":"Opiniones","Avis des voyageurs":"Opiniones de los viajeros","Aéroport de Carcassonne":"Aeropuerto de Carcasona","Baignoire balnéo XXL pour deux":"Bañera de hidromasaje XXL para dos","Baignoire balnéo XXL pour deux personnes":"Bañera de hidromasaje XXL para dos","Baignoire balnéo XXL pour deux personnes et flûtes de champagne, Ô Lit Divin à Carcassonne":"Bañera de hidromasaje XXL para dos y copas de champán, Ô Lit Divin en Carcasona","Baignoire balnéo, peignoirs et champagne":"Bañera de hidromasaje, albornoces y champán","Balnéo et sauna privés":"Hidromasaje y sauna privados","Balnéo et sauna, toute l'année":"Hidromasaje y sauna, todo el año","Bastide Saint-Louis":"Bastide Saint-Louis","Bon à <em>savoir</em>":"Conviene <em>saber</em>","Boîte cœur de chocolats":"Caja de bombones en forma de corazón","Carcassonne · La Cité":"Carcasona · La Cité","Chambre aux murs rouges et tête de lit lumineuse":"Dormitorio de paredes rojas y cabecero iluminado","Chambre d'Ô Lit Divin à Carcassonne : lit king size et baignoire balnéo pour deux":"Dormitorio de Ô Lit Divin en Carcasona: cama king size y bañera de hidromasaje para dos","Cheminée électrique":"Chimenea eléctrica","Choisir":"Elegir","Choisir mes dates":"Elegir mis fechas","Choisissez d'autres dates : les nuits libres sont en vert.":"Elegid otras fechas: las noches libres aparecen en verde.","Choisissez maintenant votre départ":"Ahora elegid vuestra salida","Choisissez vos <em>dates</em>":"Elegid vuestras <em>fechas</em>","Choisissez votre arrivée, puis votre départ.":"Elegid vuestra llegada y después vuestra salida.","Choisissez votre date d'arrivée":"Elegid vuestra fecha de llegada","Château comtal":"Castillo condal","Cité médiévale":"Cité medieval","Climatisation dans la chambre":"Aire acondicionado en el dormitorio","Climatisation dans la chambre, chauffage":"Aire acondicionado en el dormitorio, calefacción","Cochez la case d'accord pour envoyer.":"Marcad la casilla de consentimiento para enviar.","Coin repas, table pour deux":"Rincón de comedor, mesa para dos","Comment se passe l'arrivée ?":"¿Cómo es la llegada?","Communication":"Comunicación","Contact":"Contacto","Coup de cœur voyageurs":"Favorito de los viajeros","Cuisine sur mesure : réfrigérateur, micro-ondes, ustensiles, épices":"Cocina a medida: frigorífico, microondas, utensilios, especias","Cuisine sur mesure équipée":"Cocina a medida equipada","Date d'arrivée":"Fecha de llegada","Date de départ":"Fecha de salida","Dates indisponibles":"Fechas no disponibles","De la Cité":"De la Cité","Demi-bouteille de champagne":"Media botella de champán","Deux adultes au maximum. Enfants, bébés et animaux non admis.":"Dos adultos como máximo. No se admiten niños, bebés ni animales.","Disponibilités":"Disponibilidad","Dès":"Desde","Découvrir":"Descubrir","Déjà réservé":"Ya reservado","Déjà réservé sur ces dates. Les dates libres sont en vert dans le calendrier.":"Ya reservado en estas fechas. Las fechas libres aparecen en verde en el calendario.","Départ":"Salida","E-mail":"Correo electrónico","Emplacement":"Ubicación","Emplacement parfait au pied de la Cité médiévale, idéal pour tout visiter à pied. Le logement est moderne, particulièrement bien équipé et très confortable.":"Ubicación perfecta al pie de la Cité medieval, ideal para visitarlo todo a pie. El alojamiento es moderno, especialmente bien equipado y muy cómodo.","En option":"Extra","En voiture, environ 6 km.":"En coche, unos 6 km.","Enceinte Google Home":"Altavoz Google Home","Entrez dans l'<em>alcôve</em>":"Entrad en el <em>rincón</em>","Entrée privée, arrivée autonome":"Entrada privada, llegada autónoma","Entrée privée, en rez-de-chaussée":"Entrada privada, en planta baja","Envoyer":"Enviar","Envoyer un message":"Enviar un mensaje","Fauteuil doré et coussin noir dans la chambre":"Sillón dorado y cojín negro en el dormitorio","Façade de l'immeuble d'Ô Lit Divin, au pied de la Cité de Carcassonne":"Fachada del edificio de Ô Lit Divin, al pie de la Cité de Carcasona","Galerie":"Galería","Gare et canal du Midi":"Estación y canal del Midi","Gérer les cookies":"Gestionar las cookies","Il ne manque pas un <em>détail</em>":"No falta ningún <em>detalle</em>","Indiquez une adresse e-mail valide.":"Indicad un correo electrónico válido.","Indiquez votre nom.":"Indicad vuestro nombre.","Infos":"Info","Infos pratiques":"Información práctica","Instant de volupté":"Instante de placer","J'accepte d'être recontacté au sujet de ma demande. Mes coordonnées ne sont jamais transmises.":"Acepto que me contacten sobre mi solicitud. Mis datos nunca se comparten.","Jets de la baignoire balnéo sous un tableau en noir et blanc":"Chorros de la bañera de hidromasaje bajo un cuadro en blanco y negro","L'arrivée se fait à partir de 17 h, en toute autonomie grâce à un boîtier à clés sécurisé. Vous recevez toutes les instructions avant votre arrivée. Le départ se fait à 12 h au plus tard.":"La llegada es a partir de las 17:00, de forma totalmente autónoma gracias a una caja de llaves segura. Recibís todas las instrucciones antes de llegar. La salida es a las 12:00 como muy tarde.","L'entrée de la Cité côté Barbacane.":"La entrada de la Cité por el lado de la Barbacane.","L'envoi a échoué. Réessayez, ou écrivez-nous directement par e-mail.":"El envío ha fallado. Volved a intentarlo o escribidnos directamente por correo electrónico.","L'immeuble, au pied de la Cité":"El edificio, al pie de la Cité","La Cité de Carcassonne et ses remparts, vue depuis le Pont Vieux, à quelques minutes à pied d'Ô Lit Divin":"La Cité de Carcasona y sus murallas vistas desde el Pont Vieux, a pocos minutos a pie de Ô Lit Divin","La Cité de Carcassonne vue du Pont Vieux":"La Cité de Carcasona vista desde el Pont Vieux","La balnéo <em>XXL</em>":"La bañera <em>XXL</em>","La balnéo XXL pour deux":"La bañera XXL para dos","La balnéo et le sauna sont-ils privés ?":"¿La bañera de hidromasaje y la sauna son privadas?","La balnéothérapie et le sauna sont vraiment un vrai plus dans ce logement.":"La bañera de hidromasaje y la sauna son un auténtico plus en este alojamiento.","La cuisine sur mesure":"La cocina a medida","La forteresse, juste au-dessus de l'appartement.":"La fortaleza, justo encima del apartamento.","La salle de douche":"El baño con ducha","La suite":"La suite","La suite est déjà réservée sur tout ou partie de ces dates. Les nuits libres sont en vert.":"La suite ya está reservada en todas o parte de estas fechas. Las noches libres aparecen en verde.","La ville basse, place Carnot et cathédrale Saint-Michel.":"La ciudad baja, la plaza Carnot y la catedral de Saint-Michel.","Le <em>sauna</em> privé":"La <em>sauna</em> privada","Le canal passe devant la gare.":"El canal pasa frente a la estación.","Le coin repas":"El rincón de comedor","Le fauteuil doré":"El sillón dorado","Le lit et la baignoire balnéo double, lumière tamisée":"La cama y la bañera de hidromasaje doble, con luz tenue","Le lit king size et la baignoire balnéo":"La cama king size y la bañera de hidromasaje","Le pont médiéval et le parcours de santé.":"El puente medieval y el circuito deportivo.","Le prix des nuits dépend des dates. S'ajoutent les frais de ménage et de linge (35 € par séjour) et la taxe de séjour de Carcassonne (4,81 € par personne et par nuit). Le total exact s'affiche dès que vous choisissez vos dates.":"El precio por noche depende de las fechas. Se añaden la limpieza y la ropa de cama (35 € por estancia) y la tasa turística de Carcasona (4,81 € por persona y noche). El total exacto aparece en cuanto elegís vuestras fechas.","Le prix et la disponibilité sont vérifiés dès que vous choisissez vos dates.":"El precio y la disponibilidad se comprueban en cuanto elegís vuestras fechas.","Le prix et les disponibilités s'affichent à l'étape suivante.":"El precio y la disponibilidad se muestran en el siguiente paso.","Le prix s'affiche à l'étape suivante.":"El precio se muestra en el siguiente paso.","Le quartier":"El barrio","Le quartier de la Barbacane est l'un des plus vieux de Carcassonne, au cœur des faubourgs de la Cité. Épicerie, presse, pharmacie et restaurants sont à quelques minutes à pied, tout comme les bords de l'Aude, leur parcours de santé et le Pont Vieux.":"El barrio de la Barbacane es uno de los más antiguos de Carcasona, en pleno arrabal de la Cité. Tienda de alimentación, quiosco, farmacia y restaurantes están a pocos minutos a pie, al igual que la orilla del Aude, su circuito deportivo y el Pont Vieux.","Le salon et sa cheminée":"El salón y su chimenea","Le sauna infrarouge, dans la suite":"La sauna de infrarrojos, dentro de la suite","Le stationnement est gratuit dans la rue. La Cité, les restaurants et les commerces se rejoignent ensuite à pied.":"El aparcamiento es gratuito en la calle. Después, la Cité, los restaurantes y las tiendas quedan a pie.","Le séjour":"La estancia","Le séjour est payé en totalité à la réservation et n'est pas remboursable. Un contrat de location est à signer, une pièce d'identité est demandée et un dépôt de garantie de 500 € est pris par empreinte bancaire.":"La estancia se paga íntegramente al reservar y no es reembolsable. Hay que firmar un contrato de alquiler, se pide un documento de identidad y se toma una fianza de 500 € mediante preautorización bancaria.","Les jets de la balnéo":"Los chorros de la bañera","Les options s'ajoutent sur la page de réservation, sous réserve de disponibilité.":"Los extras se añaden en la página de reserva, según disponibilidad.","Libre":"Libre","Lit king size":"Cama king size","Lit king size 180 × 200 cm":"Cama king size de 180 × 200 cm","Lit king size, tête de lit dorée lumineuse et pétales de rose":"Cama king size, cabecero dorado iluminado y pétalos de rosa","Livres":"Libros","Logement impeccable avec de belles prestations, situé au pied de la cité. Le lieu idéal pour un week-end en amoureux.":"Alojamiento impecable y con buenos servicios, al pie de la Cité. El lugar ideal para un fin de semana en pareja.","Luminothérapie et cheminée électrique":"Cromoterapia y chimenea eléctrica","Luminothérapie, lumières d'ambiance":"Cromoterapia, luces de ambiente","Lumière tamisée sur le lit et la balnéo":"Luz tenue sobre la cama y la bañera","Machine Nespresso et bouilloire":"Cafetera Nespresso y hervidor","Mentions légales, conditions et confidentialité":"Aviso legal, condiciones y privacidad","Merci, nous vous répondrons par e-mail.":"Gracias, os responderemos por correo electrónico.","Message envoyé":"Mensaje enviado","Mois précédent":"Mes anterior","Mois suivant":"Mes siguiente","Murs rouges et tête de lit lumineuse":"Paredes rojas y cabecero iluminado","Ménage et linge":"Limpieza y ropa de cama","Ménage, linge et taxe de séjour compris. Paiement intégral à la réservation, non remboursable.":"Limpieza, ropa de cama y tasa turística incluidas. Pago íntegro al reservar, no reembolsable.","Nom":"Nombre","Non réservable en ligne":"No reservable en línea","Non réservable en ligne sur ces dates : une durée minimale s'applique peut-être.":"No se puede reservar en línea en estas fechas: quizá se aplique una estancia mínima.","Non-fumeur, pas de fêtes. Calme de 22 h à 7 h. Caméras dans les parties communes de l'immeuble.":"No fumadores, sin fiestas. Silencio de 22:00 a 7:00. Cámaras en las zonas comunes del edificio.","Nous aimerions mesurer l'efficacité de nos publicités Facebook et Instagram grâce à un cookie Meta. Vous pouvez accepter ou refuser : le site fonctionne exactement de la même façon.":"Nos gustaría medir la eficacia de nuestros anuncios de Facebook e Instagram con una cookie de Meta. Podéis aceptar o rechazar: la web funciona exactamente igual.","Nous avons tout adoré : son emplacement (au pied de la cité médiévale, dans un rez-de-chaussée sans marches), son confort et sa belle décoration. Il ne manque pas un détail.":"Nos encantó todo: la ubicación (al pie de la Cité medieval, en una planta baja sin escalones), la comodidad y la bonita decoración. No falta ningún detalle.","Nous avons été complètement séduits par ce logement absolument magnifique ! Il est très bien décoré, parfaitement agencé et d'une propreté irréprochable.":"¡Este alojamiento absolutamente precioso nos conquistó por completo! Muy bien decorado, perfectamente distribuido y de una limpieza impecable.","Nuit de noces":"Noche de bodas","Occasion":"Ocasión","Options":"Extras","Oui : demi-bouteille de champagne, boîte cœur de chocolats ou paquet surprise coquin, à ajouter en réservant (24 h à l'avance, 72 h pour les chocolats). Pour une demande particulière, écrivez-nous.":"Sí: media botella de champán, caja de bombones en forma de corazón o caja sorpresa traviesa, que se añaden al reservar (con 24 h de antelación, 72 h para los bombones). Para cualquier petición especial, escribidnos.","Oui, selon disponibilité, jusqu'à 2 h, en option payante à ajouter sur la page de réservation.":"Sí, según disponibilidad, hasta 2 h, como extra de pago que se añade en la página de reserva.","Oui. La baignoire balnéo et le sauna sont dans la suite, à votre entière disposition, toute l'année et à toute heure.":"Sí. La bañera de hidromasaje y la sauna están dentro de la suite, solo para vosotros, todo el año y a cualquier hora.","Où se garer ?":"¿Dónde aparcar?","Paiement intégral à la réservation · non remboursable · dépôt de garantie de 500 € par empreinte bancaire.":"Pago íntegro al reservar · no reembolsable · fianza de 500 € mediante preautorización bancaria.","Paiement intégral à la réservation, non remboursable. Dépôt de garantie de 500 € par empreinte bancaire.":"Pago íntegro al reservar, no reembolsable. Fianza de 500 € mediante preautorización bancaria.","Paquet surprise <em>coquin</em>":"Caja sorpresa <em>traviesa</em>","Peignoirs doux et grandes serviettes à votre arrivée":"Albornoces suaves y toallas grandes a vuestra llegada","Peignoirs et miroir éclairé":"Albornoces y espejo iluminado","Peignoirs, serviettes et linge de lit":"Albornoces, toallas y ropa de cama","Peut-on arriver plus tôt ou partir plus tard ?":"¿Podemos llegar antes o salir más tarde?","Plein de surprises pour jouer à deux… À réserver 24 h à l'avance.":"Llena de sorpresas para jugar en pareja… Reservar con 24 h de antelación.","Pont Vieux et bords de l'Aude":"Pont Vieux y orillas del Aude","Porte d'Aude":"Puerta de Aude","Pour qui":"Para quién","Pour une nuit de noces, un anniversaire ou simplement pour vous retrouver, offrez-vous une parenthèse enchantée.":"Para una noche de bodas, un aniversario o simplemente para reencontraros, regalaos un paréntesis encantado.","Pouvez-vous préparer une surprise ?":"¿Podéis preparar una sorpresa?","Privée, disponible toute l'année, à toute heure":"Privada, disponible todo el año, a cualquier hora","Prochains week-ends libres :":"Próximos fines de semana libres:","Propreté":"Limpieza","Précision":"Veracidad","Qualité-prix":"Calidad-precio","Que comprend le prix ?":"¿Qué incluye el precio?","Quelles sont les conditions de réservation ?":"¿Cuáles son las condiciones de reserva?","Refuser":"Rechazar","Revenir au formulaire":"Volver al formulario","Rien qu'à vous, dans l'intimité de la suite":"Solo para vosotros, en la intimidad de la suite","Réponse par e-mail.":"Respuesta por correo electrónico.","Réservation directe":"Reserva directa","Réserver":"Reservar","Réserver ces dates":"Reservar estas fechas","Salle de douche et peignoirs":"Baño con ducha y albornoces","Salle de douche, sèche-cheveux, articles de toilette":"Baño con ducha, secador de pelo, artículos de aseo","Salle de douche, vasque et miroir lumineux":"Baño con ducha, lavabo y espejo iluminado","Salon de la suite avec canapé et cheminée électrique, à Carcassonne":"Salón de la suite con sofá y chimenea eléctrica, en Carcasona","Salon et cuisine ouverte équipée":"Salón y cocina abierta equipada","Sauna infrarouge avec luminothérapie, dans la suite":"Sauna de infrarrojos con cromoterapia, dentro de la suite","Sauna infrarouge pour deux":"Sauna de infrarrojos para dos","Sauna infrarouge privatif pour deux personnes":"Sauna de infrarrojos privada para dos","Sauna pour deux personnes":"Sauna para dos","Se retrouver à deux":"Un momento para dos","Selon disponibilité. Le tarif s'affiche sur la page de réservation.":"Según disponibilidad. La tarifa aparece en la página de reserva.","Site réalisé par WebUA":"Web creada por WebUA","Stationnement gratuit dans la rue":"Aparcamiento gratuito en la calle","Suite romantique avec balnéo et sauna privés à Carcassonne · Ô Lit Divin":"Suite romántica con hidromasaje y sauna privados en Carcasona · Ô Lit Divin","Suite romantique avec balnéo et sauna privés, au pied de la Cité de Carcassonne.":"Suite romántica con bañera de hidromasaje y sauna privadas, al pie de la Cité de Carcasona.","Suite romantique pour deux avec balnéo et sauna privés, au pied de la Cité médiévale de Carcassonne.":"Suite romántica para dos con bañera de hidromasaje y sauna privadas, al pie de la Cité medieval de Carcasona.","Superbe emplacement. À distance de marche de la Cité Médiévale. Séjour très calme et confortable.":"Ubicación estupenda, a poca distancia a pie de la Cité medieval. Una estancia muy tranquila y cómoda.","Sur place":"Normas","Séjour non réservable en ligne":"Estancia no reservable en línea","Taxe de séjour":"Tasa turística","Temps de marche calculés avec OpenStreetMap. La montée vers la Cité est en pente.":"Tiempos a pie calculados con OpenStreetMap. La subida a la Cité es en cuesta.","Total":"Total","Télévision avec Netflix":"Televisión con Netflix","Tête de lit en bois doré":"Cabecero de madera dorada","Tête de lit en bois doré et applique":"Cabecero de madera dorada y aplique","Un cookie, avec votre accord":"Una cookie, con vuestro permiso","Un lit king size (180 × 200 cm) et une literie haut de gamme. Jouez avec les lumières d'ambiance et le crépitement visuel de la cheminée électrique pour créer une atmosphère feutrée, intime et hautement romantique.":"Una cama king size (180 × 200 cm) y ropa de cama de alta gama. Jugad con las luces de ambiente y el chisporroteo visual de la chimenea eléctrica para crear una atmósfera tenue, íntima y profundamente romántica.","Un peu de <em>piment</em> ?":"¿Un poco de <em>picante</em>?","Une <em>question</em> ?":"¿Alguna <em>pregunta</em>?","Une baignoire balnéothérapie pour deux, dans la suite. Plongez dans des bulles caressantes et laissez-les balayer le stress du quotidien.":"Una bañera de hidromasaje para dos, dentro de la suite. Sumergíos en burbujas que acarician y dejad que se lleven el estrés del día a día.","Une bulle de chaleur purifiante pour relaxer le corps et apaiser l'esprit. Un sauna infrarouge pour deux, avec luminothérapie et musique par Bluetooth.":"Una burbuja de calor purificante para relajar el cuerpo y calmar la mente. Una sauna de infrarrojos para dos, con cromoterapia y música por Bluetooth.","Une cuisine sur mesure, moderne et fonctionnelle, idéale pour un dîner aux chandelles. Une machine Nespresso pour démarrer la journée en douceur, Netflix pour vos soirées cinéma et une enceinte Google Home pour votre playlist préférée.":"Una cocina a medida, moderna y funcional, ideal para una cena a la luz de las velas. Una cafetera Nespresso para empezar el día con calma, Netflix para vuestras noches de cine y un altavoz Google Home para vuestra música favorita.","Une durée minimale s'applique peut-être sur ces dates.":"Quizá se aplique una estancia mínima en estas fechas.","Une durée minimale s'applique peut-être, ou les tarifs de cette période ne sont pas encore ouverts. Essayez d'autres dates, ou appelez-nous.":"Quizá se aplique una estancia mínima, o las tarifas de este periodo aún no están abiertas. Probad otras fechas o llamadnos.","Une nuit <em>royale</em>":"Una noche <em>de reyes</em>","Une question ?":"¿Alguna pregunta?","Voir la réservation":"Ver la reserva","Voir le prix":"Ver el precio","Vos dates":"Vuestras fechas","Votre <em>alcôve</em>, à votre rythme":"Vuestro <em>rincón</em>, a vuestro ritmo","Votre message":"Vuestro mensaje","Voyageurs":"Huéspedes","Vérification du prix et des disponibilités…":"Comprobando precio y disponibilidad…","Vérification du prix…":"Comprobando el precio…","Wi-Fi (12 Mbit/s)":"Wi-Fi (12 Mbit/s)","août 2026":"agosto de 2026","au pied de la Cité":"al pie de la Cité","en voiture":"en coche","la box":"la caja","la boîte de 420 g":"la caja de 420 g","la demi-bouteille":"la media botella","nuit":"noche","nuits":"noches","octobre 2026":"octubre de 2026","par Les Gîtes de Laure":"por Les Gîtes de Laure","tout compris":"todo incluido","À 12 h au plus tard.":"A las 12:00 como muy tarde.","À partir de 17 h, en autonomie avec un boîtier à clés sécurisé.":"A partir de las 17:00, de forma autónoma con una caja de llaves segura.","À quand remonte votre dernier petit-déjeuner au lit ?":"¿Cuándo fue la última vez que desayunasteis en la cama?","À réserver 24 h à l'avance.":"Reservar con 24 h de antelación.","À réserver 72 h à l'avance.":"Reservar con 72 h de antelación.","Écrivez-nous avant de réserver. Sur place, vous vous installez à votre rythme, en toute discrétion : l'arrivée se fait en toute autonomie.":"Escribidnos antes de reservar. Allí os instaláis a vuestro ritmo, con total discreción: la llegada es totalmente autónoma.","Équipements":"Equipamiento","Étape suivante : vos coordonnées et vos options (champagne, chocolats, paquet surprise…), puis le paiement sécurisé sur Beds24.":"Siguiente paso: vuestros datos y extras (champán, bombones, caja sorpresa…), y después el pago seguro en Beds24.","Ô Lit Divin, suite romantique à Carcassonne : lit king size et baignoire balnéo en lumière rouge tamisée":"Ô Lit Divin, suite romántica en Carcasona: cama king size y bañera de hidromasaje con luz roja tenue","Ô Lit Divin, un lieu d'exception où le calme vous tend les bras pour un moment d'intimité à deux. Un cocon de douceur au pied de la Cité médiévale, à l'abri des regards indiscrets.":"Ô Lit Divin, un lugar excepcional donde la calma os espera para un momento de intimidad en pareja. Un nido de dulzura al pie de la Cité medieval, lejos de miradas indiscretas.","à pied":"a pie","étoiles sur 5":"estrellas de 5"};/*ES-FIN*/
+const T=(fr,en)=>LANG==='en'?en:LANG==='es'?(ES[fr]||fr):fr;
 const $=s=>document.querySelector(s);
 const $$=s=>[...document.querySelectorAll(s)];
 /* ---------- Défilement doux ----------
@@ -867,19 +888,18 @@ function applyLang(){
   document.documentElement.lang=LANG;
   $$('[data-en]').forEach(el=>{
     if(el.dataset.fr===undefined)el.dataset.fr=el.innerHTML;
-    el.innerHTML=LANG==='en'?el.dataset.en:el.dataset.fr;
+    el.innerHTML=LANG==='en'?el.dataset.en:LANG==='es'&&el.dataset.es?el.dataset.es:el.dataset.fr;
   });
-  $$('[data-en-alt]').forEach(el=>{if(el.dataset.frAlt===undefined)el.dataset.frAlt=el.alt;el.alt=LANG==='en'?el.dataset.enAlt:el.dataset.frAlt});
-  $$('.lang button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===LANG)));
+  $$('[data-en-alt]').forEach(el=>{if(el.dataset.frAlt===undefined)el.dataset.frAlt=el.alt;el.alt=LANG==='en'?el.dataset.enAlt:LANG==='es'&&el.dataset.esAlt?el.dataset.esAlt:el.dataset.frAlt});
+  $$('.lang a').forEach(a=>a.dataset.l===LANG?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   document.title=T('Suite romantique avec balnéo et sauna privés à Carcassonne · Ô Lit Divin','Romantic suite with private whirlpool bath and sauna in Carcassonne · Ô Lit Divin');
   $$('[data-guests]').forEach(s=>s.value=String(guests));
   dpClose();renderStatic();renderAll();
 }
-$$('.lang button').forEach(b=>b.addEventListener('click',()=>{LANG=b.dataset.lang;try{localStorage.setItem('litdivin-lang',LANG)}catch(e){}applyLang()}));
 
 /* ---------- Format ---------- */
-const loc=()=>LANG==='en'?'en-GB':'fr-FR';
-const eur=n=>{const c=Math.round(n*100)/100,o=c%1?{minimumFractionDigits:2,maximumFractionDigits:2}:{};return LANG==='en'?'€'+c.toLocaleString('en-GB',o):c.toLocaleString('fr-FR',o)+' €'};
+const loc=()=>LANG==='en'?'en-GB':LANG==='es'?'es-ES':'fr-FR';
+const eur=n=>{const c=Math.round(n*100)/100,o=c%1?{minimumFractionDigits:2,maximumFractionDigits:2}:{};return LANG==='en'?'€'+c.toLocaleString('en-GB',o):c.toLocaleString(LANG==='es'?'es-ES':'fr-FR',o)+' €'};
 const dec=n=>n.toLocaleString(loc(),{minimumFractionDigits:1});
 function renderStatic(){
   $('#amen').innerHTML=EQ.map(e=>`<li>${ic(e[0])}<span>${T(e[1],e[2])}</span></li>`).join('');
@@ -891,7 +911,7 @@ function renderStatic(){
   $('#infos-grid').innerHTML=INFOS.map(i=>`<div class="info"><b>${T(i[0],i[1])}</b><p>${T(i[2],i[3])}</p></div>`).join('');
   const open=$$('#faq details').findIndex(d=>d.open);
   $('#faq').innerHTML=FAQ.map((q,i)=>`<details${i===(open<0?0:open)?' open':''}><summary>${T(q[0],q[1])}</summary><p>${T(q[2],q[3])}</p></details>`).join('');
-  $$('#gal button').forEach(b=>{if(b.dataset.capFr===undefined)b.dataset.capFr=b.dataset.cap;b.dataset.cap=LANG==='en'?b.dataset.capEn:b.dataset.capFr;b.setAttribute('aria-label',T('Agrandir : ','Enlarge: ')+b.dataset.cap)});
+  $$('#gal button').forEach(b=>{if(b.dataset.capFr===undefined)b.dataset.capFr=b.dataset.cap;b.dataset.cap=LANG==='en'?b.dataset.capEn:LANG==='es'&&b.dataset.capEs?b.dataset.capEs:b.dataset.capFr;b.setAttribute('aria-label',T('Agrandir : ','Enlarge: ')+b.dataset.cap)});
   $('#b-from').textContent=eur(PRICE);
 }
 
@@ -909,7 +929,7 @@ let sel={a:null,d:null},guests=2,calM=new Date(TODAY.getFullYear(),TODAY.getMont
 /* Nuits libres, lues dans Beds24 par dispo.php. Sans réponse, le calendrier reste sans couleurs et le prix est vérifié au choix des dates. */
 let AV=null;
 /* Aperçu sur GitHub (sans PHP) : on lit une copie des dates, dispo.json, mise à jour à chaque publication de l'aperçu */
-fetch('dispo.php').then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>location.hostname.endsWith('github.io')?fetch('dispo.json').then(r=>r.json()):null).then(j=>{if(!j)return;
+fetch(ROOT+'dispo.php').then(r=>{if(!r.ok)throw 0;return r.json()}).catch(()=>location.hostname.endsWith('github.io')?fetch(ROOT+'dispo.json').then(r=>r.json()):null).then(j=>{if(!j)return;
   if(!j.ok||!Array.isArray(j.dates))return;
   AV={s:new Set(j.dates),last:j.dates.reduce((m,x)=>x>m?x:m,'')};
   renderAll();
@@ -949,6 +969,7 @@ function renderAll(){
 }
 function renderHero(){
   const h=$('#hres'),q=quote();
+  trackSearch(q);
   if(!q){h.hidden=true;return}
   h.hidden=false;
   const n=nights(sel.a,sel.d);
@@ -998,7 +1019,7 @@ function dayCls(d,isA){
 }
 function monthHtml(y,m,isA,withTitle=true){
   const off=(new Date(y,m,1).getDay()+6)%7,len=new Date(y,m+1,0).getDate();
-  const dows=LANG==='en'?['M','T','W','T','F','S','S']:['L','M','M','J','V','S','D'];
+  const dows=LANG==='en'?['M','T','W','T','F','S','S']:LANG==='es'?['L','M','X','J','V','S','D']:['L','M','M','J','V','S','D'];
   let h=(withTitle?`<h4>${new Date(y,m,1).toLocaleDateString(loc(),{month:'long',year:'numeric'})}</h4>`:'')+`<div class="days">${dows.map(x=>`<span class="dow" aria-hidden="true">${x}</span>`).join('')}`;
   for(let i=0;i<off;i++)h+='<span></span>';
   for(let n=1;n<=len;n++){
@@ -1026,7 +1047,7 @@ function pick(d){
 }
 $('#bgo').onclick=()=>{
   if(!(sel.a&&sel.d)){openPicker(sel.a?'#c-bd':'#c-ba');return}
-  const q=quote();location.href=q.st==='ok'?beds24go(sel.a,sel.d):beds24(sel.a,sel.d);
+  const q=quote();track('InitiateCheckout',q.st==='ok'?{value:Math.round(total(q)*100)/100,currency:'EUR'}:{});location.href=q.st==='ok'?beds24go(sel.a,sel.d):beds24(sel.a,sel.d);
 };
 $$('[data-guests]').forEach(s=>s.addEventListener('change',()=>{guests=+s.value;$$('[data-guests]').forEach(o=>o.value=s.value);renderAll()}));
 
@@ -1180,7 +1201,7 @@ addEventListener('keydown',e=>{if($('#lb').hidden)return;if(e.key==='Escape')clo
 $('#cf').addEventListener('submit',e=>{e.preventDefault();const n=$('#c-n').value.trim(),m=$('#c-m').value.trim();let er='';
   if(!n)er=T('Indiquez votre nom.','Please enter your name.');else if(!/^\S+@\S+\.\S+$/.test(m))er=T('Indiquez une adresse e-mail valide.','Please enter a valid email address.');else if(!$('#c-ok').checked)er=T('Cochez la case d\'accord pour envoyer.','Tick the consent box to send.');
   $('#c-err').textContent=er;$('#c-err').hidden=!er;if(er)return;const btn=$('#cf button[type=submit]');btn.disabled=true;
-  fetch('contact.php',{method:'POST',body:new FormData($('#cf'))}).then(r=>r.json()).then(j=>{if(!j.ok)throw new Error();$('#cf').reset();$('#cf').hidden=true;$('#c-done').hidden=false})
+  fetch(ROOT+'contact.php',{method:'POST',body:new FormData($('#cf'))}).then(r=>r.json()).then(j=>{if(!j.ok)throw new Error();$('#cf').reset();$('#cf').hidden=true;track('Contact');$('#c-done').hidden=false})
   .catch(()=>{$('#c-err').textContent=T('L\'envoi a échoué. Réessayez, ou écrivez-nous directement par e-mail.','Sending failed. Please try again, or email us directly.');$('#c-err').hidden=false})
   .finally(()=>{btn.disabled=false})});
 $('#c-back').onclick=()=>{$('#c-done').hidden=true;$('#cf').hidden=false};
@@ -1215,9 +1236,36 @@ function reveal(){
   addEventListener('scroll',()=>{if(innerHeight+scrollY<document.documentElement.scrollHeight-300)return;$$('.rv:not(.in)').forEach(rvShow)},{passive:true});
 }
 
+/* ---------- Pixel Meta (publicités Facebook et Instagram) ----------
+   Éteint tant que PIXEL_ID est vide : ni bandeau, ni cookie, ni appel à Meta.
+   Une fois l'identifiant collé ici, le bandeau demande l'accord du visiteur ; le pixel ne se charge qu'après « Accepter ».
+   Mesures envoyées : PageView (page vue), Search (dates choisies avec un prix), InitiateCheckout (clic vers la réservation Beds24, avec le montant), Contact (message envoyé). */
+const PIXEL_ID='';
+const CK='litdivin-cookies',CK_DUREE=182*864e5;
+function ckGet(){try{const v=(localStorage.getItem(CK)||'').split('|');return +v[1]>Date.now()-CK_DUREE?v[0]:null}catch(e){return null}}
+function ckSet(v){try{localStorage.setItem(CK,v+'|'+Date.now())}catch(e){}}
+function track(ev,data){if(window.fbq)window.fbq('track',ev,data||{})}
+function pixelOn(){
+  if(window.fbq)return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  window.fbq('init',PIXEL_ID);window.fbq('track','PageView');
+}
+if(PIXEL_ID){
+  $$('[data-pixel=off]').forEach(e=>e.hidden=true);$$('[data-pixel=on]').forEach(e=>e.hidden=false);
+  $('#ck-open').hidden=false;
+  const choix=ckGet();
+  if(choix==='oui')pixelOn();else if(!choix)$('#ck').hidden=false;
+  $('#ck-yes').onclick=()=>{ckSet('oui');$('#ck').hidden=true;pixelOn()};
+  $('#ck-no').onclick=()=>{ckSet('non');$('#ck').hidden=true};
+  $('#ck-open').onclick=()=>{$('#ck').hidden=false};
+  /* Clic sur un bouton « Réserver » qui mène à Beds24 */
+  document.addEventListener('click',e=>{const a=e.target.closest('a[href*="beds24.com/booking.php"]');if(!a)return;const q=quote();track('InitiateCheckout',q&&q.st==='ok'?{value:Math.round(total(q)*100)/100,currency:'EUR'}:{})});
+}
+/* Dates choisies avec un prix : une seule mesure par séjour */
+const searched={};
+function trackSearch(q){if(!q||q.st!=='ok')return;const k=qk(sel.a,sel.d,guests);if(searched[k])return;searched[k]=1;track('Search',{value:Math.round(total(q)*100)/100,currency:'EUR'})}
 /* ---------- Démarrage ---------- */
-try{if(localStorage.getItem('litdivin-lang')==='en')LANG='en'}catch(e){}
-if(!LANG.startsWith('fr')||LANG==='en')applyLang();else{renderStatic();renderAll()}
+if(LANG!=='fr')applyLang();else{renderStatic();renderAll();$$('.lang a[data-l=fr]').forEach(a=>a.setAttribute('aria-current','page'))}
 reveal();
 })();
 </script>
