@@ -5,10 +5,36 @@ RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
-# Photos et polices gardées en cache 30 jours par les navigateurs
+# En-têtes de sécurité
+<IfModule mod_headers.c>
+  # Le navigateur retient pendant 1 an que le site est en HTTPS uniquement
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # Interdit au navigateur de deviner le type d'un fichier
+  Header always set X-Content-Type-Options "nosniff"
+  # Empêche d'afficher le site dans le cadre d'un autre site
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # N'envoie que le nom de domaine aux sites vers lesquels le visiteur clique
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Le site n'utilise ni caméra, ni micro, ni position
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Cache des navigateurs
 <IfModule mod_expires.c>
   ExpiresActive On
+  # La page elle-même est revérifiée à chaque visite : une mise à jour se voit tout de suite
+  ExpiresByType text/html "access plus 0 seconds"
+  # Photos, polices et icône gardées 30 jours
   ExpiresByType image/webp "access plus 30 days"
   ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
   ExpiresByType font/woff2 "access plus 30 days"
+  # Scripts gardés 7 jours (changer le nom du fichier quand il est mis à jour)
+  ExpiresByType text/javascript "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
 </IfModule>
+
+# Pas de liste des fichiers d'un dossier
+Options -Indexes
